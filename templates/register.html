@@ -6,17 +6,19 @@
     <title>Login</title>
 </head>
 <body>
+    <center>
     <h1>
         register page
     </h1>
-    <a href="{{ url_for('login') }}">Already have an account? </a><br>
+
     <form method="POST" action="">
         {{ form.hidden_tag() }}
-        {{ form.username }}
-        {{ form.password }}
+        {{ form.username }} <br>
+        {{ form.password }}<br>
         {{ form.submit }}
     </form>
     
-    
+    <a href="{{ url_for('login') }}">Already have an account? </a><br>
+</center>
 </body>
 </html>
