@@ -3,13 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Title</title>
+    <title>UserHome</title>
+    <style>
+        .media-option {
+          display: inline-block;
+          color: #000000;
+          padding: 15px;
+          border: 2px solid #000000;
+          background-color: #ff8533;
+          margin: 10px 30px;
+        }
+      </style>
 </head>
 <body>
     <center>
     <h1>Welcome to Registered User Home Page</h1>
 
-    <a href="{{url_for('logout')}}">Press here to logout</a>
+    <a href="{{url_for('logout')}}">Press here to logout</a> 
+    
+    <br><br><br>
+
+    <a href="{{url_for('mediaInfo')}}">
+        <div class="media-option">Media name 1</div>
+    </a>
+    <a href="{{url_for('mediaInfo')}}">
+        <div class="media-option">Media name 2</div>
+    </a>
+    <a href="{{url_for('mediaInfo')}}">
+        <div class="media-option">Media name 3</div>
+    </a>
+    <a href="{{url_for('mediaInfo')}}">
+        <div class="media-option">Media name 4</div>
+    </a>
+    <a href="{{url_for('mediaInfo')}}">
+        <div class="media-option">Media name 5</div>
+    </a>
+    
+    <br><br>
+
+    <a href="{{url_for('mediaInfo')}}">
+        <div class="media-option">Media name 6</div>
+    </a>
+    <a href="{{url_for('mediaInfo')}}">
+        <div class="media-option">Media name 7</div>
+    </a>
+    <a href="{{url_for('mediaInfo')}}">
+        <div class="media-option">Media name 8</div>
+    </a>
+    <a href="{{url_for('mediaInfo')}}">
+        <div class="media-option">Media name 9</div>
+    </a>
+    <a href="{{url_for('mediaInfo')}}">
+        <div class="media-option">Media name 10</div>
+    </a>
 </center>
 </body>
 </html>

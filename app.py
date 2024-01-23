@@ -88,6 +88,10 @@ def register():
 def userhome():
     return render_template('userhome.html')
 
+@app.route('/mediaInfo', methods=['GET' , 'POST'])
+@login_required
+def mediaInfo():
+    return render_template('mediaInfo.html')
 
 @app.route('/logout', methods = ['GET','POST'])
 @login_required
