@@ -1,3 +1,5 @@
 # FlixPicks-Front
+Sources used:
 
-  from video: https://www.youtube.com/watch?v=71EU8gnZqZQ
+[Python Login Tutorial](https://www.youtube.com/watch?v=71EU8gnZqZQ)
+
