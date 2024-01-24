@@ -27,7 +27,7 @@ def submit():
     #TESTING CODE START
     print(responses) #Print the responses just to make sure that they
                      #Are being read correctly
-    
+    #TESTING CODE END
 @app.route('/thanks') #Eventually edit this- should redirect to homepage of FP
 def thank_you():
     return "Thank you for completing the Taste Survey!" #Cuter message -> redirect to FP
