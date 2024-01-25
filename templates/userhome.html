@@ -13,10 +13,12 @@
           background-color: #ff8533;
           margin: 10px 30px;
         }
+        body {
+            text-align: center;
+        }
       </style>
 </head>
 <body>
-    <center>
     <h1>Welcome to Registered User Home Page</h1>
 
     <a href="{{url_for('logout')}}">Press here to logout</a> 
@@ -39,7 +41,7 @@
         <div class="media-option">Media name 5</div>
     </a>
     
-    <br><br>
+    <br /><br />
 
     <a href="{{url_for('mediaInfo')}}">
         <div class="media-option">Media name 6</div>
@@ -56,6 +58,5 @@
     <a href="{{url_for('mediaInfo')}}">
         <div class="media-option">Media name 10</div>
     </a>
-</center>
 </body>
 </html>
