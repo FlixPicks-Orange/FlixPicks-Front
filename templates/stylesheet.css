@@ -1,0 +1,39 @@
+body {
+    text-align: center;
+    background-color: rgb(23, 23, 23);
+}
+
+h1 {
+    color: white;
+    border-radius: 15px;
+    border: 5px solid rgb(42, 47, 53);
+    background: rgb(200,54,0);
+    background: -moz-linear-gradient(0deg, rgba(200,54,0,1) 0%, rgba(255,69,0,1) 35%, rgba(255,129,83,1) 100%);
+    background: -webkit-linear-gradient(0deg, rgba(200,54,0,1) 0%, rgba(255,69,0,1) 35%, rgba(255,129,83,1) 100%);
+    background: linear-gradient(0deg, rgba(200,54,0,1) 0%, rgba(255,69,0,1) 35%, rgba(255,129,83,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#c83600",endColorstr="#ff8153",GradientType=1);
+    padding: 5px;
+}
+
+.fakebutton {
+    display: block;
+    padding: 15px;
+    border: 5px solid rgb(42, 47, 53);
+    border-radius: 15px;
+    background: rgb(200,54,0);
+    background: -moz-linear-gradient(0deg, rgba(200,54,0,1) 0%, rgba(255,69,0,1) 35%, rgba(255,129,83,1) 100%);
+    background: -webkit-linear-gradient(0deg, rgba(200,54,0,1) 0%, rgba(255,69,0,1) 35%, rgba(255,129,83,1) 100%);
+    background: linear-gradient(0deg, rgba(200,54,0,1) 0%, rgba(255,69,0,1) 35%, rgba(255,129,83,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#c83600",endColorstr="#ff8153",GradientType=1);
+    width: 20%;
+    margin: 10px auto;
+}
+
+.fakebutton:hover  {
+    background: linear-gradient(0deg, rgba(200,54,0,1) 100%, rgba(255,69,0,1) 35%, rgba(255,129,83,1) 0%);
+}
+
+.fakebutton a {
+    text-decoration: none;
+    color: white;
+}
