@@ -7,6 +7,9 @@ from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt
 import os
 
+from fakebackend import *
+import random
+
 app = Flask(__name__)
 
 
@@ -83,20 +86,23 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', form = form)
 
-@app.route('/userhome', methods=['GET' , 'POST'])
-@login_required
-def userhome():
-    return render_template('userhome.html')
-
-@app.route('/mediaInfo', methods=['GET' , 'POST'])
-@login_required
-def mediaInfo():
-    return render_template('mediaInfo.html')
-
 @app.route('/logout', methods = ['GET','POST'])
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
+@app.route('/userhome', methods=['GET' , 'POST'])
+@login_required
+def userhome():
+    my_list = get_fake_list()
+    media_option = random.sample(my_list, 10)  # Select 10 random items from the fake list of movies
+    return render_template('userhome.html', media_option=media_option)
+
+@app.route('/mediaInfo/<int:page_id>', methods=['GET' , 'POST'])
+@login_required
+def mediaInfo(page_id):
+    return render_template('mediaInfo.html', page_id=page_id)
+
 if __name__ == '__main__':
     app.run(debug=True)
