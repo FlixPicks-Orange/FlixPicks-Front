@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
+from flask_login import login_required
 
 app = Flask(__name__)
 
@@ -16,7 +17,8 @@ questions = {
         #Add more questions here if needed
 }
 
-@app.route('/')
+@app.route('/tasteProfile',methods=['GET', 'POST'])
+@login_required
 def index():
     return render_template('tasteProfile.html') #This is basically rerouting to show
                                                 #the taste profile survey on the screen
@@ -28,6 +30,7 @@ def submit():
     print(responses) #Print the responses just to make sure that they
                      #Are being read correctly
     #TESTING CODE END
+    
 @app.route('/thanks') #Eventually edit this- should redirect to homepage of FP
 def thank_you():
     return "Thank you for completing the Taste Survey!" #Cuter message -> redirect to FP

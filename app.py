@@ -80,7 +80,12 @@ def register():
         new_user = User(username=form.username.data, password=hashed_password)
         db.session.add(new_user)
         db.session.commit()
-        return redirect(url_for('login'))
+        ## return redirect(url_for('login'))
+
+        #START OF TASTE PROFILE REDIRECT
+        login_user(new_user)
+        return redirect(url_for('taste profile'))
+    
     return render_template('register.html', form = form)
 
 @app.route('/userhome', methods=['GET' , 'POST'])
