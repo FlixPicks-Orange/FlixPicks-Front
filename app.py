@@ -84,7 +84,7 @@ def register():
 
         #START OF TASTE PROFILE REDIRECT
         login_user(new_user)
-        return redirect(url_for('taste profile'))
+        return redirect(url_for('tasteProfile'))
     
     return render_template('register.html', form = form)
 
@@ -103,5 +103,10 @@ def mediaInfo():
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
+@app.route('/tasteProfile')
+def tasteProfile():
+    return render_template('tasteProfile.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
