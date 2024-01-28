@@ -3,25 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UserHome</title>
+    <link rel="stylesheet" type="text/css" href="./stylesheet.css">
+    <title>FlixPicks User Home</title>
     <style>
         .media-option {
           display: inline-block;
-          color: #000000;
-          padding: 15px;
-          border: 2px solid #000000;
-          background-color: #ff8533;
+            color: white;
+            padding: 5% 2%;
+            border-radius: 15px;
+            border: 5px solid rgb(42, 47, 53);
+            background: rgb(215,100,0);
+            background: -moz-linear-gradient(0deg, rgba(215,100,0,1) 0%, rgba(255,165,0,1) 100%);
+            background: -webkit-linear-gradient(0deg, rgba(215,100,0,1) 0%, rgba(255,165,0,1) 100%);
+            background: linear-gradient(0deg, rgba(215,100,0,1) 0%, rgba(255,165,0,1) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#d76400",endColorstr="#ffa500",GradientType=1);
           margin: 10px 30px;
+        }
+
+        .media-option a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .media-option:hover {
+            background: linear-gradient(0deg, rgba(215,100,0,1) 100%, rgba(255,165,0,1) 0%);
         }
       </style>
 </head>
 <body>
-    <center>
-    <h1>Welcome to Registered User Home Page</h1>
+    <h1>Welcome to FlixPicks's Registered User Home Page</h1>
 
-    <a href="{{url_for('logout')}}">Press here to logout</a> 
+    <span class="fakebutton">
+       <a href="{{url_for('logout')}}">Press here to logout</a>
+    </span>
+
     
-    <br><br><br>
+    <br /><br /><br />
 
     <a href="{{url_for('mediaInfo')}}">
         <div class="media-option">Media name 1</div>
@@ -39,7 +56,7 @@
         <div class="media-option">Media name 5</div>
     </a>
     
-    <br><br>
+    <br /><br />
 
     <a href="{{url_for('mediaInfo')}}">
         <div class="media-option">Media name 6</div>
@@ -56,6 +73,5 @@
     <a href="{{url_for('mediaInfo')}}">
         <div class="media-option">Media name 10</div>
     </a>
-</center>
 </body>
 </html>

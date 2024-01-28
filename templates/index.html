@@ -5,16 +5,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlixPicks Home</title>
+    <link rel="stylesheet" type="text/css" href="./stylesheet.css">
+    <title>FlixPicks Landing Page</title>
 </head>
 
 <body>
-    <center>
-    <h1>Login Authentication System in Flask.</h1>
-    <a href="{{ url_for('login') }}">Login Page</a><br>
-    <a href="{{url_for('register')}}"> Register Page</a><br>
- 
-</center>
+    <h1>FlixPicks Login Authentication System in Flask</h1>
+    <br />
+    <span class="fakebutton">
+        <a href="{{ url_for('login') }}">Login Page</a>
+    </span>
+    <br />
+    <span class="fakebutton">
+        <a href="{{url_for('register')}}"> Register Page</a>
+    </span>
+
+    <br />
 </body>
 
 </html>
