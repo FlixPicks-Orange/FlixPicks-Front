@@ -7,6 +7,18 @@
                                                             team & other front end members-->
     </head>
     <body>
-        
+        <h1>Taste Profile</h1>
+        <form action="/submit" method="post">
+            {% for question, choices in question.items() %}
+            <p>{{ question }}</p>
+            {% for choice in choices %}
+                <label><input type ="radio" name="{{ question }}" value="{{ choice }}" 
+                    required> {{ choice }}</label>
+            {% endfor %}
+            <br>
+
+        {% endfor %}
+        <button type="submit">submit</button>
+        </form>
     </body>
 </html>
