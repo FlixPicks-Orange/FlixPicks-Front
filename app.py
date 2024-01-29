@@ -106,7 +106,20 @@ def logout():
 
 @app.route('/tasteProfile')
 def tasteProfile():
-    return render_template('tasteProfile.html')
+    questions = {
+    "What are your favorite genres?":["Horror","Fantasy","Action","Drama","Comedy","Other"],
+    "When do you watch TV?":["In the morning, while eating breakfast","In the afternoon, during lunch","At night, after work"],
+    "Do you prefer light-hearted movies or more serious ones?": ["Light-hearted","Serious and dramatic"],
+    "Live Action or Animation?":["Live Action","Animation"],
+    "Do you like a quick binge or to take your time?":["Quick binge","Take my time"],
+    "What do you pay attention to most in movies?":["The acting","The plot","Everything"],
+    "Who do you typically watch TV with?":["By myself","With friends","With family"],
+    "How often to you watch movies?":["Hardly at all","Rarley","Time to Time","Almost every day"],
+    "Why do you watch TV?":["To keep up with trending media","To relax","To relieve boredem"],
+    "What is your go-to streaming service?":["Netflix","Hulu","MAX","Prime Video","Paramount+","Other"]
+        #Add more questions here if needed
+}
+    return render_template('tasteProfile.html',questions=questions)
 
 if __name__ == '__main__':
     app.run(debug=True)
