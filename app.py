@@ -1,11 +1,11 @@
-from flask import Flask, render_template, url_for, redirect
+from flask import Flask, render_template, url_for, redirect, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
 from flask_bcrypt import Bcrypt
-import os
+import os, random
 
 app = Flask(__name__)
 
@@ -88,6 +88,23 @@ def register():
 def userhome():
     return render_template('userhome.html')
 
+@app.route('/spin', methods=['POST'])
+def spin():
+    options = request.form.get('options')
+    if not options:
+        return "Please enter at least one option."
+
+    options_list = options.split(',')
+    selected_option = random.choice(options_list)
+    return render_template('result.html', selected_option=selected_option)
+
+
+@app.route('/result', methods=['POSt'])
+def result():
+    options = request.form.getlist('option')
+    selected_option = random.choice(options)
+    return render_template('result.html', selected_option=selected_option)
+
 @app.route('/mediaInfo', methods=['GET' , 'POST'])
 @login_required
 def mediaInfo():
@@ -98,5 +115,9 @@ def mediaInfo():
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
+

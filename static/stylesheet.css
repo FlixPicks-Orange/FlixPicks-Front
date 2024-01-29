@@ -1,7 +1,6 @@
 body {
     text-align: center;
-    background-color: rgb(23, 23, 23);
-}
+    background-color: rgb(23, 23, 23);}
 
 h1 {
     color: white;
@@ -37,3 +36,46 @@ h1 {
     text-decoration: none;
     color: white;
 }
+
+.media-option {
+    display: inline-block;
+      color: white;
+      padding: 5% 2%;
+      border-radius: 15px;
+      border: 5px solid rgb(42, 47, 53);
+      background: rgb(215,100,0);
+      background: -moz-linear-gradient(0deg, rgba(215,100,0,1) 0%, rgba(255,165,0,1) 100%);
+      background: -webkit-linear-gradient(0deg, rgba(215,100,0,1) 0%, rgba(255,165,0,1) 100%);
+      background: linear-gradient(0deg, rgba(215,100,0,1) 0%, rgba(255,165,0,1) 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#d76400",endColorstr="#ffa500",GradientType=1);
+    margin: 10px 30px;
+  }
+
+  .media-option a {
+      text-decoration: none;
+      color: white;
+  }
+
+  .media-option:hover {
+      background: linear-gradient(0deg, rgba(215,100,0,1) 100%, rgba(255,165,0,1) 0%);
+  }
+
+  .movie-image {
+    width: 300px; /* Set the desired width */
+    height: 400px; /* Set the desired height */
+    margin: 0 auto; /* Auto margin for centering */
+    border: 2px solid #000; /* Outline style */
+    box-sizing: border-box; /* Include border in width and height */
+}
+
+.streaming-platform-option {
+  display: inline-block;
+  padding: 10px;
+  border: 1px solid #000000;
+  margin: 5px;
+}
+
+.wheel {
+    text-align: center;
+}
+
