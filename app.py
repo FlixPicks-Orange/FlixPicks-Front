@@ -105,10 +105,10 @@ def result():
     selected_option = random.choice(options)
     return render_template('result.html', selected_option=selected_option)
 
-@app.route('/mediaInfo', methods=['GET' , 'POST'])
+@app.route('/mediaInfo/<int:page_id>', methods=['GET' , 'POST'])
 @login_required
-def mediaInfo():
-    return render_template('mediaInfo.html')
+def mediaInfo(page_id):
+    return render_template('mediaInfo.html', page_id=page_id)
 
 @app.route('/logout', methods = ['GET','POST'])
 @login_required
