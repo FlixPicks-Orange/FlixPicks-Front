@@ -1,6 +1,8 @@
 body {
     text-align: center;
-    background-color: rgb(23, 23, 23);}
+    background-color: rgb(23, 23, 23);
+    color: white;
+}
 
 h1 {
     color: white;
@@ -79,3 +81,8 @@ h1 {
     text-align: center;
 }
 
+#banner {
+    height: 300px;
+    border: 2px solid rgb(42, 47, 53);
+    border-radius: 10px;
+}
