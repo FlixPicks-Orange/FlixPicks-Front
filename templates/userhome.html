@@ -8,7 +8,7 @@
 </head>
 <body>
     <img id="banner" src="../static/images/banner.png" alt="FlixPicks banner" title="FlixPicks">
-    <h1>Welcome to FlixPicks's Registered User Home Page</h1>
+    <h1>Welcome {{ current_user.fname }}! This is your personal home page!</h1>
       <span class="fakebutton">
          <a href="{{url_for('logout')}}">Press here to logout</a>
       </span>

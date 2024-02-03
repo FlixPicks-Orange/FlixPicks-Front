@@ -16,6 +16,9 @@
         {{ form.username }} <br>
         {{ form.password }} <br>
         {{ form.submit }}
+        {% if error_message %}
+            <p class="error">{{ error_message }}</p>
+        {% endif %}
     </form>
     <a href="{{url_for('register')}}"> Don't have an account? </a><br>
 </body>

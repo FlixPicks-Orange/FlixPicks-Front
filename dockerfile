@@ -4,4 +4,4 @@ COPY requirements.txt ./
 RUN python -m pip install -r requirements.txt
 COPY . .
 EXPOSE 2000
-CMD ["python", "./app.py"]
+CMD ["python", "-u", "./app.py"]
