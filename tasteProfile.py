@@ -46,7 +46,7 @@ def submit():
 
     # Commit changes to the database
     db.session.commit()
-    
+
     #TESTING CODE START
     print(responses) #Print the responses just to make sure that they
                      #Are being read correctly
@@ -55,6 +55,13 @@ def submit():
 
 def thank_you():
     return "Thank you for completing the Taste Survey!" #Cuter message -> redirect to FP
+
+@app.route('/survey_results')
+def survey_results():
+    # Retrieve all survey responses from the database
+    all_responses = SurveyResponse.query.all()
+    return render_template('surveyResults.html', responses=all_responses)
+
 
 if __name__ == '__main__':
     db.create_all() # Create the necessary fatabase tables
