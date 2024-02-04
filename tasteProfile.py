@@ -1,6 +1,17 @@
 from flask import Flask, render_template, request, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
+
 
 app = Flask(__name__)
+# Configuring the SQLite database URI
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///survey_responses.db'
+db = SQLAlchemy(app)
+
+# Define the model for survey responses
+class SurveyResponse(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    question = db.Column(db.String(255), nullable=False)
+    response = db.Column(db.String(255), nullable=False)
 
 questions = {
     "What are your favorite genres?":["Horror","Fantasy","Action","Drama","Comedy","Other"],
@@ -23,14 +34,28 @@ def index():
 
 @app.route('/submit', methods=['POST'])
 def submit():
-    responses = [request.form[str(i)] for i in range(1, len(questions) +1)]
+    # Iterate through each question and its corresponding response
+    for i in range(1, len(questions) + 1):
+        question = list(questions.keys())[i - 1]
+        response = request.form[str(i)]
+    #(OLD) responses = [request.form[str(i)] for i in range(1, len(questions) +1)] 
+
+    # Save the response to the database
+        survey_response = SurveyResponse(question=question, response=response)
+        db.session.add(survey_response)
+
+    # Commit changes to the database
+    db.session.commit()
+    
     #TESTING CODE START
     print(responses) #Print the responses just to make sure that they
                      #Are being read correctly
     #TESTING CODE END
 @app.route('/thanks') #Eventually edit this- should redirect to homepage of FP
+
 def thank_you():
     return "Thank you for completing the Taste Survey!" #Cuter message -> redirect to FP
 
 if __name__ == '__main__':
+    db.create_all() # Create the necessary fatabase tables
     app.run(debug=True)
