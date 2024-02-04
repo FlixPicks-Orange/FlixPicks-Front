@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../static/stylesheet.css">
-        <title>FlixPicks User Home</title>
+    <link rel="icon" type="image/x-icon" href="../static/images/favicon.ico">
+    <title>FlixPicks User Home</title>
 </head>
 <body>
-    <img id="banner" src="../static/images/banner.png" alt="FlixPicks banner" title="FlixPicks">
+    <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks Logo" title="FlixPicks">
     <h1>Welcome {{ current_user.fname }}! This is your personal home page!</h1>
       <span class="fakebutton">
          <a href="{{url_for('logout')}}">Press here to logout</a>

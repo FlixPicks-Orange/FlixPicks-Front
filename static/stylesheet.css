@@ -6,32 +6,30 @@ body {
 
 h1 {
     color: white;
-    border-radius: 15px;
-    border: 5px solid rgb(42, 47, 53);
-    background: rgb(200,54,0);
-    background: -moz-linear-gradient(0deg, rgba(200,54,0,1) 0%, rgba(255,69,0,1) 35%, rgba(255,129,83,1) 100%);
-    background: -webkit-linear-gradient(0deg, rgba(200,54,0,1) 0%, rgba(255,69,0,1) 35%, rgba(255,129,83,1) 100%);
-    background: linear-gradient(0deg, rgba(200,54,0,1) 0%, rgba(255,69,0,1) 35%, rgba(255,129,83,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#c83600",endColorstr="#ff8153",GradientType=1);
+    background-color: rgb(42, 47, 53);
     padding: 5px;
+}
+
+a {
+    color: dodgerblue;
+}
+
+a:visited {
+    color: royalblue;
 }
 
 .fakebutton {
     display: block;
-    padding: 15px;
+    padding: 5px;
     border: 5px solid rgb(42, 47, 53);
     border-radius: 15px;
-    background: rgb(200,54,0);
-    background: -moz-linear-gradient(0deg, rgba(200,54,0,1) 0%, rgba(255,69,0,1) 35%, rgba(255,129,83,1) 100%);
-    background: -webkit-linear-gradient(0deg, rgba(200,54,0,1) 0%, rgba(255,69,0,1) 35%, rgba(255,129,83,1) 100%);
-    background: linear-gradient(0deg, rgba(200,54,0,1) 0%, rgba(255,69,0,1) 35%, rgba(255,129,83,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#c83600",endColorstr="#ff8153",GradientType=1);
-    width: 20%;
+    background: rgb(231,113,0);
+    width: 10%;
     margin: 10px auto;
 }
 
 .fakebutton:hover  {
-    background: linear-gradient(0deg, rgba(200,54,0,1) 100%, rgba(255,69,0,1) 35%, rgba(255,129,83,1) 0%);
+    background: rgb(206, 111, 21)
 }
 
 .fakebutton a {
@@ -82,7 +80,6 @@ h1 {
 }
 
 #banner {
-    height: 300px;
-    border: 2px solid rgb(42, 47, 53);
-    border-radius: 10px;
+    height: 80px;
+    background-color: rgb(42, 47, 53);
 }
