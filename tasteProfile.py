@@ -14,16 +14,17 @@ class SurveyResponse(db.Model):
     response = db.Column(db.String(255), nullable=False)
 
 questions = {
-    "What are your favorite genres?":["Horror","Fantasy","Action","Drama","Comedy","Other"],
-    "When do you watch TV?":["In the morning, while eating breakfast","In the afternoon, during lunch","At night, after work"],
+    "What are your favorite genres?":["Horror","Fantasy","Action","Drama","Comedy","Romance","Other"],
+    "When do you watch movies or TV?":["In the morning, while eating breakfast","In the afternoon, during lunch","At night, after work"],
     "Do you prefer light-hearted movies or more serious ones?": ["Light-hearted","Serious and dramatic"],
-    "Live Action or Animation?":["Live Action","Animation"],
-    "Do you like a quick binge or to take your time?":["Quick binge","Take my time"],
-    "What do you pay attention to most in movies?":["The acting","The plot","Everything"],
+    "Live action or animation?":["Live Action","Animation"],
+    "Do you like to binge watch or to take your time?":["Binge watch","Take my time"],
+    "What do you pay attention to most in movies?":["The acting","The plot","The action","Everything"],
     "Who do you typically watch TV with?":["By myself","With friends","With family"],
-    "How often to you watch movies?":["Hardly at all","Rarley","Time to Time","Almost every day"],
-    "Why do you watch TV?":["To keep up with trending media","To relax","To relieve boredem"],
-    "What is your go-to streaming service?":["Netflix","Hulu","MAX","Prime Video","Paramount+","Other"]
+    "How often to you watch movies?":["Hardly at all","A couple times a month","A couple times a week","Every day"],
+    "Why do you watch TV?":["To keep up with trending media","For relaxation","For entertainment"],
+    "What is your preferred streaming service?":["Netflix","Hulu","MAX","Prime Video","Paramount+","Other"],
+    "Are you subscribed to any streaming services?":["None","One","Two","Three","Four or more"]
         #Add more questions here if needed
 }
 
@@ -54,7 +55,8 @@ def submit():
 @app.route('/thanks') #Eventually edit this- should redirect to homepage of FP
 
 def thank_you():
-    return "Thank you for completing the Taste Survey!" #Cuter message -> redirect to FP
+    return "Thank you for completing the Taste Profile survey!" #Cuter message -> redirect to FP
+    # return redirect(url_for('userhome')) - maybe?
 
 @app.route('/survey_results')
 def survey_results():
