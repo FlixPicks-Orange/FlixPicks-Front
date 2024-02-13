@@ -1,4 +1,4 @@
-from flask import render_template, url_for, redirect, request
+from flask import render_template, request, url_for, redirect, request
 from flask_login import login_user, login_required, logout_user, current_user
 import random
 
@@ -42,14 +42,11 @@ def login():
 def register():
     form = forms.RegisterForm()
     if form.validate_on_submit():
-        result = users.create_user(
-            form.email.data, 
-            form.username.data, 
-            form.password.data,
-            form.fname.data,
-            form.lname.data
-            )
-        if(result): return redirect(url_for('login'))
+        hashed_password = bcrypt.generate_password_hash(form.password.data)
+        new_user = User(username=form.username.data, password=hashed_password)
+        db.session.add(new_user)
+        db.session.commit()
+        return redirect(url_for('login'))
     return render_template('register.html', form = form)
 
 
@@ -99,8 +96,5 @@ def mediaInfo(page_id):
 def logout():
     logout_user()
     return redirect(url_for('home'))
-
-
-
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=2000, debug=True)

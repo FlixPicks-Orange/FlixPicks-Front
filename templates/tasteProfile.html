@@ -9,8 +9,8 @@
     </head>
     <body>
         <h1>Taste Profile</h1>
-        <form action="/submit" method="post">
-            {% for question, choices in question.items() %}
+        <form method="POST" action="{{ url_for('tasteProfile') }}">
+            {% for question, choices in questions.items() %}
             <p>{{ question }}</p>
             {% for choice in choices %}
                 <label><input type ="radio" name="{{ question }}" value="{{ choice }}" 
