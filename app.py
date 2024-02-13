@@ -3,10 +3,11 @@ from flask_login import login_user, login_required, logout_user, current_user
 import random
 
 # Custom Modules
-from config  import app
+from config  import app, bcrypt, db, User, youtube
 import forms, users, login_manager
 from youtube import get_homepage_video_data
-
+from flask_bcrypt import Bcrypt
+from flask_sqlalchemy import SQLAlchemy
 
 popular_videos = get_homepage_video_data()
 
