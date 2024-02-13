@@ -80,29 +80,9 @@ def register():
         new_user = User(username=form.username.data, password=hashed_password)
         db.session.add(new_user)
         db.session.commit()
-        ## return redirect(url_for('login'))
-
-        #START OF TASTE PROFILE REDIRECT
         login_user(new_user)
         return redirect(url_for('tasteProfile'))
-    
-    return render_template('register.html', form = form)
-
-@app.route('/userhome', methods=['GET' , 'POST'])
-@login_required
-def userhome():
-    return render_template('userhome.html')
-
-@app.route('/mediaInfo', methods=['GET' , 'POST'])
-@login_required
-def mediaInfo():
-    return render_template('mediaInfo.html')
-
-@app.route('/logout', methods = ['GET','POST'])
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for('home'))
+    return render_template('register.html', form=form)
 
 @app.route('/tasteProfile')
 def tasteProfile():
@@ -119,7 +99,23 @@ def tasteProfile():
     "What is your go-to streaming service?":["Netflix","Hulu","MAX","Prime Video","Paramount+","Other"]
         #Add more questions here if needed
 }
-    return render_template('tasteProfile.html',questions=questions)
+    return render_template('tasteProfile.html', questions=questions)
+
+@app.route('/userhome', methods=['GET' , 'POST'])
+@login_required
+def userhome():
+    return render_template('userhome.html')
+
+@app.route('/mediaInfo', methods=['GET' , 'POST'])
+@login_required
+def mediaInfo():
+    return render_template('mediaInfo.html')
+
+@app.route('/logout', methods = ['GET','POST'])
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
 
 if __name__ == '__main__':
     app.run(debug=True)

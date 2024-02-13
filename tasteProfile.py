@@ -30,6 +30,7 @@ def submit():
     print(responses) #Print the responses just to make sure that they
                      #Are being read correctly
     #TESTING CODE END
+    return redirect(url_for('thank_you'))
     
 @app.route('/thanks') #Eventually edit this- should redirect to homepage of FP
 def thank_you():
