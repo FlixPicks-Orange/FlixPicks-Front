@@ -1,5 +1,7 @@
 from flask import render_template, url_for, redirect, request
 from flask_login import login_user, login_required, logout_user, current_user
+from youtube import get_homepage_video_data
+from googleapiclient.discovery import build
 import random
 
 # Custom Modules
@@ -7,10 +9,20 @@ from config  import app
 import forms, users, login_manager
 
 
-# Routes
+popular_videos = get_homepage_video_data()
+
+
 @app.route('/')
 def home():
-    return render_template("index.html")
+    return render_template("index.html",   video1=popular_videos[0],  video2=popular_videos[1],     video3=popular_videos[2],
+    video4=popular_videos[3],   video5=popular_videos[4],    video6=popular_videos[5],    video7=popular_videos[6],    video8=popular_videos[7],         video9=popular_videos[8],       video10=popular_videos[9])
+
+
+@app.route('/quickclick/<int:video_id>')
+def quickclick(video_id):
+    video = popular_videos[video_id]
+    return render_template('quickclick.html', video=video)
+
 
 
 @app.route('/login', methods=['GET' , 'POST'])
@@ -69,7 +81,18 @@ def result():
 @app.route('/mediaInfo/<int:page_id>', methods=['GET' , 'POST'])
 @login_required
 def mediaInfo(page_id):
-    return render_template('mediaInfo.html', page_id=page_id)
+    request = youtube.videos().list(
+        part='snippet',
+        id=page_id,
+        )
+    response = request.execute()
+    video_info = response['items'][0]['snippet']
+
+    video_title = video_info['title']
+    video_thumbnail = video_info['thumbnails']['default']['url']
+    video_url = f'https://www.youtube.com/watch?v={page_id}'
+
+    return render_template('mediaInfo.html', video_title=video_title, video_thumbnail=video_thumbnail, video_url=video_url, page_id=page_id)
 
 
 @app.route('/logout', methods = ['GET','POST'])

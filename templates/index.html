@@ -21,8 +21,39 @@
     <span class="fakebutton">
         <a href="{{url_for('register')}}"> Register Page</a>
     </span>
+    <h1>QuickClick YouTube Videos</h1>
 
-    <br />
+    <a href="{{ url_for('quickclick', video_id=0) }}">
+    <div class="media-option">{{ video1.title }}</div>
+</a>
+    <a href="{{ url_for('quickclick', video_id=1)}}">
+    <div class="media-option">{{ video2.title }}</div>
+</a>
+<a href="{{ url_for('quickclick', video_id=2) }}">
+    <div class="media-option">{{ video3.title }}</div>
+</a>
+    <a href="{{ url_for('quickclick', video_id=3)}}">
+    <div class="media-option">{{ video4.title }}</div>
+</a>
+<a href="{{ url_for('quickclick', video_id=4) }}">
+    <div class="media-option">{{ video5.title }}</div>
+</a>
+    <a href="{{ url_for('quickclick', video_id=5)}}">
+    <div class="media-option">{{ video6.title }}</div>
+</a>
+<a href="{{ url_for('quickclick', video_id=6) }}">
+    <div class="media-option">{{ video7.title }}</div>
+</a>
+    <a href="{{ url_for('quickclick', video_id=7)}}">
+    <div class="media-option">{{ video8.title }}</div>
+</a>
+<a href="{{ url_for('quickclick', video_id=8) }}">
+    <div class="media-option">{{ video9.title }}</div>
+</a>
+    <a href="{{ url_for('quickclick', video_id=9)}}">
+    <div class="media-option">{{ video10.title }}</div>
+</a>
+    
 </body>
 
 </html>

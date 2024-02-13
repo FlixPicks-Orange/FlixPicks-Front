@@ -39,17 +39,24 @@ a:visited {
 
 .media-option {
     display: inline-block;
-      color: white;
-      padding: 5% 2%;
-      border-radius: 15px;
-      border: 5px solid rgb(42, 47, 53);
-      background: rgb(215,100,0);
-      background: -moz-linear-gradient(0deg, rgba(215,100,0,1) 0%, rgba(255,165,0,1) 100%);
-      background: -webkit-linear-gradient(0deg, rgba(215,100,0,1) 0%, rgba(255,165,0,1) 100%);
-      background: linear-gradient(0deg, rgba(215,100,0,1) 0%, rgba(255,165,0,1) 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#d76400",endColorstr="#ffa500",GradientType=1);
+    color: white;
+    padding: 5%;
+    width: 60px; /* Adjust as needed */
+    height: 60px; /* Adjust as needed */
+    border-radius: 15px;
+    border: 5px solid rgb(42, 47, 53);
+    background: rgb(215,100,0);
+    background: -moz-linear-gradient(0deg, rgba(215,100,0,1) 0%, rgba(255,165,0,1) 100%);
+    background: -webkit-linear-gradient(0deg, rgba(215,100,0,1) 0%, rgba(255,165,0,1) 100%);
+    background: linear-gradient(0deg, rgba(215,100,0,1) 0%, rgba(255,165,0,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#d76400",endColorstr="#ffa500",GradientType=1);
     margin: 10px 30px;
-  }
+    text-align: center;
+    overflow: hidden;
+}
+
+
+
 
   .media-option a {
       text-decoration: none;
