@@ -8,7 +8,7 @@
     </head>
     <body>
         <h1>Taste Profile</h1>
-        <form action="/submit" method="post">
+        <form method="POST" action="{{ url_for('tasteProfile') }}">
             {% for question, choices in questions.items() %}
             <p>{{ question }}</p>
             {% for choice in choices %}

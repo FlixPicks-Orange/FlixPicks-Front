@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, redirect
+from flask import Flask, render_template, request, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user
 from flask_wtf import FlaskForm
@@ -84,9 +84,12 @@ def register():
         return redirect(url_for('tasteProfile'))
     return render_template('register.html', form=form)
 
-@app.route('/tasteProfile')
+@app.route('/tasteProfile', methods=['GET','POST'])
 def tasteProfile():
-    questions = {
+    if request.method== 'POST':
+        return redirect(url_for('thank_you'))
+    else:
+        questions = {
     "What are your favorite genres?":["Horror","Fantasy","Action","Drama","Comedy","Other"],
     "When do you watch TV?":["In the morning, while eating breakfast","In the afternoon, during lunch","At night, after work"],
     "Do you prefer light-hearted movies or more serious ones?": ["Light-hearted","Serious and dramatic"],
@@ -100,6 +103,11 @@ def tasteProfile():
         #Add more questions here if needed
 }
     return render_template('tasteProfile.html', questions=questions)
+
+@app.route('/thank_you')
+@login_required
+def thank_you():
+    return render_template('thank_you.html')
 
 @app.route('/userhome', methods=['GET' , 'POST'])
 @login_required
