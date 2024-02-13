@@ -1,12 +1,11 @@
 from flask import render_template, url_for, redirect, request
 from flask_login import login_user, login_required, logout_user, current_user
-from youtube import get_homepage_video_data
-from googleapiclient.discovery import build
 import random
 
 # Custom Modules
 from config  import app
 import forms, users, login_manager
+from youtube import get_homepage_video_data
 
 
 popular_videos = get_homepage_video_data()
