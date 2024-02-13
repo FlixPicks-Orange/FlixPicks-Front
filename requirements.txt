@@ -9,6 +9,7 @@ Flask-Bcrypt==1.0.1
 Flask-Login==0.6.3
 Flask-SQLAlchemy==3.1.1
 Flask-WTF==1.2.1
+google-api-python-client==2.33.0 #remember to remove this one if stop using youtube :)
 greenlet==3.0.3
 idna==3.6
 importlib-metadata==7.0.1
