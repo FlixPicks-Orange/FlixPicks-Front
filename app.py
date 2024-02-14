@@ -1,13 +1,13 @@
-from flask import render_template, request, url_for, redirect, request
+from flask import render_template, url_for, redirect, request
 from flask_login import login_user, login_required, logout_user, current_user
 import random
 
 # Custom Modules
-from config  import app, bcrypt, db, User, youtube
+from config  import app
 import forms, users, login_manager
 from youtube import get_homepage_video_data
-from flask_bcrypt import Bcrypt
-from flask_sqlalchemy import SQLAlchemy
+
+
 
 popular_videos = get_homepage_video_data()
 
@@ -43,11 +43,14 @@ def login():
 def register():
     form = forms.RegisterForm()
     if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data)
-        new_user = User(username=form.username.data, password=hashed_password)
-        db.session.add(new_user)
-        db.session.commit()
-        return redirect(url_for('login'))
+        result = users.create_user(
+            form.email.data, 
+            form.username.data, 
+            form.password.data,
+            form.fname.data,
+            form.lname.data
+            )
+        if(result): return redirect(url_for('login'))
     return render_template('register.html', form = form)
 
 
@@ -62,13 +65,13 @@ def spin():
     options = request.form.get('options')
     if not options:
         return "Please enter at least one option."
-
+    
     options_list = options.split(',')
     selected_option = random.choice(options_list)
     return render_template('result.html', selected_option=selected_option)
 
 
-@app.route('/result', methods=['POSt'])
+@app.route('/result', methods=['POST'])
 def result():
     options = request.form.getlist('option')
     selected_option = random.choice(options)
@@ -84,11 +87,11 @@ def mediaInfo(page_id):
         )
     response = request.execute()
     video_info = response['items'][0]['snippet']
-
+    
     video_title = video_info['title']
     video_thumbnail = video_info['thumbnails']['default']['url']
     video_url = f'https://www.youtube.com/watch?v={page_id}'
-
+    
     return render_template('mediaInfo.html', video_title=video_title, video_thumbnail=video_thumbnail, video_url=video_url, page_id=page_id)
 
 
@@ -97,5 +100,8 @@ def mediaInfo(page_id):
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
+
+
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=2000, debug=True)
