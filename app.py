@@ -82,18 +82,7 @@ def result():
 @app.route('/mediaInfo/<int:page_id>', methods=['GET' , 'POST'])
 @login_required
 def mediaInfo(page_id):
-    request = youtube.videos().list(
-        part='snippet',
-        id=page_id,
-        )
-    response = request.execute()
-    video_info = response['items'][0]['snippet']
-    
-    video_title = video_info['title']
-    video_thumbnail = video_info['thumbnails']['default']['url']
-    video_url = f'https://www.youtube.com/watch?v={page_id}'
-    
-    return render_template('mediaInfo.html', video_title=video_title, video_thumbnail=video_thumbnail, video_url=video_url, page_id=page_id)
+    return render_template('mediaInfo.html',  page_id=page_id)
 
 
 @app.route('/logout', methods = ['GET','POST'])
