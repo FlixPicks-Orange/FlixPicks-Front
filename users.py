@@ -45,12 +45,18 @@ def create_user(email, username, password, fname, lname):
         else: return False
     else: return False
 
+def update_login_date(username):
+    r = requests.patch(os.getenv('DB_URL') + "/users/update/" + username + "/last_login")
+    if(r.status_code == 201): return True
+    else: return False
+    
 
 def verify_user(username, password):
     user = get_by_username(username)
     if user is None: 
         return None
     if bcrypt.check_password_hash(user["password"], password):
+        update_login_date(username)
         return user
     else: 
         return None
