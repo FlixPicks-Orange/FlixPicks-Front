@@ -50,6 +50,10 @@ def update_login_date(username):
     if(r.status_code == 201): return True
     else: return False
     
+def update_survey_check(username):
+    r = requests.patch(os.getenv('DB_URL') + "/users/update/" + username + "/survey_check")
+    if(r.status_code == 201): return True
+    else: return False
 
 def verify_user(username, password):
     user = get_by_username(username)
