@@ -11,7 +11,7 @@ import Survey
 
 
 
-trending_movies = get_trending_movies()
+trending_movies = get_trending_movies(12)
 
 
 @app.route('/')
