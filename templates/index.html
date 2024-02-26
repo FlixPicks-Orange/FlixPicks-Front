@@ -21,38 +21,54 @@
     <span class="fakebutton">
         <a href="{{url_for('register')}}"> Register Page</a>
     </span>
-    <h1>QuickClick YouTube Videos</h1>
 
-    <a href="{{ url_for('quickclick', video_id=0) }}">
-    <div class="media-option">{{ video1.title }}</div>
-</a>
-    <a href="{{ url_for('quickclick', video_id=1)}}">
-    <div class="media-option">{{ video2.title }}</div>
-</a>
-<a href="{{ url_for('quickclick', video_id=2) }}">
-    <div class="media-option">{{ video3.title }}</div>
-</a>
-    <a href="{{ url_for('quickclick', video_id=3)}}">
-    <div class="media-option">{{ video4.title }}</div>
-</a>
-<a href="{{ url_for('quickclick', video_id=4) }}">
-    <div class="media-option">{{ video5.title }}</div>
-</a>
-    <a href="{{ url_for('quickclick', video_id=5)}}">
-    <div class="media-option">{{ video6.title }}</div>
-</a>
-<a href="{{ url_for('quickclick', video_id=6) }}">
-    <div class="media-option">{{ video7.title }}</div>
-</a>
-    <a href="{{ url_for('quickclick', video_id=7)}}">
-    <div class="media-option">{{ video8.title }}</div>
-</a>
-<a href="{{ url_for('quickclick', video_id=8) }}">
-    <div class="media-option">{{ video9.title }}</div>
-</a>
-    <a href="{{ url_for('quickclick', video_id=9)}}">
-    <div class="media-option">{{ video10.title }}</div>
-</a>
+<div style="text-align: left;"> 
+    <div class="category-header"> 
+          HotPicks
+    </div>
+</div>
+<div style="display: flex;">
+    <div onclick="moveCategory1('left')" class="option-cycle-button-prev"><div style="text-align: center;">&lt</div></div>
+    <div class="media-option-container">
+        <div id="category1" style="display: flex; position: relative; transition: transform 0.6s ease-in-out;">
+        <a href="{{ url_for('hotpicks', title=trending_movies[0].title) }}">{{ trending_movies[0].title }}</a>
+        <a href="{{ url_for('hotpicks', title=trending_movies[0].title) }}">{{ trending_movies[0].title }}</a>
+        <a href="{{ url_for('hotpicks', title=trending_movies[0].title) }}">{{ trending_movies[0].title }}</a>
+        <a href="{{ url_for('hotpicks', title=trending_movies[0].title) }}">{{ trending_movies[0].title }}</a>
+        <a href="{{ url_for('hotpicks', title=trending_movies[0].title) }}">{{ trending_movies[0].title }}</a>
+        <a href="{{ url_for('hotpicks', title=trending_movies[0].title) }}">{{ trending_movies[0].title }}</a>
+        <a href="{{ url_for('hotpicks', title=trending_movies[0].title) }}">{{ trending_movies[0].title }}</a>
+        <a href="{{ url_for('hotpicks', title=trending_movies[0].title) }}">{{ trending_movies[0].title }}</a>
+        <a href="{{ url_for('hotpicks', title=trending_movies[0].title) }}">{{ trending_movies[0].title }}</a>
+        <a href="{{ url_for('hotpicks', title=trending_movies[0].title) }}">{{ trending_movies[0].title }}</a>
+    </div>
+    </div>
+    <div onclick="moveCategory1('right')" class="option-cycle-button-next"><div style="text-align: center;">&gt</div></div>
+</div>
+
+
+
+<script>// This is a JavaScrip section for any programing in the frontend
+    function moveCategory1(direction) {
+      const box = document.getElementById('category1');
+  
+      if (direction === 'right') {
+        box.style.transform = `translateX(-84vw)`;
+      } else if (direction === 'left') {
+        box.style.transform = `translateX(0px)`;
+      }
+    }
+    function moveCategory2(direction) {
+      const box = document.getElementById('category2');
+  
+      if (direction === 'right') {
+        box.style.transform = `translateX(-84vw)`;
+      } else if (direction === 'left') {
+        box.style.transform = `translateX(0px)`;
+      }
+    }
+  </script>
+
     
 </body>
 

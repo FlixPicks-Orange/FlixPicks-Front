@@ -5,15 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../static/stylesheet.css">
     <link rel="icon" type="image/x-icon" href="../static/images/favicon.ico">
-    <title>QuickClick</title>
+    <title>Hot Picks</title>
 </head>
 <body>
-    <h1>Quick Click</h1>
-    
-    <h2>{{ video.title }}</h2>
-    <a href="https://www.youtube.com/watch?v={{ video.id }}">
-        <img src="{{ video.thumbnail }}" alt="{{ video.title }}">
-    </a>
-    
+    <h1>{{ movie.title }}</h1>
+    <img src="{{ movie.picture }}" alt="{{ movie.title }}">
+    <p>Release Date: {{ movie.release_date }}</p>
+    <p><a href="{{ movie.url }}">More Info</a></p>
 </body>
 </html>
+
