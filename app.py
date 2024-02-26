@@ -58,7 +58,10 @@ def register():
 @app.route('/userhome', methods=['GET' , 'POST'])
 @login_required
 def userhome():
-    return render_template('userhome.html', user=current_user)
+    if(current_user.survey_check==False):
+        return redirect(url_for('tasteProfile'))
+    else:
+        return render_template('userhome.html', user=current_user)
 
 
 @app.route('/spin', methods=['POST'])
@@ -120,8 +123,8 @@ def tasteProfile():
 
 @app.route('/thanks') #Eventually edit this- should redirect to homepage of FP
 def thank_you():
-    return "Thank you for completing the Taste Profile survey!" #Cuter message -> redirect to FP
-    # return redirect(url_for('userhome')) - maybe?
+    users.update_survey_check(current_user.username)
+    return render_template('thankyou.html')
 
 
 @app.route('/survey_results')

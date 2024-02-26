@@ -16,6 +16,9 @@ class User(UserMixin):
         self.username = user_json.get('username')
         self.fname = user_json.get('fname')
         self.lname = user_json.get('lname')
+        self.last_login = user_json.get('last_login')
+        self.survey_check = user_json.get('survey_check')
+
     
     def get_id(self):
         object_id = self.user_json.get('id')

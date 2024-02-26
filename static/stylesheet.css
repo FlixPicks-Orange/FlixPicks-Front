@@ -37,12 +37,40 @@ a:visited {
     color: white;
 }
 
-.media-option {
+.category-header {
+    margin-top: 75px;
+    margin-bottom: 1vh;
+    margin-left: 3vw;
+    padding: 5px 1.5vw;
+    font-size: 150%;
     display: inline-block;
+    text-align: center;
+    background-color: rgb(42, 47, 53);
+    border: 3px solid #ccc;
+}
+
+.media-option-container {
+    display: flex;
+    align-items: center;
+    display: flex;
+    margin: 0 auto;
+    overflow: hidden;
+    width: 84vw;
+    height: 150px;
+    border: 3px solid #ccc;
+    text-align: left;
+}
+
+.media-option-container a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 195px;
+    height: 110px;
+    margin: 5px;
+    text-decoration: none;
+    font-size: 100%;
     color: white;
-    padding: 5%;
-    width: 60px; /* Adjust as needed */
-    height: 60px; /* Adjust as needed */
     border-radius: 15px;
     border: 5px solid rgb(42, 47, 53);
     background: rgb(215,100,0);
@@ -50,24 +78,47 @@ a:visited {
     background: -webkit-linear-gradient(0deg, rgba(215,100,0,1) 0%, rgba(255,165,0,1) 100%);
     background: linear-gradient(0deg, rgba(215,100,0,1) 0%, rgba(255,165,0,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#d76400",endColorstr="#ffa500",GradientType=1);
-    margin: 10px 30px;
-    text-align: center;
-    overflow: hidden;
+    justify-content: center;
 }
 
+.option-cycle-button-next {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    font-size: 200%;
+    width: 3vw;
+    right: 4.5vw;
+    height: 150px;
+    background-color: #4d4d4d;
+    border: 3px solid #ccc;
+    cursor: pointer;
+}
 
+.option-cycle-button-prev {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    font-size: 200%;
+    width: 3vw;
+    left: 4.5vw;
+    height: 150px;
+    background-color: #4d4d4d;
+    border: 3px solid #ccc;
+    cursor: pointer;
+}
 
+.media-option a {
+    text-decoration: none;
+    color: white;
+}
 
-  .media-option a {
-      text-decoration: none;
-      color: white;
-  }
+.media-option:hover {
+    background: linear-gradient(0deg, rgba(215,100,0,1) 100%, rgba(255,165,0,1) 0%);
+}
 
-  .media-option:hover {
-      background: linear-gradient(0deg, rgba(215,100,0,1) 100%, rgba(255,165,0,1) 0%);
-  }
-
-  .movie-image {
+.movie-image {
     width: 300px; /* Set the desired width */
     height: 400px; /* Set the desired height */
     margin: 0 auto; /* Auto margin for centering */

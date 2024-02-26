@@ -13,42 +13,117 @@
       <span class="fakebutton">
          <a href="{{url_for('logout')}}">Press here to logout</a>
       </span>
-    <br /><br /><br />
-
-    <a href="{{url_for('mediaInfo', page_id=1)}}">
-        <div class="media-option">Media name 1</div>
-    </a>
-    <a href="{{url_for('mediaInfo', page_id=2)}}">
-            <div class="media-option">Media name 2</div>
-    </a>
-    <a href="{{url_for('mediaInfo', page_id=3)}}">
-        <div class="media-option">Media name 3</div>
-    </a>
-    <a href="{{url_for('mediaInfo', page_id=4)}}">
-        <div class="media-option">Media name 4</div>
-    </a>
-    <a href="{{url_for('mediaInfo', page_id=5)}}">
-        <div class="media-option">Media name 5</div>
-    </a>
     
-    <br /><br />
+    <div style="text-align: left;"> <!-- Start of the first category (this part's the header)-->
+        <div class="category-header">
+            Category 1 Name Here
+        </div>
+    </div>
+    <div style="display: flex;">
+        <div onclick="moveCategory1('left')" class="option-cycle-button-prev"><div style="text-align: center;">&lt</div></div>
+        <div class="media-option-container">
+            <div id="category1" style="display: flex; position: relative; transition: transform 0.6s ease-in-out;">
+                <a href="{{url_for('mediaInfo', page_id=1)}}">
+                    Media name 1
+                </a>
+                <a href="{{url_for('mediaInfo', page_id=2)}}">
+                    Media name 2
+                </a>
+                <a href="{{url_for('mediaInfo', page_id=3)}}">
+                    Media name 3
+                </a>
+                <a href="{{url_for('mediaInfo', page_id=4)}}">
+                    Media Name 4
+                </a>
+                <a href="{{url_for('mediaInfo', page_id=5)}}">
+                    Media name 5
+                </a>
+                <a href="{{url_for('mediaInfo', page_id=6)}}">
+                    Media name 6
+                </a>
+                <a href="{{url_for('mediaInfo', page_id=7)}}">
+                    Media name 7
+                </a>
+                <a href="{{url_for('mediaInfo', page_id=8)}}">
+                    Media name 8
+                </a>
+                <a href="{{url_for('mediaInfo', page_id=9)}}">
+                    Media name 9
+                </a>
+                <a href="{{url_for('mediaInfo', page_id=10)}}">
+                    Media name 10
+                </a>
+            </div>
+        </div>
+        <div onclick="moveCategory1('right')" class="option-cycle-button-next"><div style="text-align: center;">&gt</div></div>
+    </div>
 
-    <a href="{{url_for('mediaInfo', page_id=6)}}">
-        <div class="media-option">Media name 6</div>
-    </a>
-    <a href="{{url_for('mediaInfo', page_id=7)}}">
-        <div class="media-option">Media name 7</div>
-    </a>
-    <a href="{{url_for('mediaInfo', page_id=8)}}">
-        <div class="media-option">Media name 8</div>
-    </a>
-    <a href="{{url_for('mediaInfo', page_id=9)}}">
-        <div class="media-option">Media name 9</div>
-    </a>
-    <a href="{{url_for('mediaInfo', page_id=10)}}">
-        <div class="media-option">Media name 10</div>
-    </a>
-    <h2>
+    <div style="text-align: left;"><!-- Start of the second category (this part's the header)-->
+        <div class="category-header">
+            Category 2 Name Here
+        </div>
+    </div>
+    <div style="display: flex;">
+        <div onclick="moveCategory2('left')" class="option-cycle-button-prev"><div style="text-align: center;">&lt</div></div>
+        <div class="media-option-container">
+            <div id="category2" style="display: flex; position: relative; transition: transform 0.6s ease-in-out;">
+                <a href="{{url_for('mediaInfo', page_id=11)}}">
+                    Media name 11
+                </a>
+                <a href="{{url_for('mediaInfo', page_id=12)}}">
+                    Media name 12
+                </a>
+                <a href="{{url_for('mediaInfo', page_id=13)}}">
+                    Media name 13
+                </a>
+                <a href="{{url_for('mediaInfo', page_id=14)}}">
+                    Media Name 14
+                </a>
+                <a href="{{url_for('mediaInfo', page_id=15)}}">
+                    Media name 15
+                </a>
+                <a href="{{url_for('mediaInfo', page_id=16)}}">
+                    Media name 16
+                </a>
+                <a href="{{url_for('mediaInfo', page_id=17)}}">
+                    Media name 17
+                </a>
+                <a href="{{url_for('mediaInfo', page_id=18)}}">
+                    Media name 18
+                </a>
+                <a href="{{url_for('mediaInfo', page_id=19)}}">
+                    Media name 19
+                </a>
+                <a href="{{url_for('mediaInfo', page_id=20)}}">
+                    Media name 20
+                </a>
+            </div>
+        </div>
+        <div onclick="moveCategory2('right')" class="option-cycle-button-next"><div style="text-align: center;">&gt</div></div>
+    </div>
+    
+    <script>// This is a JavaScrip section for any programing in the frontend
+        function moveCategory1(direction) {
+          const box = document.getElementById('category1');
+      
+          if (direction === 'right') {
+            box.style.transform = `translateX(-84vw)`;
+          } else if (direction === 'left') {
+            box.style.transform = `translateX(0px)`;
+          }
+        }
+        function moveCategory2(direction) {
+          const box = document.getElementById('category2');
+      
+          if (direction === 'right') {
+            box.style.transform = `translateX(-84vw)`;
+          } else if (direction === 'left') {
+            box.style.transform = `translateX(0px)`;
+          }
+        }
+      </script>
+
+    <h2><!-- This is the CineWheel (this actually needs to be put on a new page with a link on this page)-->
         CineWheel
     </h2>
     <div class="wheel">
