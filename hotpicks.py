@@ -9,7 +9,7 @@ class Movie:
         self.release_date = release_date
         self.picture = picture
 
-def get_trending_movies(num_movies=10):
+def get_trending_movies(num_movies=12):
     url = f"https://api.themoviedb.org/3/trending/movie/week?api_key={api_key}"
     response = requests.get(url)
     trending_movies = []
@@ -19,7 +19,7 @@ def get_trending_movies(num_movies=10):
             title = movie_data.get('title', 'Title not available')
             release_date = movie_data.get('release_date', 'Release date not available')
             picture = f"https://image.tmdb.org/t/p/w500{movie_data.get('poster_path', '')}"
-            url = f"https://www.themoviedb.org/movie/{movie_data.get('id')}"
+            url = f"https://www.themoviedb.org/movie/{movie_data.get('id')}/watch"
             movie = Movie(title, url, release_date, picture)
             trending_movies.append(movie)
     else:

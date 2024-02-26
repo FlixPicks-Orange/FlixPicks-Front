@@ -6,24 +6,30 @@ import random
 from config  import app
 import forms, users, login_manager
 from youtube import get_homepage_video_data
+from hotpicks import get_trending_movies
 import Survey
 
 
 
-popular_videos = get_homepage_video_data()
+trending_movies = get_trending_movies()
 
 
 @app.route('/')
 def home():
-    return render_template("index.html",   video1=popular_videos[0],  video2=popular_videos[1],     video3=popular_videos[2],
-    video4=popular_videos[3],   video5=popular_videos[4],    video6=popular_videos[5],    video7=popular_videos[6],    video8=popular_videos[7],         video9=popular_videos[8],       video10=popular_videos[9])
+    return render_template('index.html', trending_movies = trending_movies)
 
 
-@app.route('/quickclick/<int:video_id>')
-def quickclick(video_id):
-    video = popular_videos[video_id]
-    return render_template('quickclick.html', video=video)
-
+@app.route('/hotpicks/<title>')
+def hotpicks(title):
+    selected_movie = None
+    for movie in trending_movies:
+        if movie.title == title:
+            selected_movie = movie
+            break
+    if selected_movie:
+        return render_template('hotpicks.html', movie=selected_movie)
+    else:
+        return "Movie not found", 404
 
 
 @app.route('/login', methods=['GET' , 'POST'])
