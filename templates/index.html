@@ -31,18 +31,18 @@
     <div onclick="moveCategory1('left')" class="option-cycle-button-prev"><div style="text-align: center;">&lt</div></div>
     <div class="media-option-container">
         <div id="category1" style="display: flex; position: relative; transition: transform 0.6s ease-in-out;">
-        <a href="{{ url_for('hotpicks', title=trending_movies[0].title) }}">{{ trending_movies[0].title }}</a>
-        <a href="{{ url_for('hotpicks', title=trending_movies[1].title) }}">{{ trending_movies[1].title }}</a>
-        <a href="{{ url_for('hotpicks', title=trending_movies[2].title) }}">{{ trending_movies[2].title }}</a>
-        <a href="{{ url_for('hotpicks', title=trending_movies[3].title) }}">{{ trending_movies[3].title }}</a>
-        <a href="{{ url_for('hotpicks', title=trending_movies[4].title) }}">{{ trending_movies[4].title }}</a>
-        <a href="{{ url_for('hotpicks', title=trending_movies[5].title) }}">{{ trending_movies[5].title }}</a>
-        <a href="{{ url_for('hotpicks', title=trending_movies[6].title) }}">{{ trending_movies[6].title }}</a>
-        <a href="{{ url_for('hotpicks', title=trending_movies[7].title) }}">{{ trending_movies[7].title }}</a>
-        <a href="{{ url_for('hotpicks', title=trending_movies[8].title) }}">{{ trending_movies[8].title }}</a>
-        <a href="{{ url_for('hotpicks', title=trending_movies[9].title) }}">{{ trending_movies[9].title }}</a>
-        <a href="{{ url_for('hotpicks', title=trending_movies[10].title) }}">{{ trending_movies[10].title }}</a>
-        <a href="{{ url_for('hotpicks', title=trending_movies[11].title) }}">{{ trending_movies[11].title }}</a>
+        <a href="{{ url_for('hotpicks', movie_id=trending_movies[0].id) }}">{{ trending_movies[0].title }}</a>
+        <a href="{{ url_for('hotpicks', movie_id=trending_movies[1].id) }}">{{ trending_movies[1].title }}</a>
+        <a href="{{ url_for('hotpicks', movie_id=trending_movies[2].id) }}">{{ trending_movies[2].title }}</a>
+        <a href="{{ url_for('hotpicks', movie_id=trending_movies[3].id) }}">{{ trending_movies[3].title }}</a>
+        <a href="{{ url_for('hotpicks', movie_id=trending_movies[4].id) }}">{{ trending_movies[4].title }}</a>
+        <a href="{{ url_for('hotpicks', movie_id=trending_movies[5].id) }}">{{ trending_movies[5].title }}</a>
+        <a href="{{ url_for('hotpicks', movie_id=trending_movies[6].id) }}">{{ trending_movies[6].title }}</a>
+        <a href="{{ url_for('hotpicks', movie_id=trending_movies[7].id) }}">{{ trending_movies[7].title }}</a>
+        <a href="{{ url_for('hotpicks', movie_id=trending_movies[8].id) }}">{{ trending_movies[8].title }}</a>
+        <a href="{{ url_for('hotpicks', movie_id=trending_movies[9].id) }}">{{ trending_movies[9].title }}</a>
+        <a href="{{ url_for('hotpicks', movie_id=trending_movies[10].id) }}">{{ trending_movies[10].title }}</a>
+        <a href="{{ url_for('hotpicks', movie_id=trending_movies[11].id) }}">{{ trending_movies[11].title }}</a>
     </div>
     </div>
     <div onclick="moveCategory1('right')" class="option-cycle-button-next"><div style="text-align: center;">&gt</div></div>

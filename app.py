@@ -5,7 +5,6 @@ import random
 # Custom Modules
 from config  import app
 import forms, users, login_manager
-from youtube import get_homepage_video_data
 from hotpicks import get_trending_movies
 import Survey
 
@@ -19,11 +18,11 @@ def home():
     return render_template('index.html', trending_movies = trending_movies)
 
 
-@app.route('/hotpicks/<title>')
-def hotpicks(title):
+@app.route('/hotpicks/<int:movie_id>')
+def hotpicks(movie_id):
     selected_movie = None
     for movie in trending_movies:
-        if movie.title == title:
+        if movie.id == movie_id:
             selected_movie = movie
             break
     if selected_movie:
@@ -67,7 +66,7 @@ def userhome():
     if(current_user.survey_check==False):
         return redirect(url_for('tasteProfile'))
     else:
-        return render_template('userhome.html', user=current_user)
+        return render_template('userhome.html', user=current_user, trending_movies=trending_movies)
 
 
 @app.route('/spin', methods=['POST'])
