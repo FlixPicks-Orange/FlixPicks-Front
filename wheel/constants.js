@@ -1,3 +1,4 @@
+//This file makes sure the wheel doesn't break and gives text alignment 
 /**
  * Adjustment when drawing arcs to ensure 0° is north (due to canvas drawing arcs from 90°).
  */
@@ -24,6 +25,7 @@ export const AlignText = Object.freeze({
 
 /**
  * Wheel property defaults.
+ * Makes sure the wheel doesn't break
  */
 export const Defaults = Object.freeze({
   wheel: {

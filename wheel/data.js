@@ -1,37 +1,5 @@
 const processList = document.querySelector('.processList');
 import { props } from '/main.js';
-export var fakeDB = [
-  {
-    label: 'Batman',
-  },
-  {
-    label: 'Two',
-  },
-  // {
-  //   label: 'Three',
-  // },
-  // {
-  //   label: 'Four',
-  // },
-  // {
-  //   label: 'Five',
-  // },
-  // {
-  //   label: 'Sinester Six ',
-  // },
-  // {
-  //   label: 'Cow boy Seven',
-  // },
-  // {
-  //   label: 'Eight',
-  // },
-  // {
-  //   label: 'Nine',
-  // },
-  // {
-  //   label: 'Ten',
-  // },
-];
 
 var userArray = []; // Array to store user input
 window.addEventListener('click', (e) => {
@@ -49,6 +17,7 @@ window.addEventListener('click', (e) => {
     // Store the array in the userArray variable
     userArray = itemList.map((item) => item.trim());
     convertToLabel();
+    wheelInit;
   }
 });
 
@@ -60,4 +29,32 @@ function convertToLabel() {
     labeling[i] = { label: userArray[i] };
     i = i + 1;
   }
+}
+
+async function wheelInit(){
+  props = {
+    isInteractive: false,
+    itemLabelRadius: 0.85,
+    itemLabelRadiusMax: 0.4,
+    itemLabelRotation: 0,
+    itemLabelAlign: AlignText.right,
+    itemLabelBaselineOffset: -0.13,
+    itemBackgroundColors: [
+      '#ff7e00',
+      '#d34f00',
+      '#f49939',
+      '#fcba70',
+      '#df7234',
+    ],
+    itemLabelColors: ['#000'],
+    rotationSpeedMax: 1000,
+    rotationResistance: -150,
+    lineWidth: 0,
+    overlayImage: './imgs/example-2-overlay.svg',
+    onRest: outputWheel,
+    items: labeling,
+  };
+  const container = document.querySelector('.wheel-wrapper');
+
+  window.wheel = new Wheel(container, props);
 }
