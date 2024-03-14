@@ -2,37 +2,107 @@ body {
     text-align: center;
     background-color: rgb(23, 23, 23);
     color: white;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;    
+    height: 6vh;
+    background-color: rgb(42, 47, 53);
+    padding: 1vh 2.5vw;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000; /* Ensure it stays above other content */
+}
+#pfp {
+    width: 6vh;
+    height: 6vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 7%;
+    text-decoration: none;
+    font-size: 0.9vh;
+    color: white;
+    border-radius: 50%;
+    border: 3px solid white;
+    background: rgb(215,100,0);
+    background: linear-gradient(0deg, rgba(215,100,0,1) 50%, rgb(255, 156, 69) 100%);
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.dropdown-container {
+    /* display: none; /*Hide dropdown by default */
+    position: absolute;
+    border-radius: 6px;
+    top: calc(100% + 5px); /* Position dropdown below the circle */
+    width: 10vw;
+    right: 5%;
+  }
+
+  .dropdown {
+    /* display: none; /*Hide dropdown by default */
+    position: absolute;
+    border-radius: 6px;
+    top: calc(100% + 5px); /* Position dropdown below the circle */
+    width: 10vw;
+    right: 5%;
+    background-color: rgb(42, 47, 53);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 5px 0;
+  }
+
+  .dropdown-item, .dropdown-item a {
+    padding: 1.5vh 20px;
+    text-decoration: none;
+    font-size: 2.5vh;
+    color: white;
+    cursor: pointer;
+  }
+
+  .dropdown-item:hover {
+    background-color: rgb(53, 57, 61);
+  }
+  
+  .pfp:hover + .dropdown, .dropdown:hover {
+    display: block; /* Show dropdown when hovering over the circle */
+  }
 
 h1 {
     color: white;
     background-color: rgb(42, 47, 53);
+    font-size: 5vh;
     padding: 5px;
 }
 
-a {
-    color: dodgerblue;
-}
-
-a:visited {
-    color: royalblue;
-}
-
-.fakebutton {
-    display: block;
+.cinebutton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 5px;
     border: 5px solid rgb(42, 47, 53);
     border-radius: 15px;
     background: rgb(231,113,0);
     width: 10%;
+    height: 10vh;
     margin: 10px auto;
 }
 
-.fakebutton:hover  {
+.cinebutton:hover  {
     background: rgb(206, 111, 21)
 }
 
-.fakebutton a {
+.cinebutton a {
     text-decoration: none;
     color: white;
 }
@@ -41,43 +111,38 @@ a:visited {
     margin-top: 75px;
     margin-bottom: 1vh;
     margin-left: 3vw;
-    padding: 5px 1.5vw;
-    font-size: 150%;
+    padding: .75vh 1.5vw;
+    font-size: 4vh;
     display: inline-block;
     text-align: center;
     background-color: rgb(42, 47, 53);
-    border: 3px solid #ccc;
+    border: 3px solid white;
 }
 
-.media-option-container {
+.media-options-container {
     display: flex;
     align-items: center;
-    display: flex;
     margin: 0 auto;
     overflow: hidden;
-    width: 84vw;
-    height: 150px;
-    border: 3px solid #ccc;
+    width: 90.4vw;
+    height: 250px;
+    border: 3px solid white;
     text-align: left;
 }
 
-.media-option-container a {
+.media-options-container a {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 195px;
-    height: 110px;
+    width: 133px;
+    height: 200px;
     margin: 5px;
     text-decoration: none;
     font-size: 100%;
     color: white;
-    border-radius: 15px;
+    border-radius: 10px;
     border: 5px solid rgb(42, 47, 53);
     background: rgb(215,100,0);
-    background: -moz-linear-gradient(0deg, rgba(215,100,0,1) 0%, rgba(255,165,0,1) 100%);
-    background: -webkit-linear-gradient(0deg, rgba(215,100,0,1) 0%, rgba(255,165,0,1) 100%);
-    background: linear-gradient(0deg, rgba(215,100,0,1) 0%, rgba(255,165,0,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#d76400",endColorstr="#ffa500",GradientType=1);
     justify-content: center;
 }
 
@@ -88,11 +153,12 @@ a:visited {
     position: absolute;
     font-size: 200%;
     width: 3vw;
-    right: 4.5vw;
-    height: 150px;
+    right: 1vw;
+    height: 250px;
     background-color: #4d4d4d;
-    border: 3px solid #ccc;
+    border: 3px solid white;
     cursor: pointer;
+    z-index: 1;
 }
 
 .option-cycle-button-prev {
@@ -102,11 +168,17 @@ a:visited {
     position: absolute;
     font-size: 200%;
     width: 3vw;
-    left: 4.5vw;
-    height: 150px;
+    left: 1vw;
+    height: 250px;
     background-color: #4d4d4d;
-    border: 3px solid #ccc;
+    border: 3px solid white;
     cursor: pointer;
+    z-index: 1;
+}
+
+.media-option {
+    text-decoration: none;
+    color: white;
 }
 
 .media-option a {
@@ -138,6 +210,8 @@ a:visited {
 }
 
 #banner {
-    height: 80px;
-    background-color: rgb(42, 47, 53);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 6vh;
 }

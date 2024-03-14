@@ -11,16 +11,22 @@
 </head>
 
 <body>
-    <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks logo" title="FlixPicks">
-    <h1>FlixPicks Login Authentication System in Flask</h1>
-    <br />
-    <span class="fakebutton">
-        <a href="{{ url_for('login') }}">Login Page</a>
-    </span>
-    <br />
-    <span class="fakebutton">
-        <a href="{{url_for('register')}}"> Register Page</a>
-    </span>
+  <div class="header"><!-- Header that remains at the top of the screen-->
+    <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks Logo" title="FlixPicks">
+    <div id="pfp" style="font-size: 2.3vh;">Guest</div>
+    <div class="dropdown-container"> 
+        <div class="dropdown">
+            <div class="dropdown-item"><a href="{{url_for('login')}}">Login</a></div>
+            <div class="dropdown-item"><a href="{{url_for('register')}}">Register</a></div>
+            <div class="dropdown-item">Option 3</div>
+            <div class="dropdown-item">Option 4</div>
+            <div class="dropdown-item">Option 5</div>
+        </div>
+    </div>
+</div>
+
+<h1 style="margin-top: 15vh;">Welcome to the Guest home page!</h1> <!-- Welcome banner -->
+
 
 <div style="text-align: left;"> 
     <div class="category-header"> 
@@ -28,8 +34,8 @@
     </div>
 </div>
 <div style="display: flex;">
-    <div onclick="moveCategory1('left')" class="option-cycle-button-prev"><div style="text-align: center;">&lt</div></div>
-    <div class="media-option-container">
+    <div onclick="moveCategory(1,'left')" class="option-cycle-button-prev"><div style="text-align: center;">&lt</div></div>
+    <div class="media-options-container">
         <div id="category1" style="display: flex; position: relative; transition: transform 0.6s ease-in-out;">
         <a href="{{ url_for('hotpicks', movie_id=trending_movies[0].id) }}">{{ trending_movies[0].title }}</a>
         <a href="{{ url_for('hotpicks', movie_id=trending_movies[1].id) }}">{{ trending_movies[1].title }}</a>
@@ -45,31 +51,42 @@
         <a href="{{ url_for('hotpicks', movie_id=trending_movies[11].id) }}">{{ trending_movies[11].title }}</a>
     </div>
     </div>
-    <div onclick="moveCategory1('right')" class="option-cycle-button-next"><div style="text-align: center;">&gt</div></div>
+    <div onclick="moveCategory(1,'right')" class="option-cycle-button-next"><div style="text-align: center;">&gt</div></div>
 </div>
 
 
 
-<script>// This is a JavaScrip section for any programing in the frontend
-    function moveCategory1(direction) {
-      const box = document.getElementById('category1');
-  
-      if (direction === 'right') {
-        box.style.transform = `translateX(-84vw)`;
-      } else if (direction === 'left') {
-        box.style.transform = `translateX(0px)`;
-      }
+<script>
+    
+  let count = []; // the count array and moveCategory() are for horizontal-media-category-navigation
+  function moveCategory(categoryNum, direction) {
+    const box = document.getElementById('category' + categoryNum);
+    const maxSteps = 3;
+    const maxDistance = 133 * 12 + 75;   // Should be MediaOption width * #OfMediaOptions + wiggle room
+    const stepSize = maxDistance / maxSteps;
+
+    // Initialize count for the category if it doesn't exist
+    if (!count[categoryNum]) {
+        count[categoryNum] = 0;
     }
-    function moveCategory2(direction) {
-      const box = document.getElementById('category2');
-  
-      if (direction === 'right') {
-        box.style.transform = `translateX(-84vw)`;
-      } else if (direction === 'left') {
-        box.style.transform = `translateX(0px)`;
-      }
+
+    // Update count based on direction
+    if (direction == 'right') {
+        count[categoryNum]++;
+    } else if (direction == 'left') {
+        count[categoryNum]--;
     }
-  </script>
+
+    // Ensure count stays within bounds
+    count[categoryNum] = Math.max(0, Math.min(maxSteps, count[categoryNum]));
+
+    // Calculate translation based on count
+    const translation = -stepSize * count[categoryNum]; // Negative for right direction
+
+    // Apply translation to the box
+    box.style.transform = `translateX(${translation}px)`;
+  }
+</script>
 
     
 </body>
