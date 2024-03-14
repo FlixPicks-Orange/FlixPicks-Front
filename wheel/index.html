@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Spin Wheel Example - ESM</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="data:image/x-icon;," type="image/x-icon" />
+    <link rel="stylesheet" href="./css/index.css" />
+    <script src="wheel.js" type="module"></script>
+    <script src="data.js" type="module"></script>
+  </head>
+
+  <body>
+    <h1>Enter a List</h1>
+
+    <!-- Input field for the user to enter items -->
+    <textarea
+      type="text"
+      id="listInput"
+      placeholder="Enter items, separated by commas"
+    >
+    </textarea>
+
+    <!-- Button to trigger the list processing function -->
+    <button class ="processList">Submit</button>
+    <div class="gui-wrapper">
+      <button class="btn-spin">Spin the Wheel</button>
+    </div>
+
+    <div class="wheel-wrapper"></div>
+  </body>
+</html>
