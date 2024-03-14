@@ -21,7 +21,7 @@ a:visited {
 button {
     display: block;
     padding: 5px;
-    border: 2px solid dimgray;
+    border: 3px solid #ccc;
     border-radius: 15px;
     background: rgb(231,113,0);
     width: 10%;
@@ -44,7 +44,8 @@ button a {
     font-size: 150%;
     display: inline-block;
     text-align: center;
-    background-color: rgb(42, 47, 53);
+    border-radius: 10px;
+    background-color: rgba(231,113,0,.9);
     border: 3px solid #ccc;
 }
 
@@ -89,7 +90,8 @@ button a {
     width: 3vw;
     right: 4.5vw;
     height: 150px;
-    background-color: #4d4d4d;
+    background-color: rgba(231,113,0,.9);
+    border-radius: 10px;
     border: 3px solid #ccc;
     cursor: pointer;
 }
@@ -103,7 +105,8 @@ button a {
     width: 3vw;
     left: 4.5vw;
     height: 150px;
-    background-color: #4d4d4d;
+    background-color: rgba(231,113,0,.9);
+    border-radius: 10px;
     border: 3px solid #ccc;
     cursor: pointer;
 }
