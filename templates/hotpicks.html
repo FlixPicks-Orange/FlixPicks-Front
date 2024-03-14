@@ -5,14 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../static/stylesheet.css">
     <link rel="icon" type="image/x-icon" href="../static/images/favicon.ico">
-    <title>Hot Picks</title>
+    <title>HotPicks - {{ movie.title }}</title>
+    <style>
+        h3 {
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
-    <h1>{{ movie.title }}</h1>
-    <p>Release Date: {{ movie.release_date }}</p>
-    <img src="{{ movie.picture }}" alt="{{ movie.title }}">
- 
-    <p><a href="{{ movie.url }}">TMDB link</a></p>
+<img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks logo" title="FlixPicks">
+<h1>{{ movie.title }}</h1>
+
+<img class="hotpicksimg" src="{{ movie.picture }}" alt="{{ movie.title }}">
+<h3>Release Date: {{ movie.release_date }}</h3>
+<button><a href="{{ movie.url }}">TMDB link</a></button>
 </body>
 </html>
+
 
