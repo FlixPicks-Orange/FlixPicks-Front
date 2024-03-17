@@ -8,8 +8,27 @@
     <title>Register</title>
 </head>
 <body>
+    <div class="header"><!-- Header that remains at the top of the screen-->
+        <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks Logo" title="FlixPicks">
+        <div class="search">
+            <form action="" method="post">
+                <div class="search-left"></div>
+                <input type="text" name="options" id="options" required>
+                <div class="search-right"><img style="height: 1.5vh; filter: invert(100%)" src="https://www.freeiconspng.com/uploads/magnifying-glass-icon-16.png" alt="Magnifying Glass .ico" /></div> <!--<a href="https://www.freeiconspng.com/img/26765" title="Image from freeiconspng.com">-->
+            </form> 
+        </div>
+        <div id="pfp" style="font-size: 1vw;" onmouseover="showDropdown()" onmouseleave="hideDropdown()">Guest</div>
+        <div class="dropdown-container" onmouseover="showDropdown()" onmouseleave="hideDropdown()"> 
+            <div class="dropdown">
+                <div class="dropdown-item">Settings</div>
+                <div class="dropdown-item"><a href="{{url_for('login')}}">Log&nbsp;In</a></div>
+                <div class="dropdown-item"><a href="{{url_for('register')}}">Register</a></div>
+            </div>
+        </div>
+    </div> <!-- End of Header -->
+
     <center>
-    <h1>
+    <h1 style="margin-top: 15vh;">
         Register Page
     </h1>
 
@@ -29,7 +48,20 @@
         {% endif %}
     </form>
     
-    <a href="{{ url_for('login') }}">Already have an account? </a><br>
+    <a class="button" style="height: 6vh;" href="{{ url_for('login') }}">Already have an account? </a><br>
 </center>
 </body>
+
+<script>
+
+    function showDropdown() { // Dropdown visible
+        var dropdown = document.querySelector('.dropdown');
+        dropdown.style.display = 'block';
+    }
+    function hideDropdown() { // Dropdown invisible
+        var dropdown = document.querySelector('.dropdown');
+        dropdown.style.display = 'none';
+    }
+
+</script>
 </html>

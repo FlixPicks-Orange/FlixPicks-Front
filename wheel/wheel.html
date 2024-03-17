@@ -8,13 +8,34 @@
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
     <link rel="icon" href="data:image/x-icon;," type="image/x-icon" />
-    <link rel="stylesheet" href="./css/index.css" />
+    <!--<link rel="stylesheet" href="./css/index.css" />                   <!-- this was added before-->
+    <link rel="stylesheet" type="text/css" href="../static/stylesheet.css"> <!-- This was added after-->
     <script src="wheel.js" type="module"></script>
     <script src="data.js" type="module"></script>
   </head>
 
   <body>
-    <h1>Enter a List</h1>
+    <div class="header"><!-- Header that remains at the top of the screen-->
+      <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks Logo" title="FlixPicks">
+      <div class="search">
+          <form action="" method="post">
+              <div class="search-left"></div>
+              <input type="text" name="options" id="options" required>
+              <div class="search-right"><img style="height: 1.5vh; filter: invert(100%)" src="https://www.freeiconspng.com/uploads/magnifying-glass-icon-16.png" alt="Magnifying Glass .ico" /></div> <!--<a href="https://www.freeiconspng.com/img/26765" title="Image from freeiconspng.com">-->
+          </form> 
+      </div>
+      <div id="pfp" onmouseover="showDropdown()" onmouseleave="hideDropdown()">{{ current_user.fname }}</div>
+      <div class="dropdown-container" onmouseover="showDropdown()" onmouseleave="hideDropdown()"> 
+          <div class="dropdown">
+              <div class="dropdown-item">Settings</div>
+              <div class="dropdown-item">Taste Profile Reset</div>
+              <div class="dropdown-item">CineMap Toggle</div>
+              <div class="dropdown-item"><a href="{{url_for('logout')}}">Logout</a></div>
+          </div>
+      </div>
+  </div> <!-- End of Header -->
+
+    <h1 style="margin-top: 15vh;">Enter a List</h1>
 
     <!-- Input field for the user to enter items -->
     <textarea
@@ -32,4 +53,33 @@
 
     <div class="wheel-wrapper"></div>
   </body>
+
+  <script>
+    function adjustFontSize(targetElement, maxLength, baseFontSize) { //update profile picture(text) to fit better
+        const text = targetElement.textContent;
+        const length = text.length;
+        const scaleFactor = maxLength / length;
+        const fontSize = Math.max(baseFontSize * scaleFactor, .7); // Ensure font size doesn't become too small
+
+        targetElement.style.fontSize = fontSize + 'vh';
+    }
+
+    window.onload = function() { // Call adjustFontSize function on page load
+        const maxLength = 0.6; 
+        const baseFontSize = 16; // Base font size
+        const targetElement = document.getElementById('pfp');
+
+        adjustFontSize(targetElement, maxLength, baseFontSize);
+    };
+    
+    function showDropdown() { // Dropdown visible
+        var dropdown = document.querySelector('.dropdown');
+        dropdown.style.display = 'block';
+    }
+    function hideDropdown() { // Dropdown invisible
+        var dropdown = document.querySelector('.dropdown');
+        dropdown.style.display = 'none';
+    }
+
+</script>
 </html>

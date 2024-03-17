@@ -13,12 +13,16 @@
     </style>
 </head>
 <body>
-<img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks logo" title="FlixPicks">
-<h1>{{ movie.title }}</h1>
+    <div style="display: flex;">
+        <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks logo" title="FlixPicks">
+        <a class="button" style="height: 4vh;" href="{{ url_for('userhome') }}">Back Home</a>
+    </div>
+    <h1>{{ movie.title }}</h1>
 
-<img class="hotpicksimg" src="{{ movie.picture }}" alt="{{ movie.title }}">
-<h3>Release Date: {{ movie.release_date }}</h3>
-<button><a href="{{ movie.url }}">TMDB link</a></button>
+    <img class="hotpicksimg" src="{{ movie.picture }}" alt="{{ movie.title }}">
+    <h3>Release Date: {{ movie.release_date }}</h3>
+
+    <a class="button" style="height: 4vh;" href="{{ movie.url }}">TMDB link</a>
 </body>
 </html>
 

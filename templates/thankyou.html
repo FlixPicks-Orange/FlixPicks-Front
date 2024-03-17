@@ -3,11 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../static/stylesheet.css">
     <title>Thank You</title>
 </head>
 <body>
-    <h1>Thank You for Completing the Survey!</h1>
+    <div class="header"><!-- Header that remains at the top of the screen-->
+        <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks Logo" title="FlixPicks">
+        <div class="search">
+            <form action="" method="post">
+                <div class="search-left"></div>
+                <input type="text" name="options" id="options" required>
+                <div class="search-right"><img style="height: 1.5vh; filter: invert(100%)" src="https://www.freeiconspng.com/uploads/magnifying-glass-icon-16.png" alt="Magnifying Glass .ico" /></div> <!--<a href="https://www.freeiconspng.com/img/26765" title="Image from freeiconspng.com">-->
+            </form> 
+        </div>
+        <div id="pfp" onmouseover="showDropdown()" onmouseleave="hideDropdown()">{{ current_user.fname }}</div>
+        <div class="dropdown-container" onmouseover="showDropdown()" onmouseleave="hideDropdown()"> 
+            <div class="dropdown">
+                <div class="dropdown-item">Settings</div>
+                <div class="dropdown-item">Taste Profile Reset</div>
+                <div class="dropdown-item">CineMap Toggle</div>
+                <div class="dropdown-item"><a href="{{url_for('logout')}}">Logout</a></div>
+            </div>
+        </div>
+    </div> <!-- End of Header -->
+
+    <h1 style="margin-top: 15vh;">Thank You for Completing the Survey!</h1>
     <p>Your feedback is valuable to us.</p>
-    <a href="{{ url_for('userhome') }}" class="btn btn-primary">Back to User Home</a>
+    <a href="{{ url_for('userhome') }}" class="button" style="height: 3vh;">Home</a>
 </body>
+
+<script>
+    function adjustFontSize(targetElement, maxLength, baseFontSize) { //update profile picture(text) to fit better
+        const text = targetElement.textContent;
+        const length = text.length;
+        const scaleFactor = maxLength / length;
+        const fontSize = Math.max(baseFontSize * scaleFactor, .7); // Ensure font size doesn't become too small
+
+        targetElement.style.fontSize = fontSize + 'vh';
+    }
+
+    window.onload = function() { // Call adjustFontSize function on page load
+        const maxLength = 0.6; 
+        const baseFontSize = 16; // Base font size
+        const targetElement = document.getElementById('pfp');
+
+        adjustFontSize(targetElement, maxLength, baseFontSize);
+    };
+    
+    function showDropdown() { // Dropdown visible
+        var dropdown = document.querySelector('.dropdown');
+        dropdown.style.display = 'block';
+    }
+    function hideDropdown() { // Dropdown invisible
+        var dropdown = document.querySelector('.dropdown');
+        dropdown.style.display = 'none';
+    }
+
+</script>
 </html>
