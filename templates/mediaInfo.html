@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../static/stylesheet.css">
     <link rel="icon" type="image/x-icon" href="../static/images/favicon.ico">
-    <title>mediaInfo</title>
+    <title>{{page_id}} Info</title>
 <body>
+<a href="index.html">
+    <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks Logo" title="FlixPicks">
+</a>
     <h1>
         Insert Movie #{{page_id}} Title Here
     </h1>
@@ -14,16 +17,22 @@
     <div class="movie-image"> <br><br><br><br> movie #{{page_id}} image here</div>
 
     <br><br>
-    
-    <a href="https">
-        <div class="streaming-platform-option">Streaming Option 1 name</div>
-    </a>
+    <button>
+        <a href="https">
+            <div class="streaming-platform-option">Streaming Option 1 name</div>
+        </a>
+    </button>
+<button>
     <a href="https">
         <div class="streaming-platform-option">Streaming Option 2 name</div>
     </a>
+</button>
+<button>
     <a href="https">
         <div class="streaming-platform-option">Streaming Option 3 name</div>
     </a>
+</button>
+
         <br><br><br>
 
     <a href="{{url_for('userhome')}}"> Back to Home</a><br>
