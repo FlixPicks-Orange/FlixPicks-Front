@@ -28,11 +28,7 @@ questions = {
         #Add more questions here if needed
 }
 
-#@app.route('/tasteProfile',methods=['GET', 'POST'])
-#@login_required
-#def index():
-    #return render_template('tasteProfile.html') #This is basically rerouting to show
-                                                #the taste profile survey on the screen
+
 
 @app.route('/submit', methods=['POST'])
 def submit():
@@ -40,7 +36,7 @@ def submit():
     for i in range(1, len(questions) + 1):
         question = list(questions.keys())[i - 1]
         response = request.form[str(i)]
-    #(OLD) responses = [request.form[str(i)] for i in range(1, len(questions) +1)] 
+   
 
     # Save the response to the database
         survey_response = SurveyResponse(question=question, response=response)
