@@ -97,11 +97,15 @@ def mediaInfo(page_id):
 @app.route('/settings', methods=['GET', 'POST', 'PATCH'])
 @login_required
 def settings():
-    if (request.method=='POST'):
-        sub = { 'limit_subscriptions': True }
-        r = requests.post(os.getenv('DB_URL')+ "/users/update/"+ current_user.username + "/limit_subscriptions", json = sub)
-        if(r.status_code == 201): return True
-    return render_template('settings')
+    if request.method == 'PATCH':
+        sub = {'limit_subscriptions': True}
+        r = requests.patch(os.getenv('DB_URL') + "/users/update/" + current_user.username + "/limit_subscriptions", json=sub)
+        if r.status_code == 201:
+            return "Success", 201
+        else:
+            return "Failed", r.status_code
+    return render_template('settings.html')
+
 
 
 @app.route('/logout', methods = ['GET','POST'])
