@@ -139,8 +139,11 @@ def survey_results():
     response_list = [{'id': response.id, 'question': response.question, 'response': response.response} for response in all_responses]
     return jsonify(response_list)
 
-
+@app.route('/wheel')
+def wheel():
+    return render_template('wheel.html')
 
 if __name__ == '__main__':
     #Survey.db.create_all()
     app.run(host="0.0.0.0", port=2000, debug=True)
+

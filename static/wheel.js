@@ -1,7 +1,6 @@
-import './style.css';
 import { Wheel } from 'https://cdn.jsdelivr.net/npm/spin-wheel@4.3.1/dist/spin-wheel-esm.js';
 const processList = document.querySelector('.processList');
-import { AlignText } from '/constants.js';
+import { AlignText } from './constants';
 const btnSpin = document.querySelector('.btn-spin');
 const max_input_size = 13;
 
@@ -74,7 +73,7 @@ const props = {
   rotationSpeedMax: 1000,
   rotationResistance: -150,
   lineWidth: 0,
-  overlayImage: './imgs/example-2-overlay.svg',
+  overlayImage: './images/example-2-overlay.svg',
   onRest: outputWheel,
   items: [{ label: '' }],
 };
