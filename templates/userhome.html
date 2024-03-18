@@ -32,7 +32,12 @@
     
     <div style="display: flex; margin-left: 15%; margin-right: 15%;">
 
-        <a class="button" href="{{url_for('logout')}}">CineRoll</a>
+        <a class="button" href="{{url_for('logout')}}"> <!-- this needs to be linked to cineroll -->
+            &nbsp;&nbsp;<img style="height: 6vh;" src="../static/images/cineroll.svg" alt="CineRoll dice"/>
+            <br /><br />
+            <p style="display: block;">CineRoll</p>&nbsp;&nbsp;
+        </a>
+
 
         <a class="button" href="{{url_for('wheel')}}">CineWheel</a>
     </div>
