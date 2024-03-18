@@ -1,6 +1,7 @@
+
 from flask import render_template, url_for, redirect, request, jsonify
 from flask_login import login_user, login_required, logout_user, current_user
-import random
+import random, requests, os
 
 # Custom Modules
 from config  import app
@@ -91,6 +92,16 @@ def result():
 @login_required
 def mediaInfo(page_id):
     return render_template('mediaInfo.html',  page_id=page_id)
+
+
+@app.route('/settings', methods=['GET', 'POST', 'PATCH'])
+@login_required
+def settings():
+    if (request.method=='POST'):
+        sub = { 'limit_subscriptions': True }
+        r = requests.post(os.getenv('DB_URL')+ "/users/update/"+ current_user.username + "/limit_subscriptions", json = sub)
+        if(r.status_code == 201): return True
+    return render_template('settings')
 
 
 @app.route('/logout', methods = ['GET','POST'])
