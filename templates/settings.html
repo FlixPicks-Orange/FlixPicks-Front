@@ -19,7 +19,7 @@
             xhr.open("PATCH", "/settings", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 201) {
+                if (xhr.readyState === 4 && xhr.status === 200) {
                     alert("Done"); // Display a prompt message
                     setTimeout(function() {
                         window.location.href = "/userhome"; // Redirect after 1 second
