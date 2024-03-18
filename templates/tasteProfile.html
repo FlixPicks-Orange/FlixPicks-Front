@@ -2,38 +2,17 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content = "width = device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Welcome to your Taste Profile!</title>
         <link rel="stylesheet" type="text/css" href="../static/stylesheet.css">
         <link rel="icon" type="image/x-icon" href="../static/images/favicon.ico">
-        <title>Welcome to your Taste Profile!</title>
-        <style>
-            /* Custom CSS to make radio options horizontal */
-            .horizontal-radio-options li {
-                display: inline-block;
-                margin-right: 10px;  /* Adjust the margin as needed */
-            }
-        </style>
     </head>
+
     <body>
-    <a href="index.html">
+        <div class="header"></div>
         <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks Logo" title="FlixPicks">
-    </a>
-        <h1>Taste Profile</h1>
-        <form method="POST" action="">
-            <div class="horizontal-radio-options">
-            {{ form.q1.label }}{{ form.q1 }}<br>
-            {{ form.q2.label }}{{ form.q2 }}<br>
-            {{ form.q3.label }}{{ form.q3 }}<br>
-            {{ form.q4.label }}{{ form.q4 }}<br>
-            {{ form.q5.label }}{{ form.q5 }}<br>
-            {{ form.q6.label }}{{ form.q6 }}<br>
-            {{ form.q7.label }}{{ form.q7 }}<br>
-            {{ form.q8.label }}{{ form.q8 }}<br>
-            {{ form.q9.label }}{{ form.q9 }}<br>
-            {{ form.q10.label }}{{ form.q10 }}<br>
-            {{ form.q11.label }}{{ form.q11 }}
-            </div>
-        <button type="submit">submit</button>
-        </form>
+
+        <h1 style="margin-top: 15vh;">Welcome Your Taste Profile!</h1>
     </body>
 </html>

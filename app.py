@@ -103,7 +103,7 @@ def logout():
 # TASTE PROFILE STUFF FROM "Survey.py"
 
 @app.route('/tasteProfile', methods = ['GET','POST'])
-@login_required
+# @login_required
 def tasteProfile():
     form = Survey.SurveyForm()
     if request.method == 'POST':
