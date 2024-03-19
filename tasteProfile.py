@@ -7,9 +7,19 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///survey_responses.db'
 db = SQLAlchemy(app)
 
-subscriptions = [{"Name":"Netflix", "images":"static/images/netflix.png"}]
+subscriptions = [{"Name":"Netflix", "image":"static/images/netflix.png"},
+                 {"Name": "MAX", "image": "static/images/max.png"},
+                 {"Name": "Disney+", "image": ""},
+                 {"Name": "Prime Video", "image": ""},
+                 {"Name": "Hulu", "image": ""},
 
-movies = ["Dune", "The Matrix", "Spider-Man: No Way Home","Bridesmade"]
+                 ]
+
+movies = [{"Name": "Dune", "image": ""},
+          {"Name": "The Matrix", "image": ""},                 
+          {"Name": "Barbie", "image": ""},                
+          {"Name": "Friday", "image": ""},
+]
 
 @app.route('/tasteProfile', methods=['GET','POST'])
 def tasteProfile():
