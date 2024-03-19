@@ -7,10 +7,28 @@
     <link rel="icon" type="image/x-icon" href="../static/images/favicon.ico">
     <title>{{page_id}} Info</title>
 <body>
-<a href="index.html">
-    <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks Logo" title="FlixPicks">
-</a>
-    <h1>
+<div class="header"><!-- Header that remains at the top of the screen-->
+    <a href="{{ url_for('userhome') }}">
+        <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks Logo" title="FlixPicks">
+    </a>
+    <div class="search">
+        <form action="" method="post">
+            <div class="search-left"></div>
+            <input type="text" name="options" id="options" required>
+            <div class="search-right"><img style="height: 1.5vh" src="../static/images/searchicon.svg" alt="Magnifying Glass" /></div>
+        </form>
+    </div>
+    <div id="pfp" onmouseover="showDropdown()" onmouseleave="hideDropdown()">{{ current_user.fname }}</div>
+    <div class="dropdown-container" onmouseover="showDropdown()" onmouseleave="hideDropdown()">
+        <div class="dropdown">
+            <div class="dropdown-item"><a href="{{url_for('settings')}}">Settings</a></div>
+            <div class="dropdown-item">Taste Profile Reset</div>
+            <div class="dropdown-item">CineMap Toggle</div>
+            <div class="dropdown-item"><a href="{{url_for('logout')}}">Logout</a></div>
+        </div>
+    </div>
+</div>
+    <h1 style="margin-top: 10vh;">
         Insert Movie #{{page_id}} Title Here
     </h1>
 

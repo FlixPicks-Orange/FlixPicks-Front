@@ -13,13 +13,28 @@
     </style>
 </head>
 <body>
-<a href="index.html">
-        <div style="display: flex;">
+<div class="header"><!-- Header that remains at the top of the screen-->
+    <a href="{{ url_for('index') }}">
         <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks Logo" title="FlixPicks">
-</a>
-        <a class="button" style="height: 4vh;" href="index.html">Back Home</a>
+    </a>
+    <div class="search">
+        <form action="" method="post">
+            <div class="search-left"></div>
+            <input type="text" name="options" id="options" required>
+            <div class="search-right"><img style="height: 1.5vh" src="../static/images/searchicon.svg" alt="Magnifying Glass" /></div>
+        </form>
     </div>
-    <h1>{{ movie.title }}</h1>
+    <div id="pfp" style="font-size: 1vw;" onmouseover="showDropdown()" onmouseleave="hideDropdown()">Guest</div>
+    <div class="dropdown-container" onmouseover="showDropdown()" onmouseleave="hideDropdown()">
+        <div class="dropdown">
+            <div class="dropdown-item">Settings</div>
+            <div class="dropdown-item"><a href="{{url_for('login')}}">Log&nbsp;In</a></div>
+            <div class="dropdown-item"><a href="{{url_for('register')}}">Register</a></div>
+            <div class="dropdown-item"><a href="{{url_for('tasteProfile')}}">Taste Profile</a></div>
+        </div>
+    </div>
+</div> <!-- End of Header -->
+    <h1 style="margin-top: 15vh;">{{ movie.title }}</h1>
 
     <img class="hotpicksimg" src="{{ movie.picture }}" alt="{{ movie.title }}">
     <h3>Release Date: {{ movie.release_date }}</h3>
