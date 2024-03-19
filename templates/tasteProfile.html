@@ -8,28 +8,91 @@
     <title>Taste Profile</title>
 </head>
 <body>
-    <a href="{{ url_for('home') }}"> <!-- this is set to guesthome temporarily? -->
+    <div class="header"><!-- Header that remains at the top of the screen-->
         <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks Logo" title="FlixPicks">
-    </a>
-    <h1>Welcome to Your Taste Profile!</h1>
+        <div class="search">
+            <form action="" method="post">
+                <div class="search-left"></div>
+                <input type="text" name="options" id="options" required>
+                <div class="search-right"><img style="height: 1.5vh" src="../static/images/searchicon.svg" alt="Magnifying Glass" /></div>
+            </form> 
+        </div>
+        <div id="pfp" onmouseover="showDropdown()" onmouseleave="hideDropdown()">{{ current_user.fname }}</div>
+        <div class="dropdown-container" onmouseover="showDropdown()" onmouseleave="hideDropdown()"> 
+            <div class="dropdown">
+                <div class="dropdown-item"><a href="{{url_for('settings')}}">Settings</a></div>
+                <div class="dropdown-item">Taste Profile Reset</div>
+                <div class="dropdown-item">CineMap Toggle</div>
+                <div class="dropdown-item"><a href="{{url_for('logout')}}">Logout</a></div>
+            </div>
+        </div>
+    </div> <!-- End of Header -->
 
-    <form method="POST" action="/tasteProfile">
-        <h2>Select Your Subscriptions</h2>
-        {% for subscription in subscriptions %}
-            <label style="display: inline-flex;">
-                <div>
-                    <img style="height: 5vh; width: 5vw; display: flex;" src="{{ url_for('static', filename=subscription['image']) }}" alt="{{ subscription['Name'] }}">
-                    <input  type="checkbox" name="subscriptions" value="{{ subscription['Name'] }}">
-            </label><br>
-        {% endfor %}
-        <h2>Select Your Favorite Movies</h2>
-        {% for movie in movies %}
-            <label style="display: inline-flex;">
-                <img style="height: 12vh; width: 5vw; display: flex;" src="{{ url_for('static', filename=movie['image']) }}" alt="{{ movie['Name'] }}">
-                <input  type="checkbox" name="movies" value="{{ movie['Name'] }}">
-            </label><br>
-        {% endfor %}
-        <button type="submit">Submit</button>
+    <h1 style="margin-top: 15vh;">Welcome to Your Taste Profile!</h1>
+
+    <form method="POST" action="/tasteProfile"> 
+        <div style="text-align: left;">     <!-- subscriptions -->
+            <div class="category-header"> 
+                  Select your subscriptions:
+            </div>
+        </div>
+        <div class="tp-subscriptions-category">
+            {% for subscription in subscriptions %}
+                <label>
+                        <img class="tp-subscription" src="{{ url_for('static', filename=subscription['image']) }}" alt="{{ subscription['Name'] }}">
+                        <input  type="checkbox" name="subscriptions" value="{{ subscription['Name'] }}">
+                </label><br>
+            {% endfor %}
+        </div>
+        <div style="text-align: left;">        <!-- movies -->
+            <div class="category-header" style="margin-top: 1.5vw;"> 
+                  Select your favorite movies:
+            </div>
+        </div> 
+        <div class="tp-movies-category">
+            {% for movie in movies %}
+                <label>
+                    <a>
+                        <div class="media-option-img"> 
+                            <img class="media-option" src="{{ url_for('static', filename=movie['image']) }}" alt="{{ movie['Name'] }}"> 
+                        </div>
+                        <div class="media-option-title">{{ movie['Name'] }}</div>
+                    </a>
+                    <input  type="checkbox" name="movies" value="{{ movie['Name'] }}">
+                </label><br>
+            {% endfor %}
+        </div>
+        <center>
+            <button class="button" style="height: 5vw;" type="submit">Submit</button>
+        </center>
     </form>
 </body>
+
+<script>
+    function adjustFontSize(targetElement, maxLength, baseFontSize) { //update profile picture(text) to fit better
+        const text = targetElement.textContent;
+        const length = text.length;
+        const scaleFactor = maxLength / length;
+        const fontSize = Math.max(baseFontSize * scaleFactor, .7); // Ensure font size doesn't become too small
+
+        targetElement.style.fontSize = fontSize + 'vh';
+    }
+
+    window.onload = function() { // Call adjustFontSize function on page load
+        const maxLength = 0.6; 
+        const baseFontSize = 16; // Base font size
+        const targetElement = document.getElementById('pfp');
+
+        adjustFontSize(targetElement, maxLength, baseFontSize);
+    };
+
+    function showDropdown() { // Dropdown visible
+        var dropdown = document.querySelector('.dropdown');
+        dropdown.style.display = 'block';
+    }
+    function hideDropdown() { // Dropdown invisible
+        var dropdown = document.querySelector('.dropdown');
+        dropdown.style.display = 'none';
+    }
+</script>
 </html>

@@ -17,7 +17,7 @@ def get_survey_subscription() :
     return subscriptions
 
 def get_survey_movies() :
-    movies = [{"Name": "Dune", "image": "../static/images/dune_poster.png"},
+    movies = [{"Name": "Dune", "image": "../static/images/dune_poster.jpg"},
         {"Name": "The Matrix", "image": "../static/images/matrix_poster.jpg"},
         {"Name": "Barbie", "image": "../static/images/barbie_movie_poster.jpg"},
         {"Name": "Friday", "image": "../static/images/friday_poster.jpg"},
