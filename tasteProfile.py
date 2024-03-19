@@ -7,31 +7,20 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///survey_responses.db'
 db = SQLAlchemy(app)
 
-subscriptions = [{"Name":"Netflix", "image":"static/images/netflix.png"},
-                 {"Name": "MAX", "image": "static/images/max.png"},
-                 {"Name": "Disney+", "image": ""},
-                 {"Name": "Prime Video", "image": ""},
-                 {"Name": "Hulu", "image": ""},
+def get_survey_subscription() :
+    subscriptions = [{"Name":"Netflix", "image":"../static/images/netflix.png"},
+                {"Name": "MAX", "image": "../static/images/max.png"},
+                {"Name": "Disney+", "image": "../static/images/disney+.png"},
+                {"Name": "Prime Video", "image": "../static/images/prime_video.png"},
+                {"Name": "Hulu", "image": "../static/images/hulu.jpg"},
+                ]
+    return subscriptions
 
-                 ]
-
-movies = [{"Name": "Dune", "image": ""},
-          {"Name": "The Matrix", "image": ""},                 
-          {"Name": "Barbie", "image": ""},                
-          {"Name": "Friday", "image": ""},
-]
-
-@app.route('/tasteProfile', methods=['GET','POST'])
-def tasteProfile():
-     if request.method =='POST':
-         return redirect(url_for('thank_you'))
-     else:
-              return render_template('tasteProfile.html', subscriptions=subscriptions, movies=movies)
-
-@app.route('/thanks') #Eventually edit this- should redirect to homepage of FP
-def thank_you():
-    return render_template('thank_you.html')
-
-if __name__ == '__main__':
-    db.create_all() # Create the necessary fatabase tables
-    app.run(debug=True)
+def get_survey_movies() :
+    movies = [{"Name": "Dune", "image": "../static/images/dune_poster.png"},
+        {"Name": "The Matrix", "image": "../static/images/matrix_poster.jpg"},
+        {"Name": "Barbie", "image": "../static/images/barbie_movie_poster.jpg"},
+        {"Name": "Friday", "image": "../static/images/friday_poster.jpg"},
+    ]
+    
+    return movies

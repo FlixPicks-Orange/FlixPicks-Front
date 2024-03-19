@@ -16,17 +16,17 @@
     <form method="POST" action="/tasteProfile">
         <h2>Select Your Subscriptions</h2>
         {% for subscription in subscriptions %}
-            <label>
-                <input type="checkbox" name="subscriptions" value="{{ subscription['Name'] }}">
-                <img src="{{ url_for('static', filename=subscription['image']) }}" alt="{{ subscription['Name'] }}">
+            <label style="display: inline-flex;">
+                <div>
+                    <img style="height: 5vh; width: 5vw; display: flex;" src="{{ url_for('static', filename=subscription['image']) }}" alt="{{ subscription['Name'] }}">
+                    <input  type="checkbox" name="subscriptions" value="{{ subscription['Name'] }}">
             </label><br>
         {% endfor %}
         <h2>Select Your Favorite Movies</h2>
         {% for movie in movies %}
-            <label>
-                <input type="checkbox" name="movies" value="{{ movie }}">
-                {{ movie }}
-                <!-- Add images for movies if available -->
+            <label style="display: inline-flex;">
+                <img style="height: 12vh; width: 5vw; display: flex;" src="{{ url_for('static', filename=movie['image']) }}" alt="{{ movie['Name'] }}">
+                <input  type="checkbox" name="movies" value="{{ movie['Name'] }}">
             </label><br>
         {% endfor %}
         <button type="submit">Submit</button>
