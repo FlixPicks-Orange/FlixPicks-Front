@@ -8,7 +8,9 @@
 </head>
 <body>
     <div class="header"><!-- Header that remains at the top of the screen-->
-        <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks Logo" title="FlixPicks">
+        <a href="{{ url_for('userhome') }}">
+            <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks Logo" title="FlixPicks">
+        </a>
         <div class="search">
             <form action="" method="post">
                 <div class="search-left"></div>
