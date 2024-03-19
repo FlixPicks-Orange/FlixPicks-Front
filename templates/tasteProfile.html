@@ -1,42 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Welcome to your Taste Profile!</title>
-        <link rel="stylesheet" type="text/css" href="../static/stylesheet.css">
-        <link rel="icon" type="image/x-icon" href="../static/images/favicon.ico">
-    </head>
-
-    <body>
-        <div class="header"></div>
-        <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks Logo" title="FlixPicks">
-
-        <h1 style="margin-top: 10vh;">Welcome Your Taste Profile!</h1>
-
-        <div class="step-container">
-            <form method="POST" action=""></form>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to your Taste Profile!</title>
+    <link rel="stylesheet" type="text/css" href="../static/stylesheet.css">
+    <link rel="icon" type="image/x-icon" href="../static/images/favicon.ico">
+</head>
+<body>
+    <div class="header"></div>
+    <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks Logo" title="FlixPicks">
+    <h1 style="margin-top: 10vh;">Welcome Your Taste Profile!</h1>
+    <div class="step-container">
+        <form method="POST" action="">
             <h2> Please select your subscriptions </h2>
             {% for subscription in subscriptions %}
-            <div class="subscription-option">
-                <img src="{{ url_for('static', filename='images/' + subscription['image']) }}" alt="{{ subscription['name'] }}">
-                <label>
-                    <input type="checkbox" name="subscription" value="{{ subscription.id }}">
-                    {{ subscription.name }}
-                </label>
-            </div>
-        {% endfor %}
+            <label>
+                <input type="checkbox" name="subscriptions" value="{{ subscription.id }}">
+                {{ subscription.name }}
+                <img src="{{ url_for('static', filename=subscription.image) }}">
+            </label>
+            {% endfor %}
 
-        <h2>Select Your Favorite Movies</h2>
-        {% for movie in movies %}
+            <h2>Select Your Favorite Movies</h2>
+            {% for movie in movies %}
             <label>
                 <input type="checkbox" name="movies" value="{{ movie.id }}"> {{ movie.title }}
-                <img src="{{ url_for('static', filename='images/' + movie['poster']) }}" alt="{{ movie.title }}" width="100" height="150">
             </label>
             <br>
-        {% endfor %}
-        <button type="submit">submit</button>
+            {% endfor %}
+            <button type="submit">Submit</button>
         </form>
     </div>
 </body>

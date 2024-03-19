@@ -7,15 +7,12 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///survey_responses.db'
 db = SQLAlchemy(app)
 
-subscriptions = [{"name":"Netflix","image":"netflix.png"},
-                 {"name":"Netflix","image":"netflix.png"},
-                 {"name":"Netflix","image":"netflix.png"}
+subscriptions = [{"name":"Netflix","image":"images/netflix.png"},
+                 {"name":"Hulu","image":"images/netflix.png"},
+                 {"name":"MAX","image":"images/netflix.png"}
                 ]
 
-movies = [{"id": 1, "title": "Dune", "poster": "dune.png"},
-          {"id": 1, "title": "Dune", "poster": "dune.png"},
-          {"id": 1, "title": "Dune", "poster": "dune.png"}]
-
+movies = []
 @app.route('/tasteProfile', methods=['GET','POST'])
 def tasteProfile():
      if request.method =='POST':
@@ -29,14 +26,7 @@ def tasteProfile():
 
 def thank_you():
     return "Thank you for completing the Taste Profile survey!" #Cuter message -> redirect to FP
-    # return redirect(url_for('userhome')) - maybe?
-
-#@app.route('/survey_results')
-#def survey_results():
-    # Retrieve all survey responses from the database
-    #all_responses = SurveyResponse.query.all()
-    #return render_template('surveyResults.html', responses=all_responses)
-
+   
 
 if __name__ == '__main__':
     db.create_all() # Create the necessary fatabase tables

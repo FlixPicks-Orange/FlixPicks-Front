@@ -122,23 +122,12 @@ def logout():
 def tasteProfile():
     form = Survey.SurveyForm()
     if request.method == 'POST':
-        Survey.InsertResponse({
-            "data": [
-                {'label':form.q1.label.text, 'option':form.q1.data},
-                {'label':form.q2.label.text, 'option':form.q2.data},
-                {'label':form.q3.label.text, 'option':form.q3.data},
-                {'label':form.q4.label.text, 'option':form.q4.data},
-                {'label':form.q5.label.text, 'option':form.q5.data},
-                {'label':form.q6.label.text, 'option':form.q6.data},
-                {'label':form.q7.label.text, 'option':form.q7.data},
-                {'label':form.q8.label.text, 'option':form.q8.data},
-                {'label':form.q9.label.text, 'option':form.q9.data},
-                {'label':form.q10.label.text, 'option':form.q10.data},
-                {'label':form.q11.label.text, 'option':form.q11.data},
-            ]
-        })
+        Survey.InsertResponse
+        selected_subscriptions = request.form.getlist('subscriptions')
+        selected_movies = request.form.getlist('movies')
         return redirect(url_for('thank_you'))
-    return render_template('tasteProfile.html', form=form)
+    else:
+     return render_template('tasteProfile.html', form=form)
 
 
 @app.route('/thanks') #Eventually edit this- should redirect to homepage of FP
