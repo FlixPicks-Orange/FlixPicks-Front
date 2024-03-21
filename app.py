@@ -1,16 +1,21 @@
+
 from flask import render_template, url_for, redirect, request, jsonify
 from flask_login import login_user, login_required, logout_user, current_user
-import random
+import random, requests, os
 
 # Custom Modules
 from config  import app
 import forms, users, login_manager
 from hotpicks import get_trending_movies
+from tasteProfile import get_survey_movies
+from tasteProfile import get_survey_subscription
 import Survey
 
 
 
 trending_movies = get_trending_movies(12)
+survey_subs = get_survey_subscription()
+survey_movies = get_survey_movies()
 
 
 @app.route('/')
@@ -93,6 +98,20 @@ def mediaInfo(page_id):
     return render_template('mediaInfo.html',  page_id=page_id)
 
 
+@app.route('/settings', methods=['GET', 'POST', 'PATCH'])
+@login_required
+def settings():
+    if request.method == 'PATCH':
+        sub = {'limit_subscriptions': True}
+        r = requests.patch(os.getenv('DB_URL') + "/users/update/" + current_user.username + "/limit_subscriptions", json=sub)
+        if r.status_code == 201:
+            return "Success", 201
+        else:
+            return "Failed", r.status_code
+    return render_template('settings.html')
+
+
+
 @app.route('/logout', methods = ['GET','POST'])
 @login_required
 def logout():
@@ -100,30 +119,24 @@ def logout():
     return redirect(url_for('home'))
 
 
-# TASTE PROFILE STUFF FROM "Survey.py"
+# @app.route('/tasteProfile', methods = ['GET','POST']) # Old tasteProfile... not sure what needs to be moved to the new one
+# # @login_required
+# def tasteProfile():
+#     form = Survey.SurveyForm()
+#     if request.method == 'POST':
+#         Survey.InsertResponse
+#         selected_subscriptions = request.form.getlist('subscriptions')
+#         selected_movies = request.form.getlist('movies')
+#         return redirect(url_for('thank_you'))
+#     else:
+#      return render_template('tasteProfile.html', form=form)
 
-@app.route('/tasteProfile', methods = ['GET','POST'])
-@login_required
+@app.route('/tasteProfile', methods=['GET','POST'])
 def tasteProfile():
-    form = Survey.SurveyForm()
-    if request.method == 'POST':
-        Survey.InsertResponse({
-            "data": [
-                {'label':form.q1.label.text, 'option':form.q1.data},
-                {'label':form.q2.label.text, 'option':form.q2.data},
-                {'label':form.q3.label.text, 'option':form.q3.data},
-                {'label':form.q4.label.text, 'option':form.q4.data},
-                {'label':form.q5.label.text, 'option':form.q5.data},
-                {'label':form.q6.label.text, 'option':form.q6.data},
-                {'label':form.q7.label.text, 'option':form.q7.data},
-                {'label':form.q8.label.text, 'option':form.q8.data},
-                {'label':form.q9.label.text, 'option':form.q9.data},
-                {'label':form.q10.label.text, 'option':form.q10.data},
-                {'label':form.q11.label.text, 'option':form.q11.data},
-            ]
-        })
+     if request.method =='POST':
         return redirect(url_for('thank_you'))
-    return render_template('tasteProfile.html', form=form)
+     else:
+        return render_template('tasteProfile.html', subscriptions=survey_subs, movies=survey_movies)
 
 
 @app.route('/thanks') #Eventually edit this- should redirect to homepage of FP

@@ -1,39 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content = "width = device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="../static/stylesheet.css">
-        <link rel="icon" type="image/x-icon" href="../static/images/favicon.ico">
-        <title>Welcome to your Taste Profile!</title>
-        <style>
-            /* Custom CSS to make radio options horizontal */
-            .horizontal-radio-options li {
-                display: inline-block;
-                margin-right: 10px;  /* Adjust the margin as needed */
-            }
-        </style>
-    </head>
-    <body>
-    <a href="index.html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../static/stylesheet.css">
+    <link rel="icon" type="image/x-icon" href="../static/images/favicon.ico">
+    <title>Taste Profile</title>
+</head>
+<body>
+    <div class="header"><!-- Header that remains at the top of the screen-->
         <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks Logo" title="FlixPicks">
-    </a>
-        <h1>Taste Profile</h1>
-        <form method="POST" action="">
-            <div class="horizontal-radio-options">
-            {{ form.q1.label }}{{ form.q1 }}<br>
-            {{ form.q2.label }}{{ form.q2 }}<br>
-            {{ form.q3.label }}{{ form.q3 }}<br>
-            {{ form.q4.label }}{{ form.q4 }}<br>
-            {{ form.q5.label }}{{ form.q5 }}<br>
-            {{ form.q6.label }}{{ form.q6 }}<br>
-            {{ form.q7.label }}{{ form.q7 }}<br>
-            {{ form.q8.label }}{{ form.q8 }}<br>
-            {{ form.q9.label }}{{ form.q9 }}<br>
-            {{ form.q10.label }}{{ form.q10 }}<br>
-            {{ form.q11.label }}{{ form.q11 }}
+        <div class="search">
+            <form action="" method="post">
+                <div class="search-left"></div>
+                <input type="text" name="options" id="options" required>
+                <div class="search-right"><img style="height: 1.5vh" src="../static/images/searchicon.svg" alt="Magnifying Glass" /></div>
+            </form> 
+        </div>
+        <div id="pfp" onmouseover="showDropdown()" onmouseleave="hideDropdown()">{{ current_user.fname }}</div>
+        <div class="dropdown-container" onmouseover="showDropdown()" onmouseleave="hideDropdown()"> 
+            <div class="dropdown">
+                <div class="dropdown-item"><a href="{{url_for('settings')}}">Settings</a></div>
+                <div class="dropdown-item">Taste Profile Reset</div>
+                <div class="dropdown-item">CineMap Toggle</div>
+                <div class="dropdown-item"><a href="{{url_for('logout')}}">Logout</a></div>
             </div>
-        <button type="submit">submit</button>
-        </form>
-    </body>
+        </div>
+    </div> <!-- End of Header -->
+
+    <h1 style="margin-top: 15vh;">Welcome to Your Taste Profile!</h1>
+
+    <form method="POST" action="/tasteProfile"> 
+        <div style="text-align: left;">     <!-- subscriptions -->
+            <div class="category-header"> 
+                  Select your subscriptions:
+            </div>
+        </div>
+        <div class="tp-subscriptions-category">
+            {% for subscription in subscriptions %}
+                <label>
+                        <img class="tp-subscription" src="{{ url_for('static', filename=subscription['image']) }}" alt="{{ subscription['Name'] }}">
+                        <input  type="checkbox" name="subscriptions" value="{{ subscription['Name'] }}">
+                </label><br>
+            {% endfor %}
+        </div>
+        <div style="text-align: left;">        <!-- movies -->
+            <div class="category-header" style="margin-top: 1.5vw;"> 
+                  Select your favorite movies:
+            </div>
+        </div> 
+        <div class="tp-movies-category">
+            {% for movie in movies %}
+                <label>
+                    <a>
+                        <div class="media-option-img"> 
+                            <img class="media-option" src="{{ url_for('static', filename=movie['image']) }}" alt="{{ movie['Name'] }}"> 
+                        </div>
+                        <div class="media-option-title">{{ movie['Name'] }}</div>
+                    </a>
+                    <input  type="checkbox" name="movies" value="{{ movie['Name'] }}">
+                </label><br>
+            {% endfor %}
+        </div>
+        <center>
+            <button class="button" style="height: 5vw;" type="submit">Submit</button>
+        </center>
+    </form>
+</body>
+
+<script>
+    function adjustFontSize(targetElement, maxLength, baseFontSize) { //update profile picture(text) to fit better
+        const text = targetElement.textContent;
+        const length = text.length;
+        const scaleFactor = maxLength / length;
+        const fontSize = Math.max(baseFontSize * scaleFactor, .7); // Ensure font size doesn't become too small
+
+        targetElement.style.fontSize = fontSize + 'vh';
+    }
+
+    window.onload = function() { // Call adjustFontSize function on page load
+        const maxLength = 0.6; 
+        const baseFontSize = 16; // Base font size
+        const targetElement = document.getElementById('pfp');
+
+        adjustFontSize(targetElement, maxLength, baseFontSize);
+    };
+
+    function showDropdown() { // Dropdown visible
+        var dropdown = document.querySelector('.dropdown');
+        dropdown.style.display = 'block';
+    }
+    function hideDropdown() { // Dropdown invisible
+        var dropdown = document.querySelector('.dropdown');
+        dropdown.style.display = 'none';
+    }
+</script>
 </html>

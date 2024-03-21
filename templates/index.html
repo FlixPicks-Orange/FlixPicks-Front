@@ -7,17 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../static/stylesheet.css">
     <link rel="icon" type="image/x-icon" href="../static/images/favicon.ico">
-    <title>FlixPicks Landing Page</title>
+    <title>FlixPicks Guest Page</title>
 </head>
 
 <body>
     <div class="header"><!-- Header that remains at the top of the screen-->
-        <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks Logo" title="FlixPicks">
+        <a href="{{ url_for('home') }}">
+            <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks Logo" title="FlixPicks">
+        </a>
         <div class="search">
             <form action="" method="post">
                 <div class="search-left"></div>
                 <input type="text" name="options" id="options" required>
-                <div class="search-right"><img style="height: 1.5vh; filter: invert(100%)" src="https://www.freeiconspng.com/uploads/magnifying-glass-icon-16.png" alt="Magnifying Glass .ico" /></div> <!--<a href="https://www.freeiconspng.com/img/26765" title="Image from freeiconspng.com">-->
+                <div class="search-right"><img style="height: 1.5vh" src="../static/images/searchicon.svg" alt="Magnifying Glass" /></div>
             </form> 
         </div>
         <div id="pfp" style="font-size: 1vw;" onmouseover="showDropdown()" onmouseleave="hideDropdown()">Guest</div>
@@ -26,12 +28,13 @@
                 <div class="dropdown-item">Settings</div>
                 <div class="dropdown-item"><a href="{{url_for('login')}}">Log&nbsp;In</a></div>
                 <div class="dropdown-item"><a href="{{url_for('register')}}">Register</a></div>
+                <!--<div class="dropdown-item"><a href="{{url_for('tasteProfile')}}">Taste Profile</a></div>-->
             </div>
         </div>
     </div> <!-- End of Header -->
 
 <h1 style="margin-top: 15vh;">Welcome to the Guest home page!</h1> <!-- Welcome banner -->
-
+    <p style="font-size: 1.1em; margin: auto; width: 90%">FlixPicks is the place to be for all your streaming needs! We're here to help you find content from popular streaming services such as Netflix and Hulu. Click on a movie to find out where it's streaming. Login to access our advanced features such as CineRoll, CineWheel, and CineMap.</p>
 
 <div style="text-align: left;"> <!-- Start of Hotpix -->
     <div class="category-header"> 

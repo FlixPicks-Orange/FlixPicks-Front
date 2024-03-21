@@ -14,12 +14,14 @@
 
   <body>
     <div class="header"><!-- Header that remains at the top of the screen-->
-      <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks Logo" title="FlixPicks">
+        <a href="{{ url_for('userhome') }}">
+            <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks Logo" title="FlixPicks">
+        </a>
       <div class="search">
           <form action="" method="post">
               <div class="search-left"></div>
               <input type="text" name="options" id="options" required>
-              <div class="search-right"><img style="height: 1.5vh; filter: invert(100%)" src="https://www.freeiconspng.com/uploads/magnifying-glass-icon-16.png" alt="Magnifying Glass .ico" /></div> <!--<a href="https://www.freeiconspng.com/img/26765" title="Image from freeiconspng.com">-->
+              <div class="search-right"><img style="height: 1.5vh" src="../static/images/searchicon.svg" alt="Magnifying Glass" /></div>
           </form> 
       </div>
       <div id="pfp" onmouseover="showDropdown()" onmouseleave="hideDropdown()">{{ current_user.fname }}</div>

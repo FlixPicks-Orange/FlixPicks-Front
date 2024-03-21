@@ -1,5 +1,5 @@
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Trebuchet MS', sans-serif;
     text-align: center;
     background-color: rgb(42, 47, 53);
     color: white;
@@ -109,7 +109,6 @@ body {
     border-radius: 6px;
     top: 8.7vh;
     width: 10vw;
-    height: 30vh;
     right: 5%;
     background-color: rgb(23, 23, 23);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -136,7 +135,7 @@ body {
 h1 {
     color: white;
     background-color: rgb(23, 23, 23);
-    font-size: 5vh;
+    font-size: 4.5vh;
     padding: 5px;
 }
 
@@ -169,7 +168,7 @@ h1 {
     margin-bottom: 1vh;
     margin-left: 3vw;
     padding: .75vh 1.5vw;
-    font-size: 4vh;
+    font-size: 3.8vh;
     display: inline-block;
     text-align: center;
     border-radius: 10px;
@@ -250,6 +249,7 @@ h1 {
 
 .media-option-img {
     display: flex;
+    overflow: hidden;
     width: 133px;
     height: 200px;
     margin: 7px;
@@ -316,4 +316,19 @@ h1 {
     justify-content: center;
     align-items: center;
     height: 6vh;
+}
+
+.tp-subscriptions-category {
+    display: inline-flex;
+}
+
+.tp-subscription {
+    display: flex;
+    height: 9vw; 
+    width: 15.5vw;
+    margin: 1.5vw;
+}
+
+.tp-movies-category {
+    display: inline-flex;
 }
