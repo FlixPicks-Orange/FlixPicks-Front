@@ -7,12 +7,14 @@ import random, requests, os
 from config  import app
 import forms, users, login_manager
 from hotpicks import get_trending_movies
+from search import search_for_movie
 from tasteProfile import get_survey_movies
 from tasteProfile import get_survey_subscription
+from search import search_for_movie
 import Survey
 
 
-
+# search = search_for_movie()
 trending_movies = get_trending_movies(12)
 survey_subs = get_survey_subscription()
 survey_movies = get_survey_movies()
@@ -21,6 +23,14 @@ survey_movies = get_survey_movies()
 @app.route('/')
 def home():
     return render_template('index.html', trending_movies = trending_movies)
+
+@app.route('/search', methods=['GET' , 'POST'])
+def search():
+    if request.method == 'POST':
+        title = request.form["movie_title"]
+        search_results = search_for_movie(title)
+        return  render_template('search.html', search_results = search_results)
+
 
 
 @app.route('/hotpicks/<int:movie_id>')
