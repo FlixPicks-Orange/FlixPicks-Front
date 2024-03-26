@@ -11,7 +11,7 @@ class Movie:
 
 def getRecommendations(user_id):
     movie_ids = []
-    r =requests.patch(os.getenv('DB_URL')+"/recommendations"+ str(user_id))
+    r =requests.get(os.getenv('DB_URL')+"/recommendations/"+ str(user_id))
     print(r.status_code)
     if(r.status_code == 201):
         for entry in r.json():
@@ -26,23 +26,23 @@ def getRecommendations(user_id):
 def Function(movie_ids):
     recMovies = []
     for movie_data in movie_ids:
-        r =requests.patch(os.getenv('DB_URL')+"/movies/"+ str(movie_data))
+        r =requests.get(os.getenv('DB_URL')+"/movies/"+ str(movie_data))
         if(r.status_code==200):
-            package = r.json() 
-            movie = movie()
-            movie.id = movie_data
-            movie.title = package["title"]
-            provider = package["movie_providers"]
-            movie.url = provider["link"]
-            movie.release_date = package["release_date"]
-            movie.picture = package["poster_path"]
-            recMovies.append(movie)
+            entry = r.json()
+            for package in entry:
+                package["movie_id"] 
+                title = str(package["title"])
+                # provider = package["movie_providers"]
+                url = str("link") #change in future, wip
+                release_date = str(package["release_date"])
+                picture = package["poster_path"]
+                movie = Movie(id,title,url,release_date,picture)
+                recMovies.append(movie)
         else:
             print("Error fetching data:", r.status_code)
     return recMovies
 
         
-
 
 
 
