@@ -7,6 +7,7 @@ import random, requests, os
 from config  import app
 import forms, users, login_manager
 from hotpicks import get_trending_movies
+from recommendationCollector import getRecommendations
 from search import search_for_movie
 from tasteProfile import get_survey_movies
 from tasteProfile import get_survey_subscription
@@ -78,10 +79,11 @@ def register():
 @app.route('/userhome', methods=['GET' , 'POST'])
 @login_required
 def userhome():
+    recMovies = getRecommendations(current_user.id)
     if(current_user.survey_check==False):
         return redirect(url_for('tasteProfile'))
     else:
-        return render_template('userhome.html', user=current_user, trending_movies=trending_movies)
+        return render_template('userhome.html', user=current_user, trending_movies=trending_movies, recMovies = recMovies)
 
 
 @app.route('/spin', methods=['POST'])

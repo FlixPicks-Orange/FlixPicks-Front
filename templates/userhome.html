@@ -57,20 +57,18 @@
         <div onclick="moveCategory(1,'left')" class="option-cycle-button-prev"><div style="text-align: center;">&lt</div></div>
         <div class="media-options-container">
             <div id="category1" style="display: flex; position: relative; transition: transform 0.6s ease-in-out;">
-                <a href="{{url_for('mediaInfo', page_id=0)}}"><div class="media-option-img"></div><div class="media-option-title">Media name 0</div></a>
-                <a href="{{url_for('mediaInfo', page_id=1)}}"><div class="media-option-img"></div><div class="media-option-title">Media name 1</div></a>
-                <a href="{{url_for('mediaInfo', page_id=2)}}"><div class="media-option-img"></div><div class="media-option-title">Media name 2</div></a>
-                <a href="{{url_for('mediaInfo', page_id=3)}}"><div class="media-option-img"></div><div class="media-option-title">Media name 3</div></a>
-                <a href="{{url_for('mediaInfo', page_id=4)}}"><div class="media-option-img"></div><div class="media-option-title">Media name 4</div></a>
-                <a href="{{url_for('mediaInfo', page_id=5)}}"><div class="media-option-img"></div><div class="media-option-title">Media name 5</div></a>
-                <a href="{{url_for('mediaInfo', page_id=6)}}"><div class="media-option-img"></div><div class="media-option-title">Media name 6</div></a>
-                <a href="{{url_for('mediaInfo', page_id=7)}}"><div class="media-option-img"></div><div class="media-option-title">Media name 7</div></a>
-                <a href="{{url_for('mediaInfo', page_id=8)}}"><div class="media-option-img"></div><div class="media-option-title">Media name 8</div></a>
-                <a href="{{url_for('mediaInfo', page_id=9)}}"><div class="media-option-img"></div><div class="media-option-title">Media name 9</div></a>
-                <a href="{{url_for('mediaInfo', page_id=10)}}"><div class="media-option-img"></div><div class="media-option-title">Media name 10</div></a>
-                <a href="{{url_for('mediaInfo', page_id=11)}}"><div class="media-option-img"></div><div class="media-option-title">Media name 11</div></a>                
+                <a href="{{ url_for('hotpicks', movie_id=1) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ recMovies[0].picture }}" alt="{{ recMovies[0].title }}"> </div><div class="media-option-title">{{ recMovies[0].title }}</div></a>
+                <a href="{{ url_for('hotpicks', movie_id=2) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ recMovies[1].picture }}" alt="{{ recMovies[1].title }}"> </div><div class="media-option-title">{{ recMovies[1].title }}</div></a>
+                <a href="{{ url_for('hotpicks', movie_id=3) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ recMovies[2].picture }}" alt="{{ recMovies[2].title }}"> </div><div class="media-option-title">{{ recMovies[2].title }}</div></a>
+                <a href="{{ url_for('hotpicks', movie_id=4) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ recMovies[3].picture }}" alt="{{ recMovies[3].title }}"> </div><div class="media-option-title">{{ recMovies[3].title }}</div></a>
+                <a href="{{ url_for('hotpicks', movie_id=5) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ recMovies[4].picture }}" alt="{{ recMovies[4].title }}"> </div><div class="media-option-title">{{ recMovies[4].title }}</div></a>
+                <a href="{{ url_for('hotpicks', movie_id=6) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ recMovies[5].picture }}" alt="{{ recMovies[5].title }}"> </div><div class="media-option-title">{{ recMovies[5].title }}</div></a>
+                <a href="{{ url_for('hotpicks', movie_id=7) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ recMovies[6].picture }}" alt="{{ recMovies[6].title }}"> </div><div class="media-option-title">{{ recMovies[6].title }}</div></a>
+                <a href="{{ url_for('hotpicks', movie_id=8) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ recMovies[7].picture }}" alt="{{ recMovies[7].title }}"> </div><div class="media-option-title">{{ recMovies[7].title }}</div></a>
+                <a href="{{ url_for('hotpicks', movie_id=9) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ recMovies[8].picture }}" alt="{{ recMovies[8].title }}"> </div><div class="media-option-title">{{ recMovies[8].title }}</div></a>
+                <a href="{{ url_for('hotpicks', movie_id=10) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ recMovies[9].picture }}" alt="{{ recMovies[9].title }}"> </div><div class="media-option-title">{{ recMovies[9].title }}</div></a>
             </div>
-        </div>
+                </div>
         <div onclick="moveCategory(1,'right')" class="option-cycle-button-next"><div style="text-align: center;">&gt</div></div>
     </div> <!-- End of Recommended -->
 
