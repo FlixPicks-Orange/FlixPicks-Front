@@ -8,6 +8,7 @@ from config  import app
 import forms, users, login_manager
 from hotpicks import get_trending_movies
 from recommendationCollector import getRecommendations
+from recommendationCollector import Movie
 from search import search_for_movie
 from tasteProfile import get_survey_movies
 from tasteProfile import get_survey_subscription
@@ -104,10 +105,20 @@ def result():
     return render_template('result.html', selected_option=selected_option)
 
 
-@app.route('/mediaInfo/<int:page_id>', methods=['GET' , 'POST'])
-@login_required
-def mediaInfo(page_id):
-    return render_template('mediaInfo.html',  page_id=page_id)
+@app.route('/mediaInfo/<int:movie_id>', methods=['GET' , 'POST'])
+def mediaInfo(movie_id):
+    r =requests.get(os.getenv('DB_URL')+"/movies/"+ str(movie_id))
+    if(r.status_code==200):
+        entry = r.json()
+        package = entry[0]
+        title = str(package["title"])
+        providers = package["moive_providers"]
+        for provider_info in providers:
+            url = str(provider_info["link"])
+        release_date = str(package["release_date"])
+        picture = package["poster_path"]
+        movie = Movie(movie_id,title,url,release_date,picture)
+    return render_template('mediaInfo.html',  movie_id=movie_id, movie=movie)
 
 
 @app.route('/settings', methods=['GET', 'POST', 'PATCH'])

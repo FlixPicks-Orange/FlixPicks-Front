@@ -36,7 +36,7 @@ def Function(movie_ids):
             url = str("link") #change in future, wip
             release_date = str(package["release_date"])
             picture = package["poster_path"]
-            movie = Movie(id,title,url,release_date,picture)
+            movie = Movie(movie_data,title,url,release_date,picture)
             recMovies.append(movie)
         else:
             print("Error fetching data:", r.status_code)

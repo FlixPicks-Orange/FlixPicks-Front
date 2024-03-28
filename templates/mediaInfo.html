@@ -29,27 +29,17 @@
     </div>
 </div>
     <h1 style="margin-top: 10vh;">
-        Insert Movie #{{page_id}} Title Here
+        {{ movie.title }}
     </h1>
 
     <div class="movie-image"> <br><br><br><br> movie #{{page_id}} image here</div>
 
     <br><br>
     <button>
-        <a href="https">
-            <div class="streaming-platform-option">Streaming Option 1 name</div>
+        <a href="{{movie.url}}">
+            <div class="streaming-platform-option">TMDB Link</div>
         </a>
     </button>
-<button>
-    <a href="https">
-        <div class="streaming-platform-option">Streaming Option 2 name</div>
-    </a>
-</button>
-<button>
-    <a href="https">
-        <div class="streaming-platform-option">Streaming Option 3 name</div>
-    </a>
-</button>
 
 </body>
 </html>
