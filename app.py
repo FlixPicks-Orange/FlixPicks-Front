@@ -169,6 +169,19 @@ def survey_results():
 def wheel():
     return render_template('wheel.html')
 
+# @app.route('/cineroll')
+# @login_required
+# def cineroll():
+#      recMovies = getRecommendations(current_user.id)
+#      if(len(recMovies)>1):
+#          x = random.randint(0,len(recMovies))
+#          movie = getmovie(recMovies[x])
+#          movie_id = recMovies[x].id
+#          return render_template('mediaInfo.html',  movie_id=movie_id, movie=movie)
+#      else:
+#           return "Movie not found", 404
+        
+
 if __name__ == '__main__':
     #Survey.db.create_all()
     app.run(host="0.0.0.0", port=2000, debug=True)
