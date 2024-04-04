@@ -6,6 +6,7 @@ class Movie:
         self.id = id
         self.title = title
         self.picture = picture
+        
 
 def getRecommendations(user_id):
     movie_ids = []

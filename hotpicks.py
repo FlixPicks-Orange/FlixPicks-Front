@@ -1,32 +1,34 @@
-import requests
-
-api_key = "250af020182447c7468c03c9ec6cb7a2"
+import requests, os
 
 class Movie:
-    def __init__(self, id, title, url, release_date, picture):
+    def __init__(self, id, title, picture):
         self.id = id
         self.title = title
-        self.url = url
-        self.release_date = release_date
         self.picture = picture
 
-def get_trending_movies(num_movies=12):
-    url = f"https://api.themoviedb.org/3/trending/movie/week?api_key={api_key}"
-    response = requests.get(url)
-    trending_movies = []
-    if response.status_code == 200:
-        movies_data = response.json().get('results', [])
-        for movie_data in movies_data[:num_movies]:
-            id = movie_data.get('id')
-            title = movie_data.get('title', 'Title not available')
-            release_date = movie_data.get('release_date', 'Release date not available')
-            picture = f"https://image.tmdb.org/t/p/w500{movie_data.get('poster_path', '')}"
-            url = f"https://www.themoviedb.org/movie/{movie_data.get('id')}/watch"
-            movie = Movie(id, title, url, release_date, picture)
-            trending_movies.append(movie)
-    else:
-        print("Error fetching data:", response.status_code)
-    return trending_movies
+def get_trending_movies():
+    movie_ids = []
+    r =requests.get(os.getenv('DB_URL')+"/movies/popular")
+    print(r.status_code)
+    if(r.status_code == 200):
+        for entry in r.json():
+            movie_id = entry['movie_id']
+            movie_ids.append(movie_id)
+        movie_ids = set(movie_ids)
+        return create_movies(movie_ids)
 
-
-
+def create_movies(movie_ids):
+    movies = []
+    for movie_data in movie_ids:
+        r =requests.get(os.getenv('DB_URL')+"/movies/"+ str(movie_data))
+        if(r.status_code==200):
+            entry = r.json()
+            package = entry[0]
+            package["movie_id"] 
+            title = str(package["title"])
+            picture = package["poster_path"]
+            movie = Movie(movie_data,title,picture)
+            movies.append(movie)
+        else:
+            print("Error fetching data:", r.status_code)
+    return movies

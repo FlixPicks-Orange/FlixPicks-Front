@@ -15,7 +15,6 @@ from tasteProfile import get_survey_subscription
 import Survey
 
 
-trending_movies = get_trending_movies(10)
 survey_subs = get_survey_subscription()
 survey_movies = get_survey_movies()
 header = 'header_guest.html'
@@ -26,6 +25,7 @@ header = 'header_guest.html'
 
 @app.route('/')
 def home():
+    trending_movies = get_trending_movies()
     return render_template('index.html', header = header, trending_movies = trending_movies)
 
 
@@ -39,23 +39,6 @@ def search():
         else:
             header = 'header_guest.html'
         return  render_template('search.html', header = header, search_results = search_results)
-
-
-@app.route('/hotpicks/<int:movie_id>')             
-def hotpicks(movie_id):
-    selected_movie = None
-    for movie in trending_movies:
-        if movie.id == movie_id:
-            selected_movie = movie
-            break
-    if selected_movie:
-        if current_user.is_authenticated:
-            header = 'header_registered.html'
-        else:
-            header = 'header_guest.html'
-        return render_template('hotpicks.html', header = header, movie=selected_movie)
-    else:
-        return "Movie not found", 404
 
 
 @app.route('/login', methods=['GET' , 'POST'])
@@ -91,6 +74,7 @@ def register():
 @login_required
 def userhome():
     recMovies = getRecommendations(current_user.id)
+    trending_movies = get_trending_movies()
     if(current_user.survey_check==False):
         return redirect(url_for('tasteProfile'))
     else:
@@ -182,6 +166,7 @@ def survey_results():
     return jsonify(response_list)
 
 @app.route('/wheel')
+@login_required
 def wheel():
     return render_template('wheel.html', header = 'header_registered.html')
 

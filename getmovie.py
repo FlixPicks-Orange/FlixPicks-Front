@@ -1,12 +1,13 @@
 import requests, os
 
 class Movie:
-    def __init__(self, id, title, url, release_date, picture):
+    def __init__(self, id, title, url, release_date, picture, summary):
         self.id = id
         self.title = title
         self.url = url
         self.release_date = release_date
         self.picture = picture
+        self.summary = summary
 
 
 def getmovie(movie_id):
@@ -20,5 +21,6 @@ def getmovie(movie_id):
             url = str(provider_info["link"])
         release_date = str(package["release_date"])
         picture = package["poster_path"]
-        movie = Movie(movie_id,title,url,release_date,picture)
+        summary = package["summary"]
+        movie = Movie(movie_id,title,url,release_date,picture,summary)
         return movie
