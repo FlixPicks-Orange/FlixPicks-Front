@@ -106,6 +106,18 @@ def mediaInfo(movie_id):
         header = 'header_registered.html'
     else:
         header = 'header_guest.html'
+    
+    if request.method =='POST' and current_user.is_authenticated:
+        movie = { 
+            "from_recommended": True,
+            "movie_id":movie_id,
+            "user_id": current_user.id
+            }
+
+        r = requests.post(os.getenv('DB_URL') + f"/watch_history", json=movie)
+        if r.status_code == 201:
+            print('Succesfully updated Watch History.')
+        
     return render_template('mediaInfo.html', header = header,  movie_id=movie_id, movie=movie)
 
 

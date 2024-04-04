@@ -18,13 +18,38 @@
         <div>
             <div class="category-header" style="margin-left: -22vh; margin-top: 15vh;">Description</div>
             <div class="mediainfodescription"> {{ movie.summary }} </div>
-            <a class="button" style="margin-top: 2vh; height: 4vh; width: 14vh;" href="{{movie.url}}">TMDB Link</a>
+
+            <form id="MediaInfoForm" action="/mediaInfo/{{movie.id}}" method="post">
+            </form>
+            
+            <a class="button" onclick="triggerPostRequest(event)" style="margin-top: 2vh; height: 4vh; width: 14vh;" href="{{movie.url}}" target="_blank">TMDB Link</a>
         </div>
-        
     </div>
     
 </body>
 <script>
+    
+    function triggerPostRequest(event) {
+            event.preventDefault(); // Prevent the default behavior of the link
+            //Construct your POST request data here
+
+            fetch('/mediaInfo/{{ movie.id }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                //  If the request was successful, navigate to the URL
+                window.location.href = event.target.href;
+            })
+            .catch(error => {
+                console.error('There was a problem with the POST request:', error);
+            });
+        }
 
 </script>
 </html>

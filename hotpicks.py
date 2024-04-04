@@ -6,14 +6,18 @@ class Movie:
         self.title = title
         self.picture = picture
 
-def get_trending_movies():
+def get_trending_movies(x=10):
     movie_ids = []
     r =requests.get(os.getenv('DB_URL')+"/movies/popular")
     print(r.status_code)
     if(r.status_code == 200):
+        i=0
         for entry in r.json():
+            i+=1
             movie_id = entry['movie_id']
             movie_ids.append(movie_id)
+            if i == x:
+                break
         movie_ids = set(movie_ids)
         return create_movies(movie_ids)
 
