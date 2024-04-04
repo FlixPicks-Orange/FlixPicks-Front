@@ -4,7 +4,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 import random, requests, os
 
 # Custom Modules
-from config  import app
+from config  import app, bcrypt
 import forms, users, login_manager
 from hotpicks import get_trending_movies
 from recommendationCollector import getRecommendations
@@ -115,7 +115,8 @@ def settings():
     if request.method == 'PATCH':
         if 'newPassword' in request.json:
             new_password = request.json['newPassword']
-            updated_password = {'password': new_password}
+            updated_password = bcrypt.generate_password_hash(new_password).decode("utf-8")
+            updated_password = {'password': updated_password}
             #Hashing issue, not entirely sure how to fix this. After changing password and trying to log in it says salt issue 
             r_password = requests.patch(os.getenv('DB_URL') + f"/users/update/{current_user.username}/password", json=updated_password)
 
