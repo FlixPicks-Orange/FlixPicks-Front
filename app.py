@@ -1,7 +1,6 @@
 
 from flask import render_template, url_for, redirect, request, jsonify
 from flask_login import login_user, login_required, logout_user, current_user
-from sqlalchemy import func
 import random, requests, os
 
 # Custom Modules
@@ -13,7 +12,6 @@ from getmovie import getmovie
 from search import search_for_movie
 from tasteProfile import get_survey_movies
 from tasteProfile import get_survey_subscription
-from tasteProfile import Movie
 from search import search_for_movie
 import Survey
 
@@ -154,8 +152,6 @@ def tasteProfile():
      if request.method =='POST':
         return redirect(url_for('thank_you'))
      else:
-
-        movies = Movie.query.order_by(func.random()).limit(5).all()
         return render_template('tasteProfile.html', subscriptions=survey_subs, movies=survey_movies)
 
 
