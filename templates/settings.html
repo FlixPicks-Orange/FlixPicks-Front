@@ -8,22 +8,51 @@
     <title>Settings</title>
 </head>
 <body>
-    <form id="settingsForm">
-        <button type="button" onclick="submitPatchRequest()">Limit Subscriptions</button>
+    <h2>Change Password</h2>
+    <form id="changePasswordForm">
+        <label for="newPassword">New Password:</label><br>
+        <input type="password" id="newPassword" name="newPassword"><br>
+        <button type="button" onclick="submitChangePasswordRequest()">Change Password</button>
     </form>
+
+    <h2>Limit Subscriptions</h2>
+    <form id="limitSubscriptionsForm">
+        <button type="button" onclick="submitLimitSubscriptionsRequest()">Limit Subscriptions</button>
+    </form>
+
     <a href="{{ url_for('userhome') }}" class="button" style="height: 3vh;">Home</a>
 
     <script>
-        function submitPatchRequest() {
+        function submitChangePasswordRequest() {
             var xhr = new XMLHttpRequest();
             xhr.open("PATCH", "/settings", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    alert("Done"); // Display a prompt message
-                    setTimeout(function() {
-                        window.location.href = "/userhome"; // Redirect after 1 second
-                    }, 1000);
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        alert("Password changed successfully."); // Display a success message
+                        document.getElementById("changePasswordForm").reset(); // Reset the form
+                    } else {
+                        alert("Failed to change password. Please try again."); // Display an error message
+                    }
+                }
+            };
+            var newPassword = document.getElementById("newPassword").value;
+            var data = JSON.stringify({ "newPassword": newPassword });
+            xhr.send(data);
+        }
+
+        function submitLimitSubscriptionsRequest() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("PATCH", "/settings", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        alert("Subscription limit updated successfully."); // Display a success message
+                    } else {
+                        alert("Failed to update subscription limit. Please try again."); // Display an error message
+                    }
                 }
             };
             var data = JSON.stringify({ "limit_subscriptions": true });

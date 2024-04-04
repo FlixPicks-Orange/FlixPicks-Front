@@ -16,6 +16,7 @@ from search import search_for_movie
 import Survey
 
 
+
 # search = search_for_movie()
 trending_movies = get_trending_movies(12)
 survey_subs = get_survey_subscription()
@@ -84,7 +85,7 @@ def userhome():
     if(current_user.survey_check==False):
         return redirect(url_for('tasteProfile'))
     else:
-        return render_template('userhome.html', user=current_user, trending_movies=trending_movies, recMovies = recMovies)
+        return render_template('userhome.html', user=current_user, trending_movies=trending_movies, recMovies=recMovies if recMovies else [])
 
 
 @app.route('/spin', methods=['POST'])
@@ -115,14 +116,29 @@ def mediaInfo(movie_id):
 @login_required
 def settings():
     if request.method == 'PATCH':
-        sub = {'limit_subscriptions': True}
-        r = requests.patch(os.getenv('DB_URL') + "/users/update/" + current_user.username + "/limit_subscriptions", json=sub)
-        if r.status_code == 201:
-            return "Success", 201
-        else:
-            return "Failed", r.status_code
-    return render_template('settings.html')
+        if 'newPassword' in request.json:
+            new_password = request.json['newPassword']
+            updated_password = {'password': new_password}
+            #Hashing issue, not entirely sure how to fix this. After changing password and trying to log in it says salt issue 
+            r_password = requests.patch(os.getenv('DB_URL') + f"/users/update/{current_user.username}/password", json=updated_password)
 
+            if r_password.status_code == 200:
+                return "Password updated successfully", 200
+            else:
+                return "Failed to update password", 404
+
+        elif 'limit_subscriptions' in request.json:
+            sub = {'limit_subscriptions': True}
+            r_subscription = requests.patch(os.getenv('DB_URL') + f"/users/update/{current_user.username}/limit_subscriptions", json=sub)
+
+            if r_subscription.status_code == 201:
+                return "Subscription limit updated successfully", 200
+            else:
+                return "Failed to update subscription limit", 400
+
+    elif request.method == 'GET' or request.method == 'POST':
+        return render_template('settings.html')
+    return "Method not allowed", 405
 
 
 @app.route('/logout', methods = ['GET','POST'])
