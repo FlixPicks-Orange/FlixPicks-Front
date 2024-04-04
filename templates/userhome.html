@@ -8,27 +8,7 @@
     <title>FlixPicks Home</title>
 </head>
 <body>
-    <div class="header"><!-- Header that remains at the top of the screen-->
-        <a href="{{ url_for('userhome') }}">
-            <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks Logo" title="FlixPicks">
-        </a>
-        <div class="search">
-            <form action="" method="post">
-                <div class="search-left"></div>
-                <input type="text" name="options" id="options" required>
-                <div class="search-right"><img style="height: 1.5vh" src="../static/images/searchicon.svg" alt="Magnifying Glass" /></div>
-            </form> 
-        </div>
-        <div id="pfp" onmouseover="showDropdown()" onmouseleave="hideDropdown()">{{ current_user.fname }}</div>
-        <div class="dropdown-container" onmouseover="showDropdown()" onmouseleave="hideDropdown()"> 
-            <div class="dropdown">
-                <div class="dropdown-item"><a href="{{url_for('settings')}}">Settings</a></div>
-                <div class="dropdown-item"><a href="{{url_for('tasteProfile')}}">Taste Profile</a></div>
-                <div class="dropdown-item">CineMap Toggle</div>
-                <div class="dropdown-item"><a href="{{url_for('logout')}}">Logout</a></div>
-            </div>
-        </div>
-    </div> <!-- End of Header -->
+    {% include header %}
 
     <h1 style="margin-top: 15vh;">Welcome {{ current_user.fname }}! This is your personal home page!</h1> <!-- Welcome banner -->
     
@@ -57,19 +37,15 @@
         <div onclick="moveCategory(1,'left')" class="option-cycle-button-prev"><div style="text-align: center;">&lt</div></div>
         <div class="media-options-container">
             <div id="category1" style="display: flex; position: relative; transition: transform 0.6s ease-in-out;">
-                <a href="{{ url_for('mediaInfo', movie_id=recMovies[0].id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ recMovies[0].picture }}" alt="{{ recMovies[0].title }}"> </div><div class="media-option-title">{{ recMovies[0].title }}</div></a>
-                <a href="{{ url_for('mediaInfo', movie_id=recMovies[1].id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ recMovies[1].picture }}" alt="{{ recMovies[1].title }}"> </div><div class="media-option-title">{{ recMovies[1].title }}</div></a>
-                <a href="{{ url_for('mediaInfo', movie_id=recMovies[2].id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ recMovies[2].picture }}" alt="{{ recMovies[2].title }}"> </div><div class="media-option-title">{{ recMovies[2].title }}</div></a>
-                <a href="{{ url_for('mediaInfo', movie_id=recMovies[3].id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ recMovies[3].picture }}" alt="{{ recMovies[3].title }}"> </div><div class="media-option-title">{{ recMovies[3].title }}</div></a>
-                <a href="{{ url_for('mediaInfo', movie_id=recMovies[4].id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ recMovies[4].picture }}" alt="{{ recMovies[4].title }}"> </div><div class="media-option-title">{{ recMovies[4].title }}</div></a>
-                <a href="{{ url_for('mediaInfo', movie_id=recMovies[5].id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ recMovies[5].picture }}" alt="{{ recMovies[5].title }}"> </div><div class="media-option-title">{{ recMovies[5].title }}</div></a>
-                <a href="{{ url_for('mediaInfo', movie_id=recMovies[6].id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ recMovies[6].picture }}" alt="{{ recMovies[6].title }}"> </div><div class="media-option-title">{{ recMovies[6].title }}</div></a>
-                <a href="{{ url_for('mediaInfo', movie_id=recMovies[7].id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ recMovies[7].picture }}" alt="{{ recMovies[7].title }}"> </div><div class="media-option-title">{{ recMovies[7].title }}</div></a>
-                <a href="{{ url_for('mediaInfo', movie_id=recMovies[8].id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ recMovies[8].picture }}" alt="{{ recMovies[8].title }}"> </div><div class="media-option-title">{{ recMovies[8].title }}</div></a>
-                <a href="{{ url_for('mediaInfo', movie_id=recMovies[9].id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ recMovies[9].picture }}" alt="{{ recMovies[9].title }}"> </div><div class="media-option-title">{{ recMovies[9].title }}</div></a>
-                <a href="{{ url_for('mediaInfo', movie_id=recMovies[10].id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ recMovies[10].picture }}" alt="{{ recMovies[10].title }}"> </div><div class="media-option-title">{{ recMovies[10].title }}</div></a>
-                <a href="{{ url_for('mediaInfo', movie_id=recMovies[11].id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ recMovies[11].picture }}" alt="{{ recMovies[11].title }}"> </div><div class="media-option-title">{{ recMovies[11].title }}</div></a>
-                <a href="{{ url_for('mediaInfo', movie_id=recMovies[12].id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ recMovies[12].picture }}" alt="{{ recMovies[12].title }}"> </div><div class="media-option-title">{{ recMovies[12].title }}</div></a>
+                {% if recMovies %}
+                    {% for movie in recMovies %}
+                    <a href="{{ url_for('mediaInfo', movie_id=movie.id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ movie.picture }}" alt="{{ movie.title }}"> </div><div class="media-option-title">{{ movie.title }}</div></a>
+                    {% endfor %}
+                {% else %}
+                    <div style="width: 100%; position: absolute; left: 17vh; top: -4vh; font-size: 200%; white-space: nowrap;">
+                        Watch some movies to generate some reccomendations here!
+                    </div>
+                {% endif %}
             </div>
                 </div>
         <div onclick="moveCategory(1,'right')" class="option-cycle-button-next"><div style="text-align: center;">&gt</div></div>
@@ -85,18 +61,9 @@
         <div onclick="moveCategory(2,'left')" class="option-cycle-button-prev"><div style="text-align: center;">&lt</div></div>
         <div class="media-options-container">
             <div id="category2" style="display: flex; position: relative; transition: transform 0.6s ease-in-out;">
-                <a href="{{ url_for('hotpicks', movie_id=trending_movies[0].id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ trending_movies[0].picture }}" alt="{{ trending_movies[0].title }}"> </div><div class="media-option-title">{{ trending_movies[0].title }}</div></a>
-                <a href="{{ url_for('hotpicks', movie_id=trending_movies[1].id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ trending_movies[1].picture }}" alt="{{ trending_movies[1].title }}"> </div><div class="media-option-title">{{ trending_movies[1].title }}</div></a>
-                <a href="{{ url_for('hotpicks', movie_id=trending_movies[2].id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ trending_movies[2].picture }}" alt="{{ trending_movies[2].title }}"> </div><div class="media-option-title">{{ trending_movies[2].title }}</div></a>
-                <a href="{{ url_for('hotpicks', movie_id=trending_movies[3].id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ trending_movies[3].picture }}" alt="{{ trending_movies[3].title }}"> </div><div class="media-option-title">{{ trending_movies[3].title }}</div></a>
-                <a href="{{ url_for('hotpicks', movie_id=trending_movies[4].id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ trending_movies[4].picture }}" alt="{{ trending_movies[4].title }}"> </div><div class="media-option-title">{{ trending_movies[4].title }}</div></a>
-                <a href="{{ url_for('hotpicks', movie_id=trending_movies[5].id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ trending_movies[5].picture }}" alt="{{ trending_movies[5].title }}"> </div><div class="media-option-title">{{ trending_movies[5].title }}</div></a>
-                <a href="{{ url_for('hotpicks', movie_id=trending_movies[6].id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ trending_movies[6].picture }}" alt="{{ trending_movies[6].title }}"> </div><div class="media-option-title">{{ trending_movies[6].title }}</div></a>
-                <a href="{{ url_for('hotpicks', movie_id=trending_movies[7].id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ trending_movies[7].picture }}" alt="{{ trending_movies[7].title }}"> </div><div class="media-option-title">{{ trending_movies[7].title }}</div></a>
-                <a href="{{ url_for('hotpicks', movie_id=trending_movies[8].id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ trending_movies[8].picture }}" alt="{{ trending_movies[8].title }}"> </div><div class="media-option-title">{{ trending_movies[8].title }}</div></a>
-                <a href="{{ url_for('hotpicks', movie_id=trending_movies[9].id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ trending_movies[9].picture }}" alt="{{ trending_movies[9].title }}"> </div><div class="media-option-title">{{ trending_movies[9].title }}</div></a>
-                <a href="{{ url_for('hotpicks', movie_id=trending_movies[10].id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ trending_movies[10].picture }}" alt="{{ trending_movies[10].title }}"> </div><div class="media-option-title">{{ trending_movies[10].title }}</div></a>
-                <a href="{{ url_for('hotpicks', movie_id=trending_movies[11].id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ trending_movies[11].picture }}" alt="{{ trending_movies[11].title }}"> </div><div class="media-option-title">{{ trending_movies[11].title }}</div></a>
+                {% for movie in trending_movies %}
+                <a href="{{ url_for('hotpicks', movie_id=movie.id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ movie.picture }}" alt="{{ movie.title }}"> </div><div class="media-option-title">{{ movie.title }}</div></a>
+                {% endfor %}
             </div>
         </div>
         <div onclick="moveCategory(2,'right')" class="option-cycle-button-next"><div style="text-align: center;">&gt</div></div>
@@ -108,7 +75,7 @@
         function moveCategory(categoryNum, direction) {
             const box = document.getElementById('category' + categoryNum);
             const maxSteps = 3;
-            const maxDistance = 133 * 5 + 15;   // Should be MediaOption width * #OfMediaOptions + wiggle room
+            const maxDistance = 133 * 2.75 + 15;   // Should be MediaOption width * #OfMediaOptions + wiggle room
             const stepSize = maxDistance / maxSteps;
 
             // Initialize count for the category if it doesn't exist
@@ -131,33 +98,6 @@
 
             // Apply translation to the box
             box.style.transform = `translateX(${translation}px)`;
-        }
-
-
-        function adjustFontSize(targetElement, maxLength, baseFontSize) { //update profile picture(text) to fit better
-            const text = targetElement.textContent;
-            const length = text.length;
-            const scaleFactor = maxLength / length;
-            const fontSize = Math.max(baseFontSize * scaleFactor, .7); // Ensure font size doesn't become too small
-
-            targetElement.style.fontSize = fontSize + 'vh';
-        }
-
-        window.onload = function() { // Call adjustFontSize function on page load
-            const maxLength = 0.6; 
-            const baseFontSize = 16; // Base font size
-            const targetElement = document.getElementById('pfp');
-
-            adjustFontSize(targetElement, maxLength, baseFontSize);
-        };
-
-        function showDropdown() { // Dropdown visible
-            var dropdown = document.querySelector('.dropdown');
-            dropdown.style.display = 'block';
-        }
-        function hideDropdown() { // Dropdown invisible
-            var dropdown = document.querySelector('.dropdown');
-            dropdown.style.display = 'none';
         }
 
     </script>

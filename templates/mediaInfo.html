@@ -7,39 +7,21 @@
     <link rel="icon" type="image/x-icon" href="../static/images/favicon.ico">
     <title>{{page_id}} Info</title>
 <body>
-<div class="header"><!-- Header that remains at the top of the screen-->
-    <a href="{{ url_for('userhome') }}">
-        <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks Logo" title="FlixPicks">
-    </a>
-    <div class="search">
-        <form action="" method="post">
-            <div class="search-left"></div>
-            <input type="text" name="options" id="options" required>
-            <div class="search-right"><img style="height: 1.5vh" src="../static/images/searchicon.svg" alt="Magnifying Glass" /></div>
-        </form>
-    </div>
-    <div id="pfp" onmouseover="showDropdown()" onmouseleave="hideDropdown()">{{ current_user.fname }}</div>
-    <div class="dropdown-container" onmouseover="showDropdown()" onmouseleave="hideDropdown()">
-        <div class="dropdown">
-            <div class="dropdown-item"><a href="{{url_for('settings')}}">Settings</a></div>
-            <div class="dropdown-item">Taste Profile Reset</div>
-            <div class="dropdown-item">CineMap Toggle</div>
-            <div class="dropdown-item"><a href="{{url_for('logout')}}">Logout</a></div>
-        </div>
-    </div>
-</div>
+    {% include header %}
+
     <h1 style="margin-top: 10vh;">
         {{ movie.title }}
     </h1>
 
-    <img class="hotpicksimg" src="{{ movie.picture }}" alt="{{ movie.title }}">
-
-    <br><br>
-    <button>
-        <a href="{{movie.url}}">
-            <div class="streaming-platform-option">TMDB Link</div>
-        </a>
-    </button>
-
+    <div style="display: flex; align-items: center; justify-content: center;">
+        <img class="mediainfoimg" src="{{ movie.picture }}" alt="{{ movie.title }}">
+        <div>
+            <div class="category-header" style="margin-left: -22vh; margin-top: 15vh;">Description</div>
+            <div class="mediainfodescription"> <!-- {{ movie.description }} --> </div>
+            <a class="button" style="margin-top: 2vh; height: 4vh; width: 14vh;" href="{{movie.url}}">TMDB Link</a>
+        </div>
+        
+    </div>
+    
 </body>
 </html>

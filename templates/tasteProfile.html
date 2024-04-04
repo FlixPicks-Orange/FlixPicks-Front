@@ -8,25 +8,7 @@
     <title>Taste Profile</title>
 </head>
 <body>
-    <div class="header"><!-- Header that remains at the top of the screen-->
-        <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks Logo" title="FlixPicks">
-        <div class="search">
-            <form action="" method="post">
-                <div class="search-left"></div>
-                <input type="text" name="options" id="options" required>
-                <div class="search-right"><img style="height: 1.5vh" src="../static/images/searchicon.svg" alt="Magnifying Glass" /></div>
-            </form> 
-        </div>
-        <div id="pfp" onmouseover="showDropdown()" onmouseleave="hideDropdown()">{{ current_user.fname }}</div>
-        <div class="dropdown-container" onmouseover="showDropdown()" onmouseleave="hideDropdown()"> 
-            <div class="dropdown">
-                <div class="dropdown-item"><a href="{{url_for('settings')}}">Settings</a></div>
-                <div class="dropdown-item">Taste Profile Reset</div>
-                <div class="dropdown-item">CineMap Toggle</div>
-                <div class="dropdown-item"><a href="{{url_for('logout')}}">Logout</a></div>
-            </div>
-        </div>
-    </div> <!-- End of Header -->
+    {% include header %}
 
     <h1 style="margin-top: 15vh;">Welcome to Your Taste Profile!</h1>
 
@@ -67,32 +49,4 @@
         </center>
     </form>
 </body>
-
-<script>
-    function adjustFontSize(targetElement, maxLength, baseFontSize) { //update profile picture(text) to fit better
-        const text = targetElement.textContent;
-        const length = text.length;
-        const scaleFactor = maxLength / length;
-        const fontSize = Math.max(baseFontSize * scaleFactor, .7); // Ensure font size doesn't become too small
-
-        targetElement.style.fontSize = fontSize + 'vh';
-    }
-
-    window.onload = function() { // Call adjustFontSize function on page load
-        const maxLength = 0.6; 
-        const baseFontSize = 16; // Base font size
-        const targetElement = document.getElementById('pfp');
-
-        adjustFontSize(targetElement, maxLength, baseFontSize);
-    };
-
-    function showDropdown() { // Dropdown visible
-        var dropdown = document.querySelector('.dropdown');
-        dropdown.style.display = 'block';
-    }
-    function hideDropdown() { // Dropdown invisible
-        var dropdown = document.querySelector('.dropdown');
-        dropdown.style.display = 'none';
-    }
-</script>
 </html>

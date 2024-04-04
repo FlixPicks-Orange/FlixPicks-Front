@@ -12,31 +12,36 @@ from getmovie import getmovie
 from search import search_for_movie
 from tasteProfile import get_survey_movies
 from tasteProfile import get_survey_subscription
-from search import search_for_movie
 import Survey
 
 
-
-# search = search_for_movie()
-trending_movies = get_trending_movies(12)
+trending_movies = get_trending_movies(10)
 survey_subs = get_survey_subscription()
 survey_movies = get_survey_movies()
+header = 'header_guest.html'
+
+
+
 
 
 @app.route('/')
 def home():
-    return render_template('index.html', trending_movies = trending_movies)
+    return render_template('index.html', header = header, trending_movies = trending_movies)
 
-@app.route('/search', methods=['GET' , 'POST'])
+
+@app.route('/search', methods=['GET' , 'POST'])             
 def search():
     if request.method == 'POST':
         title = request.form["movie_title"]
         search_results = search_for_movie(title)
-        return  render_template('search.html', search_results = search_results)
+        if current_user.is_authenticated:
+            header = 'header_registered.html'
+        else:
+            header = 'header_guest.html'
+        return  render_template('search.html', header = header, search_results = search_results)
 
 
-
-@app.route('/hotpicks/<int:movie_id>')
+@app.route('/hotpicks/<int:movie_id>')             
 def hotpicks(movie_id):
     selected_movie = None
     for movie in trending_movies:
@@ -44,7 +49,11 @@ def hotpicks(movie_id):
             selected_movie = movie
             break
     if selected_movie:
-        return render_template('hotpicks.html', movie=selected_movie)
+        if current_user.is_authenticated:
+            header = 'header_registered.html'
+        else:
+            header = 'header_guest.html'
+        return render_template('hotpicks.html', header = header, movie=selected_movie)
     else:
         return "Movie not found", 404
 
@@ -59,8 +68,8 @@ def login():
             return(redirect(url_for('userhome')))
         else:
             error_message = 'Login failed. Please check your credentials.'
-            return render_template('login.html', form=form, error_message=error_message)
-    return render_template('login.html', form=form)
+            return render_template('login.html', header = header, form=form, error_message=error_message)
+    return render_template('login.html', header = header, form=form)
 
 
 @app.route('/register', methods=['GET' , 'POST'])
@@ -75,7 +84,7 @@ def register():
             form.lname.data
             )
         if(result): return redirect(url_for('login'))
-    return render_template('register.html', form = form)
+    return render_template('register.html', header = header, form = form)
 
 
 @app.route('/userhome', methods=['GET' , 'POST'])
@@ -85,7 +94,7 @@ def userhome():
     if(current_user.survey_check==False):
         return redirect(url_for('tasteProfile'))
     else:
-        return render_template('userhome.html', user=current_user, trending_movies=trending_movies, recMovies=recMovies if recMovies else [])
+        return render_template('userhome.html', header = 'header_registered.html', user=current_user, trending_movies=trending_movies, recMovies=recMovies if recMovies else [])
 
 
 @app.route('/spin', methods=['POST'])
@@ -106,10 +115,14 @@ def result():
     return render_template('result.html', selected_option=selected_option)
 
 
-@app.route('/mediaInfo/<int:movie_id>', methods=['GET' , 'POST'])
+@app.route('/mediaInfo/<int:movie_id>', methods=['GET' , 'POST'])             
 def mediaInfo(movie_id):
     movie = getmovie(movie_id)
-    return render_template('mediaInfo.html',  movie_id=movie_id, movie=movie)
+    if current_user.is_authenticated:
+        header = 'header_registered.html'
+    else:
+        header = 'header_guest.html'
+    return render_template('mediaInfo.html', header = header,  movie_id=movie_id, movie=movie)
 
 
 @app.route('/settings', methods=['GET', 'POST', 'PATCH'])
@@ -137,7 +150,7 @@ def settings():
                 return "Failed to update subscription limit", 400
 
     elif request.method == 'GET' or request.method == 'POST':
-        return render_template('settings.html')
+        return render_template('settings.html', header = 'header_registered.html')
     return "Method not allowed", 405
 
 
@@ -152,13 +165,13 @@ def tasteProfile():
      if request.method =='POST':
         return redirect(url_for('thank_you'))
      else:
-        return render_template('tasteProfile.html', subscriptions=survey_subs, movies=survey_movies)
+        return render_template('tasteProfile.html', header = header, subscriptions=survey_subs, movies=survey_movies)
 
 
 @app.route('/thanks') #Eventually edit this- should redirect to homepage of FP
 def thank_you():
     users.update_survey_check(current_user.username)
-    return render_template('thankyou.html')
+    return render_template('thankyou.html', header = header)
 
 
 @app.route('/survey_results')
@@ -170,7 +183,7 @@ def survey_results():
 
 @app.route('/wheel')
 def wheel():
-    return render_template('wheel.html')
+    return render_template('wheel.html', header = 'header_registered.html')
 
 @app.route('/cineroll')
 @login_required
@@ -180,7 +193,7 @@ def cineroll():
          x = random.randint(0,len(recMovies))
          movie_id = recMovies[x].id
          movie = getmovie(movie_id)
-         return render_template('mediaInfo.html',  movie_id=movie_id, movie=movie)
+         return render_template('mediaInfo.html', header = 'header_registered.html',  movie_id=movie_id, movie=movie)
      else:
           return "Movie not found", 404
         

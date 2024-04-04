@@ -143,13 +143,14 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 5px;
-    border: 5px solid white;
-    border-radius: 15px;
+    font-size: 2.5vh;
+    padding: .5vh;
+    border: .5vh solid white;
+    border-radius: 1.5vh;
     background: rgb(231,113,0);
     width: 10%;
     height: 10vh;
-    margin: 10px auto;
+    margin: 1vh auto;
     text-decoration: none;
     color: white;
 }
@@ -173,7 +174,7 @@ h1 {
     text-align: center;
     border-radius: 10px;
     background-color: rgb(231, 112, 0);
-    border: 3px solid white;
+    border: .5vh solid white;
 }
 
 .media-options-container {
@@ -289,28 +290,28 @@ h1 {
     z-index: 1100; /* Ensure it stays above other content */
   }
   
-  .gui-wrapper {
+.gui-wrapper {
     padding: 10px;
     background-color: #f3f3f3;
     display: flex;
     flex-direction: column;
     gap: 10px;
     z-index: 1100; /* Ensure it stays above other content */
-  }
+}
   
-  select {
+select {
     padding: 2px;
-  }
+}
   
-  label {
+label {
     margin-right: 5px;
-  }
-  #listInput {
+}
+#listInput {
     margin: auto;
     padding: 10px;
     width: 95%;
     height: 200px;
-  }
+}
 
 #banner {
     display: flex;
@@ -332,4 +333,20 @@ h1 {
 
 .tp-movies-category {
     display: inline-flex;
+}
+
+.mediainfoimg {
+    width: 49vh;
+    height: 65vh;
+    border: .3vh solid white;
+}
+
+.mediainfodescription {
+    width: 50vh;
+    height: 30vh;
+    margin-left: 2vw;
+    margin-bottom: 2vh;
+    border-radius: 1.5vh;
+    border: 3px solid white;
+
 }

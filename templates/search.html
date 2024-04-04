@@ -10,27 +10,7 @@
     <title>FlixPicks Guest Page</title>
 </head>
 <body>
-    <div class="header"><!-- Header that remains at the top of the screen-->
-        <a href="{{ url_for('home') }}">
-            <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks Logo" title="FlixPicks">
-        </a>
-        <div class="search">
-            <form action="/search" method="post">
-                <div class="search-left"></div>
-                <input type="text" name="movie_title" id="options" placeholder="Search for a movie..." required>
-                <button class="search-right" type="submit"><img style="height: 1.5vh" src="../static/images/searchicon.svg" alt="Magnifying Glass" /></button>
-            </form>
-        </div>
-        <div id="pfp" style="font-size: 1vw;" onmouseover="showDropdown()" onmouseleave="hideDropdown()">Guest</div>
-        <div class="dropdown-container" onmouseover="showDropdown()" onmouseleave="hideDropdown()"> 
-            <div class="dropdown">
-                <div class="dropdown-item">Settings</div>
-                <div class="dropdown-item"><a href="{{url_for('login')}}">Log&nbsp;In</a></div>
-                <div class="dropdown-item"><a href="{{url_for('register')}}">Register</a></div>
-                <!--<div class="dropdown-item"><a href="{{url_for('tasteProfile')}}">Taste Profile</a></div>-->
-            </div>
-        </div>
-    </div> <!-- End of Header -->
+    {% include header %}
 
     <h1 style="margin-top: 15vh;">Search for Something You Like:</h1> <!-- Welcome banner -->
 
@@ -44,7 +24,7 @@
         <div class="media-options-container">
             <div id="category1" style="display: flex; position: relative; transition: transform 0.6s ease-in-out;">
                 {% for movie in search_results %}
-                <a href="{{ url_for('hotpicks', movie_id=movie.id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ movie.picture }}" alt="{{ movie.title }}"> </div><div class="media-option-title">{{ movie.title }}</div></a>
+                <a href="{{ url_for('mediaInfo', movie_id=movie.id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ movie.picture }}" alt="{{ movie.title }}"> </div><div class="media-option-title">{{ movie.title }}</div></a>
                 {% endfor %}
             </div>
         </div>
@@ -80,15 +60,6 @@
   
           // Apply translation to the box
           box.style.transform = `translateX(${translation}px)`;
-      }
-  
-      function showDropdown() { // Dropdown visible
-          var dropdown = document.querySelector('.dropdown');
-          dropdown.style.display = 'block';
-      }
-      function hideDropdown() { // Dropdown invisible
-          var dropdown = document.querySelector('.dropdown');
-          dropdown.style.display = 'none';
       }
   
 </script>

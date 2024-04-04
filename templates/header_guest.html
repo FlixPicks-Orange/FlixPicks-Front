@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">                           <!--   // = \\   -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">          <!--  ||         -->
+    <link rel="stylesheet" type="text/css" href="../static/stylesheet.css">         <!--  ||   ====  -->
+    <link rel="icon" type="image/x-icon" href="../static/images/favicon.ico">       <!--  ||     //  -->
+    <title>FlixPicks Guest Header</title>                                           <!--    ====     -->
+</head>
+
+<body>
+    <div class="header">
+        <a href="{{ url_for('home') }}">
+            <img id="banner" src="../static/images/FlixpicksLogo.png" alt="FlixPicks Logo" title="FlixPicks">
+        </a>
+        <div class="search">
+            <form action="/search" method="post">
+                <div class="search-left"></div>
+                <input type="text" name="movie_title" id="options" placeholder="Search for a movie..." required>
+                <button class="search-right" type="submit"><img style="height: 1.5vh" src="../static/images/searchicon.svg" alt="Magnifying Glass" /></button>
+            </form>
+        </div>
+        <div id="pfp" style="font-size: 1vw;" onmouseover="showDropdown()" onmouseleave="hideDropdown()">Guest</div>
+        <div class="dropdown-container" onmouseover="showDropdown()" onmouseleave="hideDropdown()"> 
+            <div class="dropdown">
+                <div class="dropdown-item"><a href="{{url_for('login')}}">Log&nbsp;In</a></div>
+                <div class="dropdown-item"><a href="{{url_for('register')}}">Register</a></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>        
+    function adjustFontSize(targetElement, maxLength, baseFontSize) { //update profile picture(text) to fit better
+        const text = targetElement.textContent;
+        const length = text.length;
+        const scaleFactor = maxLength / length;
+        const fontSize = Math.max(baseFontSize * scaleFactor, .7); // Ensure font size doesn't become too small
+
+        targetElement.style.fontSize = fontSize + 'vh';
+    }
+
+    window.onload = function() { // Call adjustFontSize function on page load
+        const maxLength = 0.6; 
+        const baseFontSize = 16; // Base font size
+        const targetElement = document.getElementById('pfp');
+
+        adjustFontSize(targetElement, maxLength, baseFontSize);
+    };
+
+    function showDropdown() { // Dropdown visible
+        var dropdown = document.querySelector('.dropdown');
+        dropdown.style.display = 'block';
+    }
+    function hideDropdown() { // Dropdown invisible
+        var dropdown = document.querySelector('.dropdown');
+        dropdown.style.display = 'none';
+    }
+
+</script>

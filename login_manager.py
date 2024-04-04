@@ -26,4 +26,6 @@ class User(UserMixin):
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User(users.get_by_id(user_id))
+    user = users.get_by_id(user_id)
+    if user is not None:
+        return User(users.get_by_id(user_id))
