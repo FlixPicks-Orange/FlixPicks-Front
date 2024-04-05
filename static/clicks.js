@@ -1,11 +1,14 @@
-var count = 0;
+var clicks = 0;
+
+//Captures number of clicks
 window.addEventListener('click', (e) => {
 
-count = count +1;
+clicks = clicks +1;
 
 })
 
-function sendClicks()
-{
-    
-}
+
+window.addEventListener('beforeunload', (e)=>{
+
+    console.log("Page is unloading!"+clicks);
+})
