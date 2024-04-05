@@ -13,7 +13,7 @@ from search import search_for_movie
 from tasteProfile import get_survey_movies
 from tasteProfile import get_survey_subscription
 import Survey
-
+from analytics import most_watched
 
 survey_subs = get_survey_subscription()
 survey_movies = get_survey_movies()
@@ -194,7 +194,10 @@ def cineroll():
          return render_template('mediaInfo.html', header = 'header_registered.html',  movie_id=movie_id, movie=movie)
      else:
           return "Movie not found", 404
-        
+
+@app.route('/test')
+def test():
+    return render_template('analytics.html', plot_url=most_watched(10))        
 
 if __name__ == '__main__':
     #Survey.db.create_all()
