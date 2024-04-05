@@ -14,7 +14,7 @@ from tasteProfile import get_survey_movies
 from tasteProfile import get_survey_subscription
 import Survey
 from analytics import most_watched
-
+from interactions import add_click
 survey_subs = get_survey_subscription()
 survey_movies = get_survey_movies()
 header = 'header_guest.html'
@@ -197,6 +197,7 @@ def cineroll():
 
 @app.route('/test')
 def test():
+    add_click(1)
     return render_template('analytics.html', plot_url=most_watched(10))        
 
 if __name__ == '__main__':
