@@ -17,6 +17,7 @@ def getRecommendations(user_id):
             movie_id = entry['movie_id']
             movie_ids.append(movie_id)
         movie_ids = set(movie_ids)
+        movie_ids = movie_ids - set(filter_watch_history(user_id))
         return Function(movie_ids)
   
 
@@ -38,6 +39,20 @@ def Function(movie_ids):
 
         
 
+def filter_watch_history(user_id):
+    r = requests.get(os.getenv('DB_URL') + "/watch_history/" + str(user_id))
+    if r.status_code == 200:
+        watch_history_ids = []
+        package = r.json()
+        for entry in package:
+            if entry['from_recommended'] is True:
+                watch_history_ids.append(entry['movie_id'])
+    else:
+        print("Error fetching data", r.status_code)            
+
+    return set(watch_history_ids)
 
 
+
+    
 
