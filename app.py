@@ -13,7 +13,7 @@ from search import search_for_movie
 from tasteProfile import get_survey_movies
 from tasteProfile import get_survey_subscription
 import Survey
-from analytics import most_watched
+from analytics import most_watched, click_data
 from interactions import click
 survey_subs = get_survey_subscription()
 survey_movies = get_survey_movies()
@@ -197,7 +197,7 @@ def cineroll():
 
 @app.route('/test')
 def test():
-    return render_template('analytics.html', plot_url=most_watched(10))  
+    return render_template('analytics.html', plot_url=click_data(5))  
 @app.route('/add_click', methods=['POST'])
 def add_click():
     data = request.json
