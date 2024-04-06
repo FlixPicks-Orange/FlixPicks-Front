@@ -1,18 +1,21 @@
 import requests, os
 
-def add_click(event):
+def click(click_num, page_url, user_id):
     entry = "e"
 
+
     entry = {
-        'user_id' : 1,
-        'page_id' : 1,
-        'click_num' : 1
+        'user_id' : user_id,
+        'page_id' : page_url,
+        'click_num' : click_num
 
 
     }
 
     r = requests.post(os.getenv('DB_URL') + "/user_clicks", json=entry)
-    if r == 201:
+    if r.status_code == 201:
         print(f"succesful, {r}")
     else:
         print(f"failed, {r}")
+
+    return "Worked"
