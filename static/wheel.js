@@ -2,6 +2,9 @@ import { Wheel } from 'https://cdn.jsdelivr.net/npm/spin-wheel@4.3.1/dist/spin-w
 const processList = document.querySelector('.processList');
 import { AlignText } from './constants.js';
 const btnSpin = document.querySelector('.btn-spin');
+const openbtn = document.querySelector('.openModal');
+const closeBTN = document.querySelector('.closeBTN');
+const modal = document.getElementById("modal");
 const max_input_size = 13;
 
 // Initializes wheel
@@ -25,6 +28,13 @@ var userArray = []; // Array to store user input
 
 //Event listener to check if buttons have been pressed
 window.addEventListener('click', (e) => {
+
+  if(e.target == openbtn)
+  modal.classList.add("open");
+
+ if(e.target == closeBTN)
+  modal.classList.remove("open");
+
 
     // Listen for click event on spin button:
     if (e.target === btnSpin) {
