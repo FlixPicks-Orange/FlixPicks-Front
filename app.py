@@ -14,7 +14,7 @@ from tasteProfile import get_survey_movies
 from tasteProfile import get_survey_subscription
 import Survey
 from analytics import most_watched
-
+from interactions import click
 survey_subs = get_survey_subscription()
 survey_movies = get_survey_movies()
 header = 'header_guest.html'
@@ -197,7 +197,18 @@ def cineroll():
 
 @app.route('/test')
 def test():
-    return render_template('analytics.html', plot_url=most_watched(10))        
+    return render_template('analytics.html', plot_url=most_watched(10))  
+@app.route('/add_click', methods=['POST'])
+def add_click():
+    data = request.json
+    num_clicks = data.get('num_clicks')
+    page_url = data.get('page_url')
+    if  current_user.is_authenticated:
+        user_id = current_user.id
+    else:
+        user_id = 100
+
+    return click(num_clicks, page_url, user_id)      
 
 if __name__ == '__main__':
     #Survey.db.create_all()
