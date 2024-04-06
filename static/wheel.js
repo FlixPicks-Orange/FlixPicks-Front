@@ -4,36 +4,43 @@ import { AlignText } from './constants.js';
 const btnSpin = document.querySelector('.btn-spin');
 const max_input_size = 13;
 
+// Initializes wheel
 window.onload = () => {
   wheelInit();
 };
 
-window.addEventListener('click', (e) => {
-  // Listen for click event on spin button:
-  if (e.target === btnSpin) {
-    wheel.spin(Math.floor(Math.random() * 1000) + 500);
-  }
-});
-
+// Checks pointer angle on wheel
 window.addEventListener('keyup', (e) => {
   if (e.target && e.target.matches('#pointerAngle')) {
     wheel.pointerAngle = parseInt(0);
   }
 });
 
+//Post request to backend WIP
 function outputWheel() {
+  alert(userArray[wheel.getCurrentIndex()]);
   console.log(userArray[wheel.getCurrentIndex()]);
 }
 var userArray = []; // Array to store user input
 
+//Event listener to check if buttons have been pressed
 window.addEventListener('click', (e) => {
+
+    // Listen for click event on spin button:
+    if (e.target === btnSpin) {
+      wheel.spin(Math.floor(Math.random() * 1000) + 500);
+    }
+
+    // Listen for click event on Submit button
   if (e.target == processList) {
     if (props.items.length > 0 || userArray.length > 0) {
       props.items.length = 0;
       userArray.length = 0;
     }
+    // If you want to see the array lengths
     // console.log(userArray.length);
     // console.log(props.items.length);
+
     // Listen for click event on spin button:
     if (e.target === processList) {
       // Get the input value from the user
@@ -48,6 +55,7 @@ window.addEventListener('click', (e) => {
       // Store the array in the userArray variable
       userArray = itemList.map((item) => item.trim());
 
+      // Purge any array greater than 13
       if (userArray.length > max_input_size) {
         userArray.length = max_input_size;
       }
@@ -58,11 +66,14 @@ window.addEventListener('click', (e) => {
       if (props.items.length == 0) {
         props.items.push({ label: '' });
       }
+      // Re-initialize the wheel with new labels.
       wheel.remove;
       wheel.init(props);
     }
   }
 });
+
+// This is the wheel settings
 const props = {
   isInteractive: false,
   itemLabelRadius: 0.85,
@@ -80,6 +91,7 @@ const props = {
   items: [{ label: '' }],
 };
 
+// Wheel initializer
 function wheelInit() {
   const container = document.querySelector('.wheel-wrapper');
   window.wheel = new Wheel(container, props);
