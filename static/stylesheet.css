@@ -283,8 +283,7 @@ h1 {
 }
 
 .wheel-wrapper {
-    position:fixed;
-    overflow: hidden;
+
     height: 100%;
     width: 100%;
     z-index: 1100; /* Ensure it stays above other content */
