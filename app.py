@@ -10,13 +10,13 @@ from hotpicks import get_trending_movies
 from recommendationCollector import getRecommendations
 from getmovie import getmovie
 from search import search_for_movie
-from tasteProfile import get_survey_movies
+# from tasteProfile import get_survey_movies
 from tasteProfile import get_survey_subscription
 import Survey
 from analytics import most_watched, click_data
 from interactions import click
 survey_subs = get_survey_subscription()
-survey_movies = get_survey_movies()
+# survey_movies = get_survey_movies()
 header = 'header_guest.html'
 
 
@@ -159,10 +159,12 @@ def logout():
 
 @app.route('/tasteProfile', methods=['GET','POST'])
 def tasteProfile():
+     trending_movies = get_trending_movies()
+
      if request.method =='POST':
         return redirect(url_for('thank_you'))
      else:
-        return render_template('tasteProfile.html', header = header, subscriptions=survey_subs, movies=survey_movies)
+         return render_template('tasteProfile.html', header = header, trending_movies = trending_movies, subscriptions = survey_subs)
 
 
 @app.route('/thanks') #Eventually edit this- should redirect to homepage of FP

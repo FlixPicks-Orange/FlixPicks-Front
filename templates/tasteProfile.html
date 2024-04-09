@@ -26,7 +26,31 @@
                 </label><br>
             {% endfor %}
         </div>
-        <div style="text-align: left;">        <!-- movies -->
+        <div style="text-align: left;"> <!-- Start of the second category (Movies)-->
+            <div class="category-header"> 
+                Movies
+            </div>
+        </div>
+        <div style="display: flex;"> <!-- Media Options Container (for movies)-->
+            <div class="media-options-container" style="display: flex;">
+                {% for movie in trending_movies %}
+                <div class="movie-option">
+                    <a href="{{ url_for('mediaInfo', movie_id=movie.id) }}">
+                        <div class="media-option-img">
+                            <img class="movie-img" src="{{ movie.picture }}" alt="{{ movie.title }}">
+                        </div>
+                        <div class="media-option-title">{{ movie.title }}</div>
+                        <div class="thumbs">
+                            <img class="thumb-up" src="path_to_thumb_up_icon" alt="Thumbs Up">
+                            <img class="thumb-down" src="path_to_thumb_down_icon" alt="Thumbs Down">
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div> <!-- End of Movies -->
+        
+        <!-- <div style="text-align: left;">
             <div class="category-header" style="margin-top: 1.5vw;"> 
                   Select your favorite movies:
             </div>
@@ -46,7 +70,7 @@
         </div>
         <center>
             <button class="button" style="height: 5vw;" type="submit">Submit</button>
-        </center>
+        </center> !-->
     </form>
 </body>
 </html>
