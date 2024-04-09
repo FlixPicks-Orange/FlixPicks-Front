@@ -15,6 +15,7 @@ from tasteProfile import get_survey_subscription
 import Survey
 from analytics import most_watched, click_data
 from interactions import click
+from watch_history import get_watched_movies, get_liked_movies, get_disliked_movies
 survey_subs = get_survey_subscription()
 # survey_movies = get_survey_movies()
 header = 'header_guest.html'
@@ -188,14 +189,23 @@ def wheel():
 @app.route('/cineroll')
 @login_required
 def cineroll():
-     recMovies = getRecommendations(current_user.id)
-     if(len(recMovies)>1):
-         x = random.randint(0,len(recMovies))
-         movie_id = recMovies[x].id
-         movie = getmovie(movie_id)
-         return render_template('mediaInfo.html', header = 'header_registered.html',  movie_id=movie_id, movie=movie)
-     else:
-          return "Movie not found", 404
+    recMovies = getRecommendations(current_user.id)
+    if(len(recMovies)>1):
+        x = random.randint(0,len(recMovies))
+        movie_id = recMovies[x].id
+        movie = getmovie(movie_id)
+        return render_template('mediaInfo.html', header = 'header_registered.html',  movie_id=movie_id, movie=movie)
+    else:
+        return "Movie not found", 404
+     
+@app.route('/watch_history', methods=['GET' , 'POST'])
+@login_required
+def watch_history():
+    watched = get_watched_movies(current_user.id, 10)
+    liked = get_liked_movies(current_user.id, 10)
+    disliked = get_disliked_movies(current_user.id, 10)
+
+    return render_template('watch_history.html', header = 'header_registered.html', user=current_user, watched=watched, liked=liked, disliked=disliked)
 
 @app.route('/test')
 def test():

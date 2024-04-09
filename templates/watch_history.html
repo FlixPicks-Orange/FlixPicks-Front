@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../static/stylesheet.css">
+    <link rel="icon" type="image/x-icon" href="../static/images/favicon.ico">
+    <title>Watch History</title>
+</head>
+<body>
+    {% include header %}
+
+    <h1 style="margin-top: 15vh;">Watch History</h1>
+    <p style="font-size: 1.1em; margin: auto; width: 90%">Watch some movies to make them appear in the "Watched" list. Then you can click "Like" or "Dislike" to move them into a different list. But remember that your choices will affect future recommendations.</p>
+
+    <div style="text-align: left;"> <!-- Start of Watched -->
+        <div class="category-header"> 
+              Watched
+        </div>
+    </div>
+    <div style="display: flex;"> <!-- Media Options Container (for category1)-->
+        <div onclick="moveCategory(1,'left')" class="option-cycle-button-prev"><div style="text-align: center;">&lt</div></div>
+        <div class="media-options-container">
+            <div id="category1" style="display: flex; position: relative; transition: transform 0.6s ease-in-out;">
+                {% for movie in watched %}
+                <div style="display: inline-flex;">
+                    <a href="{{ url_for('mediaInfo', movie_id=movie.id) }}" style="padding-right: 53px;">
+                        <div class="media-option-img" style="border-top-right-radius: 0;"> 
+                            <img src="{{ movie.picture }}" alt="{{ movie.title }}"> 
+                        </div>
+                        <div class="media-option-title" style="border-bottom-right-radius: 0;">
+                            {{ movie.title }}
+                        </div>
+                    </a>
+                    <div class="watched_rating_container">
+                        <a class="like">
+                            &uarr;
+                        </a>
+                        <a class="dislike">
+                            &darr;
+                        </a>
+                    </div> 
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div onclick="moveCategory(1,'right')" class="option-cycle-button-next"><div style="text-align: center;">&gt</div></div>
+    </div> <!-- End of Watched -->
+
+
+    <div style="text-align: left;"> <!-- Start of Liked -->
+        <div class="category-header"> 
+              Liked
+        </div>
+    </div>
+    <div style="display: flex;"> <!-- Media Options Container (for category2)-->
+        <div onclick="moveCategory(2,'left')" class="option-cycle-button-prev"><div style="text-align: center;">&lt</div></div>
+        <div class="media-options-container">
+            <div id="category2" style="display: flex; position: relative; transition: transform 0.6s ease-in-out;">
+                {% for movie in liked %}
+                <div style="display: inline-flex;">
+                    <a href="{{ url_for('mediaInfo', movie_id=movie.id) }}" style="padding-right: 53px;">
+                        <div class="media-option-img" style="border-top-right-radius: 0;"> 
+                            <img src="{{ movie.picture }}" alt="{{ movie.title }}"> 
+                        </div>
+                        <div class="media-option-title" style="border-bottom-right-radius: 0;">
+                            {{ movie.title }}
+                        </div>
+                    </a>
+                    <div class="watched_rating_container">
+                        <a class="like">
+                            &uarr;
+                        </a>
+                        <a class="dislike">
+                            &darr;
+                        </a>
+                    </div> 
+                </div>                
+                {% endfor %}
+            </div>
+        </div>
+        <div onclick="moveCategory(2,'right')" class="option-cycle-button-next"><div style="text-align: center;">&gt</div></div>
+    </div> <!-- End of Watched -->
+
+
+    <div style="text-align: left;"> <!-- Start of Disliked -->
+        <div class="category-header"> 
+              Disliked
+        </div>
+    </div>
+    <div style="display: flex;"> <!-- Media Options Container (for category3)-->
+        <div onclick="moveCategory(3,'left')" class="option-cycle-button-prev"><div style="text-align: center;">&lt</div></div>
+        <div class="media-options-container">
+            <div id="category3" style="display: flex; position: relative; transition: transform 0.6s ease-in-out;">
+                {% for movie in disliked %}
+                <div style="display: inline-flex;">
+                    <a href="{{ url_for('mediaInfo', movie_id=movie.id) }}" style="padding-right: 53px;">
+                        <div class="media-option-img" style="border-top-right-radius: 0;"> 
+                            <img src="{{ movie.picture }}" alt="{{ movie.title }}"> 
+                        </div>
+                        <div class="media-option-title" style="border-bottom-right-radius: 0;">
+                            {{ movie.title }}
+                        </div>
+                    </a>
+                    <div class="watched_rating_container">
+                        <a class="like">
+                            &uarr;
+                        </a>
+                        <a class="dislike">
+                            &darr;
+                        </a>
+                    </div> 
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div onclick="moveCategory(3,'right')" class="option-cycle-button-next"><div style="text-align: center;">&gt</div></div>
+    </div> <!-- End of Disliked -->
+</body>
+<script>
+
+    let count = []; // the count array and moveCategory() are for horizontal-media-category-navigation
+    function moveCategory(categoryNum, direction) {
+        const box = document.getElementById('category' + categoryNum);
+        const maxSteps = 3;
+        const maxDistance = 133 * 2.75 + 15;   // Should be MediaOption width * #OfMediaOptions + wiggle room
+        const stepSize = maxDistance / maxSteps;
+
+        // Initialize count for the category if it doesn't exist
+        if (!count[categoryNum]) {
+            count[categoryNum] = 0;
+        }
+
+        // Update count based on direction
+        if (direction == 'right') {
+            count[categoryNum]++;
+        } else if (direction == 'left') {
+            count[categoryNum]--;
+        }
+
+        // Ensure count stays within bounds
+        count[categoryNum] = Math.max(0, Math.min(maxSteps, count[categoryNum]));
+
+        // Calculate translation based on count
+        const translation = -stepSize * count[categoryNum]; // Negative for right direction
+
+        // Apply translation to the box
+        box.style.transform = `translateX(${translation}px)`;
+    }
+
+</script>
+</html>
