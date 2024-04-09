@@ -33,10 +33,10 @@
                         </div>
                     </a>
                     <div class="watched_rating_container">
-                        <a class="like">
+                        <a class="like" onclick="triggerLikeRequest(event, '{{ movie.id }}')" href="{{url_for('watch_history')}}">
                             &uarr;
                         </a>
-                        <a class="dislike">
+                        <a class="dislike" onclick="triggerDislikeRequest(event, '{{ movie.id }}')" href="{{url_for('watch_history')}}">
                             &darr;
                         </a>
                     </div> 
@@ -68,10 +68,7 @@
                         </div>
                     </a>
                     <div class="watched_rating_container">
-                        <a class="like">
-                            &uarr;
-                        </a>
-                        <a class="dislike">
+                        <a class="dislike" onclick="triggerDislikeRequest(event, '{{ movie.id }}')" href="{{url_for('watch_history')}}">
                             &darr;
                         </a>
                     </div> 
@@ -103,11 +100,8 @@
                         </div>
                     </a>
                     <div class="watched_rating_container">
-                        <a class="like">
+                        <a class="like" onclick="triggerLikeRequest(event, '{{ movie.id }}')" href="{{url_for('watch_history')}}">
                             &uarr;
-                        </a>
-                        <a class="dislike">
-                            &darr;
                         </a>
                     </div> 
                 </div>
@@ -147,6 +141,56 @@
         // Apply translation to the box
         box.style.transform = `translateX(${translation}px)`;
     }
+
+    function triggerLikeRequest(event, movie_id) {
+            event.preventDefault(); // Prevent the default behavior of the link
+            //Construct your POST request data here
+
+            const liked_data = {movie: movie_id};
+
+            fetch('/like', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            body:JSON.stringify(liked_data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                //  If the request was successful, navigate to the URL
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('There was a problem with the POST request:', error);
+            });
+        }
+
+        function triggerDislikeRequest(event, movie_id) {
+            event.preventDefault(); // Prevent the default behavior of the link
+            //Construct your POST request data here
+
+            const disliked_data = {movie: movie_id};
+
+            fetch('/dislike', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            body:JSON.stringify(disliked_data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                //  If the request was successful, navigate to the URL
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('There was a problem with the POST request:', error);
+            });
+        }
 
 </script>
 </html>

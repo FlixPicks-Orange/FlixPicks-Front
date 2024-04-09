@@ -6,50 +6,34 @@ class Movie:
         self.title = title
         self.picture = picture
 
-def get_watched_movies(user_id, x=10):
+def get_watched_movies(user_id):
     movie_ids = []
     r =requests.get(os.getenv('DB_URL')+"/watch_history/"+ str(user_id))
     print(r.status_code)
     if(r.status_code == 200):
         i=0
         for entry in r.json():
-            i+=1
             movie_id = entry['movie_id']
             movie_ids.append(movie_id)
-            if i == x:
-                break
         movie_ids = set(movie_ids)
+        liked_ids, disliked_ids = get_rated_movies(user_id)
+        movie_ids = movie_ids - set(liked_ids)
+        movie_ids = movie_ids - set(disliked_ids)
         return create_movies(movie_ids)
 
-def get_liked_movies(user_id, x=10):
-    movie_ids = []
-    r =requests.get(os.getenv('DB_URL')+"/watch_history/"+ str(user_id))
-    print(r.status_code)
+def get_rated_movies(user_id):
+    r =requests.get(os.getenv('DB_URL')+"/user_ratings/"+ str(user_id))
     if(r.status_code == 200):
-        i=0
-        for entry in r.json():
-            i+=1
+        package = r.json()
+        liked_ids = []
+        disliked_ids = []
+        for entry in package:
             movie_id = entry['movie_id']
-            movie_ids.append(movie_id)
-            if i == x:
-                break
-        movie_ids = set(movie_ids)
-        return create_movies(movie_ids)
-
-def get_disliked_movies(user_id, x=10):
-    movie_ids = []
-    r =requests.get(os.getenv('DB_URL')+"/watch_history/"+ str(user_id))
-    print(r.status_code)
-    if(r.status_code == 200):
-        i=0
-        for entry in r.json():
-            i+=1
-            movie_id = entry['movie_id']
-            movie_ids.append(movie_id)
-            if i == x:
-                break
-        movie_ids = set(movie_ids)
-        return create_movies(movie_ids)
+            if entry['user_liked'] == True:
+                liked_ids.append(movie_id)
+            else:
+                disliked_ids.append(movie_id)
+        return liked_ids, disliked_ids
 
 def create_movies(movie_ids):
     movies = []
