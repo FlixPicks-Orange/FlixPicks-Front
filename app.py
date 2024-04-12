@@ -41,16 +41,17 @@ def search():
             header = 'header_guest.html'
         return  render_template('search.html', header = header, search_results = search_results)
 
-@app.route('/wheelresult', methods=['POST'])
+@app.route('/wheelresult', methods=['GET','POST'])
 def wheelresult():
     print('in wheel result')
     data = request.json
     title = data.get('title')
+    search_results = search_for_movie(title)
     if current_user.is_authenticated:
             header = 'header_registered.html'
     else:
         header = 'header_guest.html'
-    return  render_template('search.html', header = header, search_results = search_for_movie(title))
+    return  render_template('search.html', header = header, search_results = search_results )
 
 
 @app.route('/login', methods=['GET' , 'POST'])
@@ -92,7 +93,7 @@ def userhome():
     else:
         return render_template('userhome.html', header = 'header_registered.html', user=current_user, trending_movies=trending_movies, recMovies=recMovies if recMovies else [])
 
-
+#Why is this here
 @app.route('/spin', methods=['POST'])
 def spin():
     options = request.form.get('options')
@@ -103,7 +104,7 @@ def spin():
     selected_option = random.choice(options_list)
     return render_template('result.html', selected_option=selected_option)
 
-
+#Why is this here
 @app.route('/result', methods=['POST'])
 def result():
     options = request.form.getlist('option')
@@ -194,7 +195,11 @@ def survey_results():
 
 @app.route('/wheel')
 def wheel():
-    return render_template('wheel.html', header = 'header_registered.html')
+    if current_user.is_authenticated:
+            header = 'header_registered.html'
+    else:
+        header = 'header_guest.html'
+    return render_template('wheel.html', header  = header)
 
 @app.route('/cineroll')
 @login_required
