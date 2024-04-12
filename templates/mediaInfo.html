@@ -22,7 +22,7 @@
             <form id="MediaInfoForm" action="/mediaInfo/{{movie.id}}" method="post">
             </form>
             
-            <a class="button" onclick="triggerPostRequest(event)" style="margin-top: 2vh; height: 4vh; width: 14vh;" href="{{movie.url}}" target="_blank">TMDB Link</a>
+            <a class="button" onclick="triggerPostRequest(event)" style="margin-top: 2vh; height: 4vh; width: 14vh;" href="{{movie.url}}">TMDB Link</a>
         </div>
     </div>
     
@@ -44,7 +44,7 @@
                     throw new Error('Network response was not ok');
                 }
                 //  If the request was successful, navigate to the URL
-                window.location.href = event.target.href;
+                window.open(event.target.href, '_blank');
             })
             .catch(error => {
                 console.error('There was a problem with the POST request:', error);

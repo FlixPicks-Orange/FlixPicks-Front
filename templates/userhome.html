@@ -39,7 +39,7 @@
             <div id="category1" style="display: flex; position: relative; transition: transform 0.6s ease-in-out;">
                 {% if recMovies %}
                     {% for movie in recMovies %}
-                    <a href="{{ url_for('mediaInfo', movie_id=movie.id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ movie.picture }}" alt="{{ movie.title }}"> </div><div class="media-option-title">{{ movie.title }}</div></a>
+                    <a href="{{ url_for('mediaInfo', movie_id=movie.id) }}"><div class="media-option-img"> <img src="{{ movie.picture }}" alt="{{ movie.title }}"> </div><div class="media-option-title">{{ movie.title }}</div></a>
                     {% endfor %}
                 {% else %}
                     <div style="width: 100%; position: absolute; left: 17vh; top: -4vh; font-size: 200%; white-space: nowrap;">
@@ -62,7 +62,7 @@
         <div class="media-options-container">
             <div id="category2" style="display: flex; position: relative; transition: transform 0.6s ease-in-out;">
                 {% for movie in trending_movies %}
-                <a href="{{ url_for('mediaInfo', movie_id=movie.id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ movie.picture }}" alt="{{ movie.title }}"> </div><div class="media-option-title">{{ movie.title }}</div></a>
+                <a href="{{ url_for('mediaInfo', movie_id=movie.id) }}"><div class="media-option-img"> <img src="{{ movie.picture }}" alt="{{ movie.title }}"> </div><div class="media-option-title">{{ movie.title }}</div></a>
                 {% endfor %}
             </div>
         </div>

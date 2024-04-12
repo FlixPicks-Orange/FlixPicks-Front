@@ -10,13 +10,14 @@ from hotpicks import get_trending_movies
 from recommendationCollector import getRecommendations
 from getmovie import getmovie
 from search import search_for_movie
-from tasteProfile import get_survey_movies
+# from tasteProfile import get_survey_movies
 from tasteProfile import get_survey_subscription
 import Survey
 from analytics import most_watched, click_data
-from interactions import click
+from interactions import click,postLike, postDislike
+from watch_history import get_watched_movies, get_rated_movies, create_movies
 survey_subs = get_survey_subscription()
-survey_movies = get_survey_movies()
+# survey_movies = get_survey_movies()
 header = 'header_guest.html'
 
 
@@ -159,10 +160,12 @@ def logout():
 
 @app.route('/tasteProfile', methods=['GET','POST'])
 def tasteProfile():
+     trending_movies = get_trending_movies()
+
      if request.method =='POST':
         return redirect(url_for('thank_you'))
      else:
-        return render_template('tasteProfile.html', header = header, subscriptions=survey_subs, movies=survey_movies)
+         return render_template('tasteProfile.html', header = header, trending_movies = trending_movies, subscriptions = survey_subs)
 
 
 @app.route('/thanks') #Eventually edit this- should redirect to homepage of FP
@@ -185,18 +188,28 @@ def wheel():
 @app.route('/cineroll')
 @login_required
 def cineroll():
-     recMovies = getRecommendations(current_user.id)
-     if(len(recMovies)>1):
-         x = random.randint(0,len(recMovies))
-         movie_id = recMovies[x].id
-         movie = getmovie(movie_id)
-         return render_template('mediaInfo.html', header = 'header_registered.html',  movie_id=movie_id, movie=movie)
-     else:
-          return "Movie not found", 404
+    recMovies = getRecommendations(current_user.id)
+    if(len(recMovies)>1):
+        x = random.randint(0,len(recMovies))
+        movie_id = recMovies[x].id
+        movie = getmovie(movie_id)
+        return render_template('mediaInfo.html', header = 'header_registered.html',  movie_id=movie_id, movie=movie)
+    else:
+        return "Movie not found", 404
+     
+@app.route('/watch_history', methods=['GET' , 'POST'])
+@login_required
+def watch_history():
+    watched = get_watched_movies(current_user.id)
+    liked_ids, disliked_ids = get_rated_movies(current_user.id)
+    liked = create_movies(liked_ids)
+    disliked = create_movies(disliked_ids)
+    return render_template('watch_history.html', header = 'header_registered.html', user=current_user, watched=watched, liked=liked, disliked=disliked)
 
 @app.route('/test')
 def test():
     return render_template('analytics.html', plot_url=click_data(5))  
+
 @app.route('/add_click', methods=['POST'])
 def add_click():
     data = request.json
@@ -208,6 +221,36 @@ def add_click():
         user_id = 100
 
     return click(num_clicks, page_url, user_id)      
+
+@app.route('/like', methods=['POST'])
+def like():
+    data = request.json
+    movie_id = data.get('movie')
+    if  current_user.is_authenticated:
+        user_id = current_user.id
+    else:
+        user_id = 100
+    package = {
+        'movie_id': movie_id,
+        'user_id': user_id,
+        'user_liked': True
+    }
+    return postLike(package, user_id, movie_id)
+
+@app.route('/dislike', methods=['POST'])
+def dislike():
+    data = request.json
+    movie_id = data.get('movie')
+    if  current_user.is_authenticated:
+        user_id = current_user.id
+    else:
+        user_id = 100
+    package = {
+        'movie_id': movie_id,
+        'user_id': user_id,
+        'user_liked': True
+    }
+    return postDislike(package, user_id, movie_id)
 
 if __name__ == '__main__':
     #Survey.db.create_all()

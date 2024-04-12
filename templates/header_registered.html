@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">          <!--  ||    ||  -->
     <link rel="stylesheet" type="text/css" href="../static/stylesheet.css">         <!--  ||====    -->
     <link rel="icon" type="image/x-icon" href="../static/images/favicon.ico">       <!--  || \\     -->
-    <script src="../static/clicks.js" type="module"></script> 
-    <title>FlixPicks Registered Header</title>                                      <!--  ||   \\   -->
+    <script src="../static/clicks.js" type="module"></script>                       <!--  ||   \\   -->
+    <title>FlixPicks Registered Header</title>               
 </head>
 
 <body>
@@ -28,7 +28,7 @@
             <div class="dropdown">
                 <div class="dropdown-item"><a href="{{url_for('settings')}}">Settings</a></div>
                 <div class="dropdown-item">CineMap Toggle</div>
-                <div class="dropdown-item">Watch History</div>
+                <div class="dropdown-item"><a href="{{url_for('watch_history')}}">Watch History</a></div>
                 <div class="dropdown-item"><a href="{{url_for('logout')}}">Logout</a></div>
             </div>
         </div>
