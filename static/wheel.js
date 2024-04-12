@@ -19,38 +19,33 @@ window.addEventListener('keyup', (e) => {
   }
 });
 
+
 //Post request to backend WIP
 function outputWheel() {
   const postData = {
-
     title : userArray[wheel.getCurrentIndex()]
   }
+  // Create a hidden form element
+var form = document.createElement("form");
+form.setAttribute("method", "post");
+form.setAttribute("action", "/wheelresult");
+form.style.display = "none";
 
-  fetch('/wheelresult', {
-    method: 'POST',
-    headers: {
-      'Content-Type' : 'application/json'
-    },
-    body: JSON.stringify(postData)
-  })
-  .then(response => {
-    console.log(response);
-    if (!response.ok) {
-        throw new Error('Network response was not ok');
-    }
-    window.open(response.url, '_blank');
-  })
-  .then(data => {
+// Create a hidden input field to hold the JSON string
+var jsonInput = document.createElement("input");
+jsonInput.setAttribute("type", "hidden");
+jsonInput.setAttribute("name", "movie_title");
+jsonInput.setAttribute("value", userArray[wheel.getCurrentIndex()]);
 
-    console.log('Response:', data);
-})
-.catch(error => {
+// Append the input field to the form
+form.appendChild(jsonInput);
 
-    console.error('Error:', error);
-});
+// Append the form to the document body
+document.body.appendChild(form);
+
+// Submit the form
+form.submit();
 }
-
-
 
 
 

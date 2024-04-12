@@ -43,16 +43,15 @@ def search():
 
 @app.route('/wheelresult', methods=['GET','POST'])
 def wheelresult():
-    print('in wheel result')
-    data = request.json
-    title = data.get('title')
-    search_results = search_for_movie(title)
-    if current_user.is_authenticated:
+    if request.method == 'POST':
+        title = request.form["movie_title"]
+        search_results = search_for_movie(title)
+        if current_user.is_authenticated:
             header = 'header_registered.html'
-    else:
-        header = 'header_guest.html'
-    return  render_template('search.html', header = header, search_results = search_results )
-
+        else:
+            header = 'header_guest.html'
+        return  render_template('search.html', header = header, search_results = search_results )
+    else: return(redirect(url_for('wheel'))) # This line redirects user back to wheel input if nothing was posted
 
 @app.route('/login', methods=['GET' , 'POST'])
 def login():
