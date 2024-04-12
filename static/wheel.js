@@ -21,9 +21,39 @@ window.addEventListener('keyup', (e) => {
 
 //Post request to backend WIP
 function outputWheel() {
-  alert(userArray[wheel.getCurrentIndex()]);
-  console.log(userArray[wheel.getCurrentIndex()]);
+  const postData = {
+
+    title : userArray[wheel.getCurrentIndex()]
+  }
+
+  fetch('/wheelresult', {
+    method: 'POST',
+    headers: {
+      'Content-Type' : 'application/json'
+    },
+    body: JSON.stringify(postData)
+  })
+  .then(response => {
+
+    if (!response.ok) {
+        throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+
+    console.log('Response:', data);
+})
+.catch(error => {
+
+    console.error('Error:', error);
+});
 }
+
+
+
+
+
 var userArray = []; // Array to store user input
 
 //Event listener to check if buttons have been pressed

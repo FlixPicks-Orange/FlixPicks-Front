@@ -41,6 +41,17 @@ def search():
             header = 'header_guest.html'
         return  render_template('search.html', header = header, search_results = search_results)
 
+@app.route('/wheelresult', methods=['POST'])
+def wheelresult():
+    print('in wheel result')
+    data = request.json
+    title = data.get('title')
+    if current_user.is_authenticated:
+            header = 'header_registered.html'
+    else:
+        header = 'header_guest.html'
+    return  render_template('search.html', header = header, search_results = search_for_movie(title))
+
 
 @app.route('/login', methods=['GET' , 'POST'])
 def login():
@@ -209,7 +220,7 @@ def watch_history():
 
 @app.route('/test')
 def test():
-    return render_template('analytics.html', plot_url=click_data(5))  
+    return render_template('analytics.html', plot_url=most_watched(5))  
 
 @app.route('/add_click', methods=['POST'])
 def add_click():
