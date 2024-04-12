@@ -21,7 +21,6 @@ window.addEventListener('keyup', (e) => {
 
 //Post request to backend WIP
 function outputWheel() {
-  alert(userArray[wheel.getCurrentIndex()]);
   console.log(userArray[wheel.getCurrentIndex()]);
 }
 var userArray = []; // Array to store user input
@@ -91,6 +90,8 @@ const props = {
   itemLabelRotation: 0,
   itemLabelAlign: AlignText.right,
   itemLabelBaselineOffset: -0.13,
+  itemLabelFontSizeMax:55,
+  itemLabelFontSizeMin:11,
   itemBackgroundColors: ['#ff7e00', '#d34f00', '#f49939', '#fcba70', '#df7234'],
   itemLabelColors: ['#000'],
   rotationSpeedMax: 1000,
