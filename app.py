@@ -193,7 +193,6 @@ def survey_results():
     return jsonify(response_list)
 
 @app.route('/wheel')
-@login_required
 def wheel():
     return render_template('wheel.html', header = 'header_registered.html')
 
