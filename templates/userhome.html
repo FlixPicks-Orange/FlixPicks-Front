@@ -14,7 +14,7 @@
     
     <div style="display: flex; margin-left: 15%; margin-right: 15%;">
 
-        <a class="button" style="width: 13%;" href="{{url_for('cineroll')}}"> <!-- this needs to be linked to cineroll -->
+        <a class="button" style="width: 13%;" href="{{url_for('cineroll')}}">
             &nbsp;&nbsp;<img style="height: 6vh;" src="../static/images/cineroll.svg" alt="CineRoll dice"/>
             <br /><br />
             <p style="display: block;">CineRoll</p>&nbsp;&nbsp;
@@ -28,12 +28,12 @@
         </a>
     </div>
 
-    <div style="text-align: left;"> <!-- Start of the first category (Recommended content)-->
+    <div style="position: absolute; left: 50%; margin-left: calc(-570px - 7.5vh); margin-top: -10px; text-align: left;"> <!-- Start of the first category (Recommended content)-->
         <div class="category-header">
             Recommended Content
         </div>
     </div>
-    <div style="display: flex;"> <!-- Media Options Container (for category1)-->
+    <div style="margin-top: 12vh; display: flex; align-items: center; justify-content: center;"> <!-- Media Options Container (for category1)-->
         <div onclick="moveCategory(1,'left')" class="option-cycle-button-prev"><div style="text-align: center;">&lt</div></div>
         <div class="media-options-container">
             <div id="category1" style="display: flex; position: relative; transition: transform 0.6s ease-in-out;">
@@ -42,7 +42,7 @@
                     <a href="{{ url_for('mediaInfo', movie_id=movie.id) }}"><div class="media-option-img"> <img src="{{ movie.picture }}" alt="{{ movie.title }}"> </div><div class="media-option-title">{{ movie.title }}</div></a>
                     {% endfor %}
                 {% else %}
-                    <div style="width: 100%; position: absolute; left: 17vh; top: -4vh; font-size: 200%; white-space: nowrap;">
+                    <div style="width: 100%; position: absolute; left: 15vh; top: -4vh; font-size: 200%; white-space: nowrap;">
                         Watch some movies to generate some reccomendations here!
                     </div>
                 {% endif %}
@@ -52,12 +52,12 @@
     </div> <!-- End of Recommended -->
 
 
-    <div style="text-align: left;"> <!-- Start of the second category (Hotpix)-->
+    <div style="position: absolute; left: 50%; margin-left: calc(-570px - 7.5vh); margin-top: -10px; text-align: left;"> <!-- Start of the second category (Hotpix)-->
         <div class="category-header"> 
               HotPicks
         </div>
     </div>
-    <div style="display: flex;"> <!-- Media Options Container (for category2)-->
+    <div style="margin-top: 12vh; display: flex; align-items: center; justify-content: center;"> <!-- Media Options Container (for category2)-->
         <div onclick="moveCategory(2,'left')" class="option-cycle-button-prev"><div style="text-align: center;">&lt</div></div>
         <div class="media-options-container">
             <div id="category2" style="display: flex; position: relative; transition: transform 0.6s ease-in-out;">

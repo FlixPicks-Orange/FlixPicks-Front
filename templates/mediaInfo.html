@@ -13,16 +13,23 @@
         {{ movie.title }}
     </h1>
 
-    <div style="display: flex; align-items: center; justify-content: center;">
+    <div style="display: inline-flex; align-items: center; justify-content: center;">
         <img class="mediainfoimg" src="{{ movie.picture }}" alt="{{ movie.title }}">
         <div>
-            <div class="category-header" style="margin-left: -22vh; margin-top: 15vh;">Description</div>
-            <div class="mediainfodescription"> {{ movie.summary }} </div>
+            <div class="category-header" style="margin-left: -24vh; margin-top: 0vh; margin-right: 0vh;">Description:</div>
+            <div class="mediainfodescription"> Release Date: {{movie.release_date}} <br> <!-- Genres: {% for genre in movie.genres %}{{genre}}, {% endfor %} <br> --> Plot: {{ movie.summary }} </div>
 
+            <div class="category-header" style="margin-left: -15vh; margin-top: 0vh; margin-right: 0vh;">Where to watch:</div>
             <form id="MediaInfoForm" action="/mediaInfo/{{movie.id}}" method="post">
             </form>
             
             <a class="button" onclick="triggerPostRequest(event)" style="margin-top: 2vh; height: 4vh; width: 14vh;" href="{{movie.url}}">TMDB Link</a>
+
+            <!--  <div style="display: inline-flex;">                                     Feel free to delete this, I forgot someone else was working on this already
+                {% for sub in subcriptionsList %}
+                    <a class="button" onclick="triggerPostRequest(event)" href="{{movie.url}}"> {{sub}} </a>
+                {% endfor %}
+            </div> -->
         </div>
     </div>
     

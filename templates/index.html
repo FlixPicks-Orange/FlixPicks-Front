@@ -16,18 +16,29 @@
 <h1 style="margin-top: 15vh;">Welcome to the Guest home page!</h1> <!-- Welcome banner -->
     <p style="font-size: 1.1em; margin: auto; width: 90%">FlixPicks is the place to be for all your streaming needs! We're here to help you find content from popular streaming services such as Netflix and Hulu. Click on a movie to find out where it's streaming. Login to access our advanced features such as CineRoll and our recommender.</p>
     <div padding="20px"></div>
-    <a class="button" style="width: 13%;" href="{{url_for('wheel')}}">
-        &nbsp;&nbsp;<img style="height: 6vh;" src="../static/images/cinewheel.svg" alt="CineWheel Logo"/>
-        <br /><br />
-        <p style="display: block;">CineWheel</p>&nbsp;&nbsp;
-    </a>
+    
+    <div style="display: flex; margin-left: 15%; margin-right: 15%;">
 
-<div style="text-align: left;"> <!-- Start of Hotpix -->
+        <a class="button" style="width: 13%; background-color: rgb(90, 90, 90);" onclick="makeAccountPopup()">
+            &nbsp;&nbsp;<img style="height: 6vh;" src="../static/images/cineroll.svg" alt="CineRoll dice"/>
+            <br /><br />
+            <p style="display: block;">CineRoll</p>&nbsp;&nbsp;
+        </a>
+
+
+        <a class="button" style="width: 13%;" href="{{url_for('wheel')}}">
+            &nbsp;&nbsp;<img style="height: 6vh;" src="../static/images/cinewheel.svg" alt="CineWheel Logo"/>
+            <br /><br />
+            <p style="display: block;">CineWheel</p>&nbsp;&nbsp;
+        </a>
+    </div>
+
+    <div style="position: absolute; left: 50%; margin-left: calc(-570px - 7.5vh); margin-top: -10px; text-align: left;"> <!-- Start of Hotpix -->
     <div class="category-header"> 
           HotPicks
     </div>
 </div>
-<div style="display: flex;"> <!-- Media Options Container (for category1)-->
+<div style="margin-top: 12vh; display: flex; align-items: center; justify-content: center;"> <!-- Media Options Container (for category1)-->
     <div onclick="moveCategory(1,'left')" class="option-cycle-button-prev"><div style="text-align: center;">&lt</div></div>
     <div class="media-options-container">
         <div id="category1" style="display: flex; position: relative; transition: transform 0.6s ease-in-out;">
@@ -38,8 +49,6 @@
     </div>
     <div onclick="moveCategory(1,'right')" class="option-cycle-button-next"><div style="text-align: center;">&gt</div></div>
 </div> <!-- End of Hotpix -->
-
-
 
 <script>
   
@@ -72,9 +81,10 @@
         box.style.transform = `translateX(${translation}px)`;
     }
 
+    function makeAccountPopup() {
+        alert("If you would like full access to all of FlixPicks' features, which includes CineRoll, please make an account and sign in first!");
+    }
+
 </script>
-
-    
 </body>
-
 </html>
