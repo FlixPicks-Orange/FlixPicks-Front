@@ -22,7 +22,7 @@
             {% for subscription in subscriptions %}
                 <label>
                         <img class="tp-subscription" src="{{ url_for('static', filename=subscription['image']) }}" alt="{{ subscription['Name'] }}">
-                        <input  type="checkbox" name="subscriptions" value="{{ subscription['Name'] }}">
+                        <input  type="checkbox" name="subscriptions" value="{{ subscription['id'] }}">
                 </label><br>
             {% endfor %}
         </div>
@@ -41,14 +41,17 @@
                         </div>
                         <div class="media-option-title">{{ movie.title }}</div>
                         <div class="thumbs">
-                            <img class="thumb-up" src="path_to_thumb_up_icon" alt="Thumbs Up">
-                            <img class="thumb-down" src="path_to_thumb_down_icon" alt="Thumbs Down">
+                            <a class="like" onclick="triggerLikeRequest(event, '{{ movie.id }}')" href="#"> <img class="thumb-up" src="path_to_thumb_up_icon" alt="Thumbs Up"></a>
                         </div>
                     </a>
                 </div>
                 {% endfor %}
             </div>
-        </div> <!-- End of Movies -->
+        </div> 
+                <input type="submit" value="finish">
+                
+        
+        <!-- End of Movies -->
         
         <!-- <div style="text-align: left;">
             <div class="category-header" style="margin-top: 1.5vw;"> 
@@ -72,5 +75,32 @@
             <button class="button" style="height: 5vw;" type="submit">Submit</button>
         </center> !-->
     </form>
+    <script>
+        function triggerLikeRequest(event, movie_id) {
+            event.preventDefault(); // Prevent the default behavior of the link
+            //Construct your POST request data here
+
+            const liked_data = {movie: movie_id};
+
+            fetch('/add_to_watch_history/'+ movie_id, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                //  If the request was successful, navigate to the URL
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('There was a problem with the POST request:', error);
+            });
+        }
+
+    </script>
 </body>
 </html>
+

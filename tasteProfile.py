@@ -2,11 +2,11 @@ import requests, os
 
 
 def get_survey_subscription():
-    subscriptions = [{"Name":"Netflix", "image":"../static/images/netflix.svg"},
-            {"Name": "MAX", "image": "../static/images/max.svg"},
-            {"Name": "Disney+", "image": "../static/images/disney+.svg"},
-            {"Name": "Prime Video", "image": "../static/images/prime_video.svg"},
-            {"Name": "Hulu", "image": "../static/images/hulu.svg"},
+    subscriptions = [{"Name":"Netflix", "image":"../static/images/netflix.svg", "id":1},
+            {"Name": "MAX", "image": "../static/images/max.svg","id":9},
+            {"Name": "Disney+", "image": "../static/images/disney+.svg","id":3},
+            {"Name": "Prime Video", "image": "../static/images/prime_video.svg","id":2},
+            {"Name": "Hulu", "image": "../static/images/hulu.svg","id":6},
             ]
     return subscriptions
 
@@ -54,4 +54,5 @@ def create_movies(movie_ids):
             movies.append(movie)
         else:
             print("Error fetching data:", r.status_code)
+
     return movies
