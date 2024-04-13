@@ -11,19 +11,19 @@
     {% include header %}
 
     <h1 style="margin-top: 15vh;">Watch History</h1>
-    <p style="font-size: 1.1em; margin: auto; width: 90%">Watch some movies to make them appear in the "Watched" list. Then you can click "Like" or "Dislike" to move them into a different list. But remember that your choices will affect future recommendations.</p>
+    <p style="font-size: 1.1em; margin: auto; width: 90%">Watch some movies to make them appear in the "Watched" list. Then you can click "Thumbs Up" or "Thumbs Down" to move them into a different list. Just remember that your choices will affect future recommendations.</p>
 
-    <div style="text-align: left;"> <!-- Start of Watched -->
+    <div style="position: absolute; left: 50%; margin-left: calc(-570px - 7.5vh); margin-top: -10px; text-align: left;"> <!-- Start of Watched -->
         <div class="category-header"> 
-              Watched
+            How did you enjoy the movie?
         </div>
     </div>
-    <div style="display: flex;"> <!-- Media Options Container (for category1)-->
+    <div style="margin-top: 12vh; display: flex; align-items: center; justify-content: center;"> <!-- Media Options Container (for category1)-->
         <div onclick="moveCategory(1,'left')" class="option-cycle-button-prev"><div style="text-align: center;">&lt</div></div>
         <div class="media-options-container">
-            <div id="category1" style="display: flex; position: relative; transition: transform 0.6s ease-in-out;">
+            <div id="category1" style="display: flex; position: relative; transition: transform 1s ease-in-out;">
                 {% for movie in watched %}
-                <div style="display: inline-flex;">
+                <div style="display: inline-flex; margin: 12px;">
                     <a href="{{ url_for('mediaInfo', movie_id=movie.id) }}" style="padding-right: 53px;">
                         <div class="media-option-img" style="border-top-right-radius: 0;"> 
                             <img src="{{ movie.picture }}" alt="{{ movie.title }}"> 
@@ -33,11 +33,11 @@
                         </div>
                     </a>
                     <div class="watched_rating_container">
-                        <a class="like" onclick="triggerLikeRequest(event, '{{ movie.id }}')" href="{{url_for('watch_history')}}">
-                            &uarr;
+                        <a class="rank" onclick="triggerLikeRequest(event, '{{ movie.id }}')" href="{{url_for('watch_history')}}">
+                            <img style="width: 40px;" src="../static/images/grey_thumb_up.png" alt="like">
                         </a>
-                        <a class="dislike" onclick="triggerDislikeRequest(event, '{{ movie.id }}')" href="{{url_for('watch_history')}}">
-                            &darr;
+                        <a class="rank" onclick="triggerDislikeRequest(event, '{{ movie.id }}')" href="{{url_for('watch_history')}}">
+                            <img style="width: 40px;" src="../static/images/grey_thumb_down.png" alt="like">
                         </a>
                     </div> 
                 </div>
@@ -48,17 +48,17 @@
     </div> <!-- End of Watched -->
 
 
-    <div style="text-align: left;"> <!-- Start of Liked -->
+    <div style="position: absolute; left: 50%; margin-left: calc(-570px - 7.5vh); margin-top: -10px; text-align: left;"> <!-- Start of Liked -->
         <div class="category-header"> 
-              Liked
+            Like
         </div>
     </div>
-    <div style="display: flex;"> <!-- Media Options Container (for category2)-->
+    <div style="margin-top: 12vh; display: flex; align-items: center; justify-content: center;"> <!-- Media Options Container (for category2)-->
         <div onclick="moveCategory(2,'left')" class="option-cycle-button-prev"><div style="text-align: center;">&lt</div></div>
         <div class="media-options-container">
-            <div id="category2" style="display: flex; position: relative; transition: transform 0.6s ease-in-out;">
+            <div id="category2" style="display: flex; position: relative; transition: transform 1s ease-in-out;">
                 {% for movie in liked %}
-                <div style="display: inline-flex;">
+                <div style="display: inline-flex; margin: 12px;">
                     <a href="{{ url_for('mediaInfo', movie_id=movie.id) }}" style="padding-right: 53px;">
                         <div class="media-option-img" style="border-top-right-radius: 0;"> 
                             <img src="{{ movie.picture }}" alt="{{ movie.title }}"> 
@@ -68,8 +68,11 @@
                         </div>
                     </a>
                     <div class="watched_rating_container">
-                        <a class="dislike" onclick="triggerDislikeRequest(event, '{{ movie.id }}')" href="{{url_for('watch_history')}}">
-                            &darr;
+                        <a class="fake_rank">
+                            <img style="width: 40px;" src="../static/images/green_thumb_up.png" alt="like">
+                        </a>
+                        <a class="rank" onclick="triggerDislikeRequest(event, '{{ movie.id }}')" href="{{url_for('watch_history')}}">
+                            <img style="width: 40px;" src="../static/images/grey_thumb_down.png" alt="like">
                         </a>
                     </div> 
                 </div>                
@@ -80,17 +83,17 @@
     </div> <!-- End of Watched -->
 
 
-    <div style="text-align: left;"> <!-- Start of Disliked -->
+    <div style="position: absolute; left: 50%; margin-left: calc(-570px - 7.5vh); margin-top: -10px; text-align: left;"> <!-- Start of Disliked -->
         <div class="category-header"> 
-              Disliked
+            Dislike
         </div>
     </div>
-    <div style="display: flex;"> <!-- Media Options Container (for category3)-->
+    <div style="margin-top: 12vh; display: flex; align-items: center; justify-content: center;"> <!-- Media Options Container (for category3)-->
         <div onclick="moveCategory(3,'left')" class="option-cycle-button-prev"><div style="text-align: center;">&lt</div></div>
         <div class="media-options-container">
-            <div id="category3" style="display: flex; position: relative; transition: transform 0.6s ease-in-out;">
+            <div id="category3" style="display: flex; position: relative; transition: transform 1s ease-in-out;">
                 {% for movie in disliked %}
-                <div style="display: inline-flex;">
+                <div style="display: inline-flex; margin: 12px;">
                     <a href="{{ url_for('mediaInfo', movie_id=movie.id) }}" style="padding-right: 53px;">
                         <div class="media-option-img" style="border-top-right-radius: 0;"> 
                             <img src="{{ movie.picture }}" alt="{{ movie.title }}"> 
@@ -100,8 +103,11 @@
                         </div>
                     </a>
                     <div class="watched_rating_container">
-                        <a class="like" onclick="triggerLikeRequest(event, '{{ movie.id }}')" href="{{url_for('watch_history')}}">
-                            &uarr;
+                        <a class="rank" onclick="triggerLikeRequest(event, '{{ movie.id }}')" href="{{url_for('watch_history')}}">
+                            <img style="width: 40px;" src="../static/images/grey_thumb_up.png" alt="like">
+                        </a>
+                        <a class="fake_rank">
+                            <img style="width: 40px;" src="../static/images/red_thumb_down.png" alt="like">
                         </a>
                     </div> 
                 </div>
@@ -116,9 +122,8 @@
     let count = []; // the count array and moveCategory() are for horizontal-media-category-navigation
     function moveCategory(categoryNum, direction) {
         const box = document.getElementById('category' + categoryNum);
-        const maxSteps = 3;
-        const maxDistance = 133 * 2.75 + 15;   // Should be MediaOption width * #OfMediaOptions + wiggle room
-        const stepSize = maxDistance / maxSteps;
+        const maxSteps = (Math.max(0, Math.ceil((box.offsetWidth - (6 * box.children[0].offsetWidth)) / box.children[0].offsetWidth)))/5;
+        const stepSize = (box.children[0].offsetWidth + 24) * 5; // (Width of each movie element + margin) * num of steps
 
         // Initialize count for the category if it doesn't exist
         if (!count[categoryNum]) {
@@ -140,57 +145,57 @@
 
         // Apply translation to the box
         box.style.transform = `translateX(${translation}px)`;
-    }
+        }
 
     function triggerLikeRequest(event, movie_id) {
-            event.preventDefault(); // Prevent the default behavior of the link
-            //Construct your POST request data here
+        event.preventDefault(); // Prevent the default behavior of the link
+        //Construct your POST request data here
 
-            const liked_data = {movie: movie_id};
+        const liked_data = {movie: movie_id};
 
-            fetch('/like', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            body:JSON.stringify(liked_data)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                //  If the request was successful, navigate to the URL
-                window.location.reload();
-            })
-            .catch(error => {
-                console.error('There was a problem with the POST request:', error);
-            });
-        }
+        fetch('/like', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        body:JSON.stringify(liked_data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            //  If the request was successful, navigate to the URL
+            window.location.reload();
+        })
+        .catch(error => {
+            console.error('There was a problem with the POST request:', error);
+        });
+    }
 
-        function triggerDislikeRequest(event, movie_id) {
-            event.preventDefault(); // Prevent the default behavior of the link
-            //Construct your POST request data here
+    function triggerDislikeRequest(event, movie_id) {
+        event.preventDefault(); // Prevent the default behavior of the link
+        //Construct your POST request data here
 
-            const disliked_data = {movie: movie_id};
+        const disliked_data = {movie: movie_id};
 
-            fetch('/dislike', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            body:JSON.stringify(disliked_data)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                //  If the request was successful, navigate to the URL
-                window.location.reload();
-            })
-            .catch(error => {
-                console.error('There was a problem with the POST request:', error);
-            });
-        }
+        fetch('/dislike', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        body:JSON.stringify(disliked_data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            //  If the request was successful, navigate to the URL
+            window.location.reload();
+        })
+        .catch(error => {
+            console.error('There was a problem with the POST request:', error);
+        });
+    }
 
 </script>
 </html>

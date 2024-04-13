@@ -90,7 +90,7 @@ body {
     font-size: 0.9vh;
     color: white;
     border-radius: 50%;
-    border: 3px solid white;
+    border: .5vh solid white;
     background: rgb(215,100,0);
     background: linear-gradient(0deg, rgba(215,100,0,1) 50%, rgb(255, 156, 69) 100%);
     cursor: pointer; /* Change cursor to pointer on hover */
@@ -167,7 +167,7 @@ h1 {
 .category-header {
     margin-top: 35px;
     margin-bottom: 1vh;
-    margin-left: 3vw;
+    margin-right: 700px;
     padding: .75vh 1.5vw;
     font-size: 3.8vh;
     display: inline-block;
@@ -180,9 +180,8 @@ h1 {
 .media-options-container {
     display: flex;
     align-items: center;
-    margin: 0 auto;
     overflow: hidden;
-    width: 90.4vw;
+    width: 1158px;
     height: 275px;
     border: 3px solid white;
     border-radius: 10px;
@@ -220,10 +219,10 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    font-size: 200%;
-    width: 3vw;
-    right: 1vw;
+    margin-left: -1px;
+
+    font-size: 35px;
+    width: 37px;
     height: 275px;
     border-radius: 10px;
     background-color: rgba(231,113,0);
@@ -236,10 +235,10 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    font-size: 200%;
-    width: 3vw;
-    left: 1vw;
+    margin-right: -1px;
+
+    font-size: 35px;
+    width: 37px;
     height: 275px;
     border-radius: 10px;
     background-color: rgba(231,113,0);
@@ -336,7 +335,7 @@ label {
 }
 
 .mediainfoimg {
-    width: 49vh;
+    width: 43.3vh;
     height: 65vh;
     border: .3vh solid white;
 }
@@ -344,11 +343,12 @@ label {
 .mediainfodescription {
     width: 50vh;
     height: 30vh;
+    text-align: left;
     margin-left: 2vw;
     margin-bottom: 2vh;
     border-radius: 1.5vh;
     border: 3px solid white;
-
+    overflow: hidden;
 }
 
 .modal {
@@ -382,7 +382,7 @@ label {
 }
 
 .watched_rating_container {
-    background-color: rgb(97, 97, 97);
+    background-color: rgb(77, 77, 77);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -410,27 +410,21 @@ label {
     
 }
 
-.like {
-    background-color: rgb(71, 150, 71);
+.rank, .fake_rank {
+    background-color: rgb(175, 175, 175);
     border: 3px solid white;
     text-decoration: none;
     color: white;
 }
 
-.like:hover {
-    background-color: rgb(58, 119, 58) !important;
+.rank:hover {
+    background-color: rgb(211, 211, 211) !important;
 }
 
-.dislike {
-    background-color: rgb(175, 45, 45);
-    border: 3px solid white;
-    text-decoration: none;
-    color: white;
+.fake_rank:hover {
+    background-color: rgb(175, 175, 175) !important;
 }
 
-.dislike:hover {
-    background-color: rgb(134, 39, 39) !important;
-}
 .button2{
     background: rgb(231,113,0);
     border: none;

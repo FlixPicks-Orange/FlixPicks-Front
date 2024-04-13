@@ -232,10 +232,10 @@ def cineroll():
 @app.route('/watch_history', methods=['GET' , 'POST'])
 @login_required
 def watch_history():
-    watched = get_watched_movies(current_user.id)
+    watched = reversed(get_watched_movies(current_user.id))
     liked_ids, disliked_ids = get_rated_movies(current_user.id)
-    liked = create_movies(liked_ids)
-    disliked = create_movies(disliked_ids)
+    liked = reversed(create_movies(liked_ids))
+    disliked = reversed(create_movies(disliked_ids))
     return render_template('watch_history.html', header = 'header_registered.html', user=current_user, watched=watched, liked=liked, disliked=disliked)
 
 @app.route('/test')

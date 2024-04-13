@@ -14,18 +14,24 @@
 
     <h1 style="margin-top: 15vh;">Search for Something You Like:</h1> <!-- Welcome banner -->
 
-    <div style="text-align: left; "> <!-- Start of Search -->
+    <div style="position: absolute; left: 50%; margin-left: calc(-570px - 7.5vh); margin-top: -10px; text-align: left;"> <!-- Start of Search -->
         <div class="category-header"> 
             Search Results:
         </div>
     </div>
-    <div style="display: flex;"> <!-- Media Options Container (for category1)-->
+    <div style="margin-top: 12vh; display: flex; align-items: center; justify-content: center;"> <!-- Media Options Container (for category1)-->
         <div onclick="moveCategory(1,'left')" class="option-cycle-button-prev"><div style="text-align: center;">&lt</div></div>
         <div class="media-options-container">
             <div id="category1" style="display: flex; position: relative; transition: transform 0.6s ease-in-out;">
-                {% for movie in search_results %}
-                <a href="{{ url_for('mediaInfo', movie_id=movie.id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ movie.picture }}" alt="{{ movie.title }}"> </div><div class="media-option-title">{{ movie.title }}</div></a>
-                {% endfor %}
+                {% if search_results %}
+                    {% for movie in search_results %}
+                    <a href="{{ url_for('mediaInfo', movie_id=movie.id) }}"><div class="media-option-img"> <img class="hotpicksimg" src="{{ movie.picture }}" alt="{{ movie.title }}"> </div><div class="media-option-title">{{ movie.title }}</div></a>
+                    {% endfor %}
+                {% else %}
+                    <div style="width: 100%; position: absolute; left: 15vh; top: -4vh; font-size: 200%; white-space: nowrap;">
+                        Sorry, we couldn't find a result for that search.
+                    </div>
+                {% endif %}
             </div>
         </div>
         <div onclick="moveCategory(1,'right')" class="option-cycle-button-next"><div style="text-align: center;">&gt</div></div>
@@ -34,33 +40,32 @@
 <script>
   
     let count = []; // the count array and moveCategory() are for horizontal-media-category-navigation
-      function moveCategory(categoryNum, direction) {
-          const box = document.getElementById('category' + categoryNum);
-          const maxSteps = 3;
-          const maxDistance = 133 * 5 + 15;   // Should be MediaOption width * #OfMediaOptions + wiggle room
-          const stepSize = maxDistance / maxSteps;
-  
-          // Initialize count for the category if it doesn't exist
-          if (!count[categoryNum]) {
-              count[categoryNum] = 0;
-          }
-  
-          // Update count based on direction
-          if (direction == 'right') {
-              count[categoryNum]++;
-          } else if (direction == 'left') {
-              count[categoryNum]--;
-          }
-  
-          // Ensure count stays within bounds
-          count[categoryNum] = Math.max(0, Math.min(maxSteps, count[categoryNum]));
-  
-          // Calculate translation based on count
-          const translation = -stepSize * count[categoryNum]; // Negative for right direction
-  
-          // Apply translation to the box
-          box.style.transform = `translateX(${translation}px)`;
-      }
+    function moveCategory(categoryNum, direction) {
+        const box = document.getElementById('category' + categoryNum);
+        const maxSteps = (Math.max(0, Math.ceil((box.offsetWidth - (7 * box.children[0].offsetWidth)) / box.children[0].offsetWidth)));
+        const stepSize = (box.children[0].offsetWidth); // (Width of each movie element + margin) * num of steps
+
+        // Initialize count for the category if it doesn't exist
+        if (!count[categoryNum]) {
+            count[categoryNum] = 0;
+        }
+
+        // Update count based on direction
+        if (direction == 'right') {
+            count[categoryNum]++;
+        } else if (direction == 'left') {
+            count[categoryNum]--;
+        }
+
+        // Ensure count stays within bounds
+        count[categoryNum] = Math.max(0, Math.min(maxSteps, count[categoryNum]));
+
+        // Calculate translation based on count
+        const translation = -stepSize * count[categoryNum]; // Negative for right direction
+
+        // Apply translation to the box
+        box.style.transform = `translateX(${translation}px)`;
+        }
   
 </script>
 </html>

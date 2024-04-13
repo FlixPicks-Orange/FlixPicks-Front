@@ -10,8 +10,8 @@ class Movie:
 
 def search_for_movie(title):
     r = requests.get(os.getenv("DB_URL")+"/movies/by_title/"+title)
+    searches = []
     if(r.status_code==200):
-        searches = []
         search_results = r.json()
         for item in search_results:
             id = item['movie_id']
