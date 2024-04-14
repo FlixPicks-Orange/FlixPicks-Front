@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../static/stylesheet.css">
     <link rel="icon" type="image/x-icon" href="../static/images/favicon.ico">
-    <title>Register</title>
+    <title>FlixPicks Registration</title>
 </head>
 <body>
     {% include header %}
 
     <h1 style="margin-top: 15vh;">
-        Register Page
+        Registration
     </h1>
 
     <form method="POST" action="">
@@ -30,6 +30,6 @@
         {% endif %}
     </form>
     
-    <a class="button" style="height: 6vh;" href="{{ url_for('login') }}">Already have an account? </a><br>
+    <a class="button" style="height: 5vh;" href="{{ url_for('login') }}">Already have an account? </a><br>
 </body>
 </html>

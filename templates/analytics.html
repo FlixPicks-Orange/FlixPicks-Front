@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matplotlib Plot in Flask</title>
+    <link rel="stylesheet" href="../static/stylesheet.css">
+    <link rel="icon" type="image/x-icon" href="../static/images/favicon.ico">
+    <title>FlixPicks Analytics</title>
 </head>
 <body>
-    <h1>Matplotlib Plot in Flask</h1>
+{% include header %}
+    <h1>FlixPicks Analytics Report</h1>
     <div>
-            <img src="data:image/png;base64,{{ plot_url }}" alt="Matplotlib Plot">
+        <img class="analyticsimage" src="data:image/png;base64,{{ plot_url }}" alt="Matplotlib Plot for FlixPicks Analytics">
     </div>
+<p>Generated using Matplotlib Plot in Flask</p>
 </body>
 </html>
