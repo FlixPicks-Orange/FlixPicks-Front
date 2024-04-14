@@ -16,6 +16,7 @@ import Survey
 from analytics import most_watched, click_data
 from interactions import click,postLike, postDislike
 from watch_history import get_watched_movies, get_rated_movies, create_movies
+from subscriptions import get_subscriptions
 survey_subs = get_survey_subscription()
 # survey_movies = get_survey_movies()
 header = 'header_guest.html'
@@ -26,6 +27,7 @@ header = 'header_guest.html'
 
 @app.route('/')
 def home():
+    # HotPicks movie collection, then passed to the html template and displayed to user
     trending_movies = get_trending_movies()
     return render_template('index.html', header = header, trending_movies = trending_movies)
 
@@ -85,6 +87,7 @@ def register():
 @app.route('/userhome', methods=['GET' , 'POST'])
 @login_required
 def userhome():
+    #Recommended movie collection based on user id (recommendationCollector.py)
     recMovies = getRecommendations(current_user.id)
     trending_movies = get_trending_movies()
     if(current_user.survey_check==False):
@@ -92,23 +95,6 @@ def userhome():
     else:
         return render_template('userhome.html', header = 'header_registered.html', user=current_user, trending_movies=trending_movies, recMovies=recMovies if recMovies else [])
 
-#Why is this here
-@app.route('/spin', methods=['POST'])
-def spin():
-    options = request.form.get('options')
-    if not options:
-        return "Please enter at least one option."
-    
-    options_list = options.split(',')
-    selected_option = random.choice(options_list)
-    return render_template('result.html', selected_option=selected_option)
-
-#Why is this here
-@app.route('/result', methods=['POST'])
-def result():
-    options = request.form.getlist('option')
-    selected_option = random.choice(options)
-    return render_template('result.html', selected_option=selected_option)
 
 
 @app.route('/mediaInfo/<int:movie_id>', methods=['GET' , 'POST'])             
@@ -136,30 +122,20 @@ def mediaInfo(movie_id):
 @app.route('/settings', methods=['GET', 'POST', 'PATCH'])
 @login_required
 def settings():
+    subs = get_subscriptions(current_user.id)
     if request.method == 'PATCH':
         if 'newPassword' in request.json:
             new_password = request.json['newPassword']
             updated_password = bcrypt.generate_password_hash(new_password).decode("utf-8")
             updated_password = {'password': updated_password}
-            #Hashing issue, not entirely sure how to fix this. After changing password and trying to log in it says salt issue 
             r_password = requests.patch(os.getenv('DB_URL') + f"/users/update/{current_user.username}/password", json=updated_password)
 
             if r_password.status_code == 200:
                 return "Password updated successfully", 200
             else:
                 return "Failed to update password", 404
-
-        elif 'limit_subscriptions' in request.json:
-            sub = {'limit_subscriptions': True}
-            r_subscription = requests.patch(os.getenv('DB_URL') + f"/users/update/{current_user.username}/limit_subscriptions", json=sub)
-
-            if r_subscription.status_code == 201:
-                return "Subscription limit updated successfully", 200
-            else:
-                return "Failed to update subscription limit", 400
-
     elif request.method == 'GET' or request.method == 'POST':
-        return render_template('settings.html', header = 'header_registered.html')
+        return render_template('settings.html', header = 'header_registered.html', subs = subs)
     return "Method not allowed", 405
 
 

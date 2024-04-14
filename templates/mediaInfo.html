@@ -17,7 +17,7 @@
         <img class="mediainfoimg" src="{{ movie.picture }}" alt="{{ movie.title }}">
         <div>
             <div class="category-header" style="margin-left: -24vh; margin-top: 0vh; margin-right: 0vh;">Description:</div>
-            <div class="mediainfodescription"> Release Date: {{movie.release_date}} <br> <!-- Genres: {% for genre in movie.genres %}{{genre}}, {% endfor %} <br> --> Plot: {{ movie.summary }} </div>
+            <div class="mediainfodescription"> Release Date: {{movie.release_date}} <br> <!-- Insert genre info--> <br> Plot: {{ movie.summary }} </div>
 
             <div class="category-header" style="margin-left: -15vh; margin-top: 0vh; margin-right: 0vh;">Where to watch:</div>
             <form id="MediaInfoForm" action="/mediaInfo/{{movie.id}}" method="post">
@@ -25,11 +25,11 @@
             
             <a class="button" onclick="triggerPostRequest(event)" style="margin-top: 2vh; height: 4vh; width: 14vh;" href="{{movie.url}}">TMDB Link</a>
 
-            <!--  <div style="display: inline-flex;">                                     Feel free to delete this, I forgot someone else was working on this already
+           <div style="display: inline-flex;">                                    
                 {% for sub in subcriptionsList %}
                     <a class="button" onclick="triggerPostRequest(event)" href="{{movie.url}}"> {{sub}} </a>
                 {% endfor %}
-            </div> -->
+            </div> 
         </div>
     </div>
     

@@ -17,10 +17,18 @@
         <button type="button" onclick="submitChangePasswordRequest()">Change Password</button>
     </form>
 
-    <h2>Limit Subscriptions</h2>
-    <form id="limitSubscriptionsForm">
-        <button type="button" onclick="submitLimitSubscriptionsRequest()">Limit Subscriptions</button>
-    </form>
+
+    <h2 style="margin-top: 20px;">Subscriptions:</h2>
+    {% if subs %}
+        <ul>
+            {% for sub in subs %}
+                <li>{{ sub.title }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No subscriptions found.</p>
+    {% endif %}
+
 
     <a href="{{ url_for('userhome') }}" class="button" style="height: 3vh;">Home</a>
 
@@ -41,23 +49,6 @@
             };
             var newPassword = document.getElementById("newPassword").value;
             var data = JSON.stringify({ "newPassword": newPassword });
-            xhr.send(data);
-        }
-
-        function submitLimitSubscriptionsRequest() {
-            var xhr = new XMLHttpRequest();
-            xhr.open("PATCH", "/settings", true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        alert("Subscription limit updated successfully."); // Display a success message
-                    } else {
-                        alert("Failed to update subscription limit. Please try again."); // Display an error message
-                    }
-                }
-            };
-            var data = JSON.stringify({ "limit_subscriptions": true });
             xhr.send(data);
         }
     </script>
