@@ -16,7 +16,7 @@ import Survey
 from analytics import most_watched, click_data
 from interactions import click,postLike, postDislike
 from watch_history import get_watched_movies, get_rated_movies, create_movies
-from subscriptions import get_subscriptions
+from subscriptions import get_subscriptions, delete_subscription, add_subscription
 survey_subs = get_survey_subscription()
 # survey_movies = get_survey_movies()
 header = 'header_guest.html'
@@ -119,10 +119,11 @@ def mediaInfo(movie_id):
     return render_template('mediaInfo.html', header = header,  movie_id=movie_id, movie=movie)
 
 
-@app.route('/settings', methods=['GET', 'POST', 'PATCH'])
+@app.route('/settings', methods=['GET', 'POST', 'PATCH', 'DELETE'])
 @login_required
 def settings():
     subs = get_subscriptions(current_user.id)
+    #Update password, PATCH request triggers 
     if request.method == 'PATCH':
         if 'newPassword' in request.json:
             new_password = request.json['newPassword']
@@ -134,9 +135,25 @@ def settings():
                 return "Password updated successfully", 200
             else:
                 return "Failed to update password", 404
+    #Delete subscription services
+    elif request.method == 'DELETE':
+        if 'provider_id' in request.json:
+            provider_id = request.json['provider_id']
+            delete_subscription(current_user.id, provider_id)
+            return "Subscription deleted successfully", 200
+        else:
+            return "Missing provider_id in request", 400
+    #Add subscription services
+    elif request.method == 'POST':
+        if 'provider_id' in request.json:
+            provider_id = request.json['provider_id']
+            add_subscription(current_user.id, provider_id)
+            return "Subscription added successfully", 201
+        else:
+            return "Missing provider_id in request", 400
     elif request.method == 'GET' or request.method == 'POST':
-        return render_template('settings.html', header = 'header_registered.html', subs = subs)
-    return "Method not allowed", 405
+        return render_template('settings.html', header='header_registered.html', subs=subs)
+
 
 
 @app.route('/logout', methods = ['GET','POST'])
