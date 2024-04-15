@@ -14,6 +14,8 @@
     <form id="changePasswordForm">
         <label for="newPassword">New Password:</label><br>
         <input type="password" id="newPassword" name="newPassword"><br>
+        <label for="confirmPassword">Confirm Password:</label><br>
+        <input type="password" id="confirmPassword" name="confirmPassword"><br>
         <button type="button" onclick="submitChangePasswordRequest()">Change Password</button>
     </form>
 
@@ -37,28 +39,37 @@
         <button onclick="addSubscription()">Add Subscription</button>
     </div>
 
-
+    <br></br>
     <a href="{{ url_for('userhome') }}" class="button" style="height: 3vh;">Home</a>
 
     <script>
+
         function submitChangePasswordRequest() {
-            var xhr = new XMLHttpRequest();
-            xhr.open("PATCH", "/settings", true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        alert("Password changed successfully."); // Display a success message
-                        document.getElementById("changePasswordForm").reset(); // Reset the form
-                    } else {
-                        alert("Failed to change password. Please try again."); // Display an error message
-                    }
-                }
-            };
-            var newPassword = document.getElementById("newPassword").value;
-            var data = JSON.stringify({ "newPassword": newPassword });
-            xhr.send(data);
+        var newPassword = document.getElementById("newPassword").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
+        
+        if (newPassword !== confirmPassword) {
+            alert("New password and confirmed password do not match");
+            return;
         }
+        
+        var xhr = new XMLHttpRequest();
+        xhr.open("PATCH", "/settings", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    alert("Password changed successfully."); // Display a success message
+                    document.getElementById("changePasswordForm").reset();
+                } else {
+                    alert("Failed to change password. Please try again."); // Display an error message
+                }
+            }
+        };
+        var data = JSON.stringify({ "newPassword": newPassword, "confirmPassword": confirmPassword });
+        xhr.send(data);
+    }
+
 
         function deleteSubscription() {
         var providerName = prompt("Enter the provider name to delete (e.g., Netflix, Hulu, Disney+, etc.):");

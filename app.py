@@ -125,8 +125,13 @@ def settings():
     subs = get_subscriptions(current_user.id)
     #Update password, PATCH request triggers 
     if request.method == 'PATCH':
-        if 'newPassword' in request.json:
+         if 'newPassword' in request.json and 'confirmPassword' in request.json:
             new_password = request.json['newPassword']
+            confirm_password = request.json['confirmPassword']
+            
+            if new_password != confirm_password:
+                return "New password and confirmed password do not match", 400
+
             updated_password = bcrypt.generate_password_hash(new_password).decode("utf-8")
             updated_password = {'password': updated_password}
             r_password = requests.patch(os.getenv('DB_URL') + f"/users/update/{current_user.username}/password", json=updated_password)
