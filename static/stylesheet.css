@@ -456,3 +456,7 @@ label {
 .highlighted {
     border-color: orange;
 }
+
+.frontimage {
+    width: 10vh;
+}
