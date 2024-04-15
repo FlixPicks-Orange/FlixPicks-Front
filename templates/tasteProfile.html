@@ -31,8 +31,8 @@
                 Movies
             </div>
         </div>
-        <div style="display: flex;"> <!-- Media Options Container (for movies)-->
-            <div class="media-options-container" style="display: flex;">
+        <div style="display: flex; align-items: center; justify-content: center;"> <!-- Media Options Container (for movies)-->
+            <div class="media-options-container" style = "height: 40vh">
                 {% for movie in trending_movies %}
                 <div class="movie-option">
                     <a href="{{ url_for('mediaInfo', movie_id=movie.id) }}">
@@ -40,40 +40,17 @@
                             <img class="movie-img" src="{{ movie.picture }}" alt="{{ movie.title }}">
                         </div>
                         <div class="media-option-title">{{ movie.title }}</div>
-                        <div class="thumbs">
-                            <a class="like" onclick="triggerLikeRequest(event, '{{ movie.id }}')" href="#"> <img class="thumb-up" src="path_to_thumb_up_icon" alt="Thumbs Up"></a>
+                        <div class="thumbs" style="text-align: center;">
+                            <a class="like" onclick="triggerLikeRequest(event, '{{ movie.id }}')" href="#"> 
+                                <img style="width: 40px;"  src="../static/images/green_thumb_up.png" alt="like">
+                            </a>
                         </div>
                     </a>
                 </div>
                 {% endfor %}
             </div>
         </div> 
-                <input type="submit" value="finish">
-                
-        
-        <!-- End of Movies -->
-        
-        <!-- <div style="text-align: left;">
-            <div class="category-header" style="margin-top: 1.5vw;"> 
-                  Select your favorite movies:
-            </div>
-        </div> 
-        <div class="tp-movies-category">
-            {% for movie in movies %}
-                <label>
-                    <a>
-                        <div class="media-option-img"> 
-                            <img class="media-option" src="{{ url_for('static', filename=movie['image']) }}" alt="{{ movie['Name'] }}"> 
-                        </div>
-                        <div class="media-option-title">{{ movie['Name'] }}</div>
-                    </a>
-                    <input  type="checkbox" name="movies" value="{{ movie['Name'] }}">
-                </label><br>
-            {% endfor %}
-        </div>
-        <center>
-            <button class="button" style="height: 5vw;" type="submit">Submit</button>
-        </center> !-->
+                <input type="submit" display="center" class="button" value="Finished!" style="height: 4vh; width: 10%">
     </form>
     <script>
         function triggerLikeRequest(event, movie_id) {

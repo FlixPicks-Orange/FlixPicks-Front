@@ -452,3 +452,7 @@ label {
     border-radius: 10px;
     width: 33%;
 }
+
+.highlighted {
+    border-color: orange;
+}
