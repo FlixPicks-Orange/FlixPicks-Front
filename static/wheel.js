@@ -29,6 +29,7 @@ function outputWheel() {
 var form = document.createElement("form");
 form.setAttribute("method", "post");
 form.setAttribute("action", "/wheelresult");
+form.setAttribute("target", "_blank")
 form.style.display = "none";
 
 // Create a hidden input field to hold the JSON string
