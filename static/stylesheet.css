@@ -199,10 +199,15 @@ h1 {
 
 .media-option-title {
     display: flex;
-    align-items: center;
+    scroll-behavior: smooth;
+    align-items: flex-start;
     justify-content: center;
-    width: 133px;
-    height: 50px;
+    width: 123px;
+    height: 30px;
+    padding-top: 15px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
     margin: 7px;
     margin-top: -10px;
     text-decoration: none;
@@ -213,6 +218,11 @@ h1 {
     border: 3px solid white;
     background: rgb(215,100,0);
     justify-content: center;
+    overflow: auto;
+}
+
+.media-option-title::-webkit-scrollbar {
+    display: none;
 }
 
 .option-cycle-button-next {
@@ -341,14 +351,14 @@ label {
 }
 
 .mediainfodescription {
-    width: 50vh;
-    height: 30vh;
+    width: 70vh;
     text-align: left;
     margin-left: 2vw;
     margin-bottom: 2vh;
     border-radius: 1.5vh;
     border: 3px solid white;
-    overflow: hidden;
+    font-size: 2vh;
+    padding: 1vh;
 }
 
 .modal {

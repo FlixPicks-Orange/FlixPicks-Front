@@ -16,18 +16,19 @@
     <div style="display: inline-flex; align-items: center; justify-content: center;">
         <img class="mediainfoimg" src="{{ movie.picture }}" alt="{{ movie.title }}">
         <div>
-            <div class="category-header" style="margin-left: -24vh; margin-top: 0vh; margin-right: 0vh;">Description:</div>
-            <div class="mediainfodescription"> Release Date: {{movie.release_date}} <br> <!-- Insert genre info--> <br> Plot: {{ movie.summary }} </div>
-
-            <div class="category-header" style="margin-left: -15vh; margin-top: 0vh; margin-right: 0vh;">Where to watch:</div>
+            <div class="category-header" style="margin-left: -44vh; margin-top: 0vh; margin-right: 0vh;">Description:</div> 
+            <div class="mediainfodescription"> <strong style="font-size: 2.4vh;"> Release Date: </strong>{{ movie.release_date }} 
+                                               <br><br><strong style="font-size: 2.4vh;"> Genres: </strong>{% for i in range(0, movie.genres|length) %}{{ movie.genres[i] }}{% if movie.genres[i+1] %}, {% endif %}  {% endfor %} 
+                                               <br><br><strong style="font-size: 2.4vh;"> Plot: </strong>{{ movie.summary }}</div>
+            <div class="category-header" style="margin-left: -35vh; margin-top: 0vh; margin-right: 0vh;">Where to watch:</div>
             <form id="MediaInfoForm" action="/mediaInfo/{{movie.id}}" method="post">
             </form>
             
-            <a class="button" onclick="triggerPostRequest(event)" style="margin-top: 2vh; height: 4vh; width: 14vh;" href="{{movie.url}}">TMDB Link</a>
-
-           <div style="display: inline-flex;">                                    
-                {% for sub in subcriptionsList %}
-                    <a class="button" onclick="triggerPostRequest(event)" href="{{movie.url}}"> {{sub}} </a>
+           <div style="display: flex; margin-left: 4.5vh;">
+                {% for i in range(0, movie.providers.url|length) %}
+                <a style="display: flex; flex-direction: column;  text-decoration: none; color: white; margin: 1vh;" onclick="triggerPostRequest(event)" href="{{ movie.providers.url[i] }}">
+                    <img src="{{ movie.providers.logo[i] }}" style="height: 7vh; width: 7vh;" alt="{{ movie.providers.name[i] }}">
+                </a>
                 {% endfor %}
             </div> 
         </div>
@@ -51,7 +52,7 @@
                     throw new Error('Network response was not ok');
                 }
                 //  If the request was successful, navigate to the URL
-                window.open(event.target.href, '_blank');
+                window.open('{{movie.providers.url[0]}}'); // this should open the event.target.href but event doesn't seem to work and this does
             })
             .catch(error => {
                 console.error('There was a problem with the POST request:', error);
