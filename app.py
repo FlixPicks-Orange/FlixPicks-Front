@@ -174,24 +174,23 @@ def tasteProfile():
 
      if request.method =='POST':
         subscriptions = request.form.getlist("subscriptions")
+        trending_movies = request.form.getlist("trending_movies")
         for subscription in subscriptions : 
             r = requests.post(os.getenv("DB_URL")+f"/subscriptions/{current_user.id}/update/{subscription}")
+        for movie_id in trending_movies :
+            movie = { 
+            "from_recommended": False,
+            "movie_id": int(movie_id),
+            "user_id": current_user.id
+            }
+            r = requests.post(os.getenv('DB_URL') + f"/watch_history", json=movie)
+            if r.status_code == 201:
+                print('Succesfully updated Watch History.')
+            else:
+                print('Get good scrub')
         return redirect(url_for('thank_you')) 
      else:
          return render_template('tasteProfile.html', header = header, trending_movies = trending_movies, subscriptions = survey_subs)
-    
-@app.route('/add_to_watch_history/<int:movie_id>', methods = ['GET','POST'])
-def add_to_watch_history(movie_id):
-     if request.method =='POST':
-       movie = { 
-            "from_recommended": False,
-            "movie_id":movie_id,
-            "user_id": current_user.id
-            }
-     r = requests.post(os.getenv('DB_URL') + f"/watch_history", json=movie)
-     if r.status_code == 201:
-            print('Succesfully updated Watch History.')
-     return redirect(url_for('tasteProfile'))
 
 
 @app.route('/thanks') #Eventually edit this- should redirect to homepage of FP

@@ -10,7 +10,9 @@
 <body>
     {% include header %}
 
-    <h2 style="margin-top: 15vh;">Change Password</h2>
+ 
+    <br><br>
+    <h2 class="settings-header">Change Password</h2>
     <form id="changePasswordForm">
         <label for="newPassword">New Password:</label><br>
         <input type="password" id="newPassword" name="newPassword"><br>
@@ -21,16 +23,11 @@
 
 
     <br></br>
-    <h2 style="margin-top: 20px;">Subscriptions:</h2>
-    {% if subs %}
-    <div>
-        {% for sub in subs %}
-            {{ sub.title }}<br>
-        {% endfor %}
-    </div>
-    {% else %}
-        <p>No subscriptions found.</p>
-    {% endif %}
+    <h3 class="settings-header">Current Subscriptions:</h3>
+    <br /> 
+    {% for sub in subs %}
+        <img class="frontimage" src="../static/images/{{ sub.title|lower() }}.svg" alt="{{ sub.title }}" title="{{ sub.title }}"/>
+    {% endfor %}
 
     <br></br>
     <div class="edit-options">
@@ -43,131 +40,102 @@
     <a href="{{ url_for('userhome') }}" class="button" style="height: 3vh;">Home</a>
 
     <script>
+        var providerIds = {
+            'netflix': 1,
+            'hulu': 6,
+            'disney+': 3,
+            'prime': 2,
+            'max': 9
+        };
 
         function submitChangePasswordRequest() {
-        var newPassword = document.getElementById("newPassword").value;
-        var confirmPassword = document.getElementById("confirmPassword").value;
-        
-        if (newPassword !== confirmPassword) {
-            alert("New password and confirmed password do not match");
-            return;
-        }
-        
-        var xhr = new XMLHttpRequest();
-        xhr.open("PATCH", "/settings", true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    alert("Password changed successfully."); // Display a success message
-                    document.getElementById("changePasswordForm").reset();
-                } else {
-                    alert("Failed to change password. Please try again."); // Display an error message
-                }
+            var newPassword = document.getElementById("newPassword").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (newPassword !== confirmPassword) {
+                alert("New password and confirmed password do not match");
+                return;
             }
-        };
-        var data = JSON.stringify({ "newPassword": newPassword, "confirmPassword": confirmPassword });
-        xhr.send(data);
-    }
 
-
-        function deleteSubscription() {
-        var providerName = prompt("Enter the provider name to delete (e.g., Netflix, Hulu, Disney+, etc.):");
-        if (providerName !== null) {
-            providerName = providerName.toLowerCase(); // Convert to lowercase
             var xhr = new XMLHttpRequest();
-            xhr.open("DELETE", "/settings", true);
+            xhr.open("PATCH", "/settings", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
-                        alert("Subscription deleted successfully.");
-                        window.location.reload();
-                    } else if (xhr.status === 404) {
-                        alert("Subscription not found.");
+                        alert("Password changed successfully."); // Display a success message
+                        document.getElementById("changePasswordForm").reset();
                     } else {
-                        alert("Failed to delete subscription.");
+                        alert("Failed to change password. Please try again."); // Display an error message
                     }
                 }
             };
-            var providerId;
-            switch (providerName) {
-                case 'netflix':
-                    providerId = 1;
-                    break;
-                case 'hulu':
-                    providerId = 6;
-                    break;
-                case 'disney+':
-                    providerId = 3;
-                    break;
-                case 'prime':
-                    providerId = 2;
-                    break;
-                case 'max':
-                    providerId = 9;
-                    break;
-                default:
-                    alert("Invalid provider name.");
-                    return;
-            }
-            var data = JSON.stringify({ "provider_id": providerId });
+            var data = JSON.stringify({ "newPassword": newPassword, "confirmPassword": confirmPassword });
             xhr.send(data);
         }
-    }
 
 
-        
-    
-
-    function addSubscription() {
-        var providerName = prompt("Enter the provider name to add (e.g., Netflix, Hulu, Disney+, etc.):");
-        if (providerName !== null) {
-            providerName = providerName.toLowerCase(); // Convert to lowercase
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/settings", true);
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 201) {
-                        alert("Subscription added successfully.");
-                        // Reload the page to reflect the changes
-                        window.location.reload();
-                    } else if (xhr.status === 409) {
-                        alert("Subscription already exists.");
-                    } else {
-                        alert("Failed to add subscription.");
+        function deleteSubscription() {
+            var providerName = prompt("Enter the provider name to delete (e.g., Netflix, Hulu, Disney+, etc.):");
+            if (providerName !== null) {
+                providerName = providerName.toLowerCase(); // Convert to lowercase
+                var xhr = new XMLHttpRequest();
+                xhr.open("DELETE", "/settings", true);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            alert("Subscription deleted successfully.");
+                            window.location.reload();
+                        } else if (xhr.status === 404) {
+                            alert("Subscription not found.");
+                        } else {
+                            alert("Failed to delete subscription.");
+                        }
                     }
-                }
-            };
-            var providerId;
-            switch (providerName) {
-                case 'netflix':
-                    providerId = 1;
-                    break;
-                case 'hulu':
-                    providerId = 6;
-                    break;
-                case 'disney+':
-                    providerId = 3;
-                    break;
-                case 'prime':
-                    providerId = 2;
-                    break;
-                case 'max':
-                    providerId = 9;
-                    break;
-                default:
+                };
+                var providerId = providerIds[providerName];
+                if (providerId) {
+                    var data = JSON.stringify({ "provider_id": providerId });
+                    xhr.send(data);
+                } else {
                     alert("Invalid provider name.");
-                    return;
+                }
             }
-            var data = JSON.stringify({ "provider_id": providerId });
-            xhr.send(data);
-    }
-}
+        }
 
+
+
+        function addSubscription() {
+            var providerName = prompt("Enter the provider name to add (e.g., Netflix, Hulu, Disney+, etc.):");
+            if (providerName !== null) {
+                providerName = providerName.toLowerCase(); // Convert to lowercase
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/settings", true);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 201) {
+                            alert("Subscription added successfully.");
+                            window.location.reload();
+                        } else if (xhr.status === 409) {
+                            alert("Subscription already exists.");
+                        } else {
+                            alert("Failed to add subscription.");
+                        }
+                    }
+                };
+                var providerId = providerIds[providerName];
+                if (providerId) {
+                    var data = JSON.stringify({ "provider_id": providerId });
+                    xhr.send(data);
+                } else {
+                    alert("Invalid provider name.");
+                }
+            }
+        }
     </script>
 
-    
+
 </body>
 </html>

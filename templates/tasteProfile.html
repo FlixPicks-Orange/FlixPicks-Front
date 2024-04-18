@@ -32,52 +32,24 @@
             </div>
         </div>
         <div style="display: flex; align-items: center; justify-content: center;"> <!-- Media Options Container (for movies)-->
-            <div class="media-options-container" style = "height: 40vh">
+            <div class="media-options-container" style = "height: 320px">
                 {% for movie in trending_movies %}
                 <div class="movie-option">
-                    <a href="{{ url_for('mediaInfo', movie_id=movie.id) }}">
+                    <label>
                         <div class="media-option-img">
                             <img class="movie-img" src="{{ movie.picture }}" alt="{{ movie.title }}">
                         </div>
                         <div class="media-option-title">{{ movie.title }}</div>
                         <div class="thumbs" style="text-align: center;">
-                            <a class="like" onclick="triggerLikeRequest(event, '{{ movie.id }}')" href="#"> 
-                                <img style="width: 40px;"  src="../static/images/green_thumb_up.png" alt="like">
-                            </a>
+                            <input  type="checkbox" name="trending_movies" value="{{ movie['id'] }}">
                         </div>
-                    </a>
+                    </label>
                 </div>
                 {% endfor %}
             </div>
         </div> 
                 <input type="submit" display="center" class="button" value="Finished!" style="height: 4vh; width: 10%">
     </form>
-    <script>
-        function triggerLikeRequest(event, movie_id) {
-            event.preventDefault(); // Prevent the default behavior of the link
-            //Construct your POST request data here
-
-            const liked_data = {movie: movie_id};
-
-            fetch('/add_to_watch_history/'+ movie_id, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                //  If the request was successful, navigate to the URL
-                window.location.reload();
-            })
-            .catch(error => {
-                console.error('There was a problem with the POST request:', error);
-            });
-        }
-
-    </script>
 </body>
 </html>
 
