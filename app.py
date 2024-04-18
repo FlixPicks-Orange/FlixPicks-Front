@@ -90,6 +90,8 @@ def userhome():
     #Recommended movie collection based on user id (recommendationCollector.py)
     recMovies = getRecommendations(current_user.id)
     trending_movies = get_trending_movies()
+    if(current_user.role == "Representative"): 
+        return render_template('analytics.html', header = 'header_registered.html')
     if(current_user.survey_check==False):
         return redirect(url_for('tasteProfile'))
     else:
