@@ -32,19 +32,17 @@
             </div>
         </div>
         <div style="display: flex; align-items: center; justify-content: center;"> <!-- Media Options Container (for movies)-->
-            <div class="media-options-container" style = "height: 320px">
+            <div class="survey-option-container">
                 {% for movie in trending_movies %}
-                <div class="movie-option">
-                    <label>
-                        <div class="media-option-img">
-                            <img class="movie-img" src="{{ movie.picture }}" alt="{{ movie.title }}">
+                    <label  style = "margin-left: 1vh;">
+                        <div class="media-option-img" style="width: 10.4vh; height: 15.6vh;">
+                            <img src="{{ movie.picture }}" alt="{{ movie.title }}">
                         </div>
-                        <div class="media-option-title">{{ movie.title }}</div>
+                        <div class="media-option-title" style="width: 10.4vh; padding: 0; height: 3.9vh; align-items: center; font-size: 1.25vh;">{{ movie.title }}</div>
                         <div class="thumbs" style="text-align: center;">
                             <input  type="checkbox" name="trending_movies" value="{{ movie['id'] }}">
                         </div>
                     </label>
-                </div>
                 {% endfor %}
             </div>
         </div> 

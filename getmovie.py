@@ -13,8 +13,9 @@ class Movie:
 
 
 class Provider:
-    def __init__(self, url, logo, name):
+    def __init__(self, url, id, logo, name):
         self.url = url
+        self.id = id
         self.logo = logo
         self.name = name
 
@@ -31,17 +32,19 @@ def getmovie(movie_id):
         for genre in movie_genres:
             genres.append(str(genre["genre_name"]))
         url = []
+        id = []
         logo = []
         name = []
         for provider_info in services:
             url.append(str(provider_info["link"]))
+            id.append(str(provider_info["provider_id"]))
             logo.append(str(provider_info["logo_path"]))
             name.append(str(provider_info["provider_name"]))
         release_date = translate_date(str(package["release_date"]))
         picture = package["poster_path"]
         summary = package["summary"]
-        providers = Provider(url, logo, name)
-        movie = Movie(movie_id,title, genres,providers,release_date,picture,summary)
+        providers = Provider(url, id, logo, name)
+        movie = Movie(movie_id,title,genres,providers,release_date,picture,summary)
         return movie
     
 def translate_date(numerical_date):

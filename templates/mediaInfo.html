@@ -26,7 +26,7 @@
             
            <div style="display: flex; margin-left: 4.5vh;">
                 {% for i in range(0, movie.providers.url|length) %}
-                <a style="display: flex; flex-direction: column;  text-decoration: none; color: white; margin: 1vh;" onclick="triggerPostRequest(event)" href="{{ movie.providers.url[i] }}">
+                <a style="display: flex; flex-direction: column;  text-decoration: none; color: white; margin: 1vh;" onclick="triggerPostRequest(event, '{{movie.id}}', '{{movie.providers.id[i]}}')" href="{{ movie.providers.url[i] }}">
                     <img src="{{ movie.providers.logo[i] }}" style="height: 7vh; width: 7vh;" alt="{{ movie.providers.name[i] }}">
                 </a>
                 {% endfor %}
@@ -37,8 +37,13 @@
 </body>
 <script>
     
-    function triggerPostRequest(event) {
-            event.preventDefault(); // Prevent the default behavior of the link
+    function triggerPostRequest(event, movie_id, provider_id) {
+
+        event.preventDefault(); // Prevent the default behavior of the link
+
+        const postData = {
+        provider_id: provider_id
+        };
             //Construct your POST request data here
 
             fetch('/mediaInfo/{{ movie.id }}', {
@@ -46,6 +51,7 @@
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                body: JSON.stringify(postData)
             })
             .then(response => {
                 if (!response.ok) {

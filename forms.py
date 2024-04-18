@@ -6,10 +6,10 @@ import users
 
 class RegisterForm(FlaskForm):
     email = EmailField(validators=[InputRequired()], render_kw={"placeholder" : "E-mail Address"})
-    fname = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder" : "First Name"})
-    lname = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder" : "Last Name"})
-    username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder" : "Username"})
-    password = PasswordField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder" : "Password"})
+    fname = StringField(validators=[InputRequired(), Length(min=1, max=20)], render_kw={"placeholder" : "First Name"})
+    lname = StringField(validators=[InputRequired(), Length(min=1, max=20)], render_kw={"placeholder" : "Last Name"})
+    username = StringField(validators=[InputRequired(), Length(min=1, max=20)], render_kw={"placeholder" : "Username"})
+    password = PasswordField(validators=[InputRequired(), Length(min=1, max=20)], render_kw={"placeholder" : "Password"})
     confirm = PasswordField(validators=[InputRequired(), EqualTo('password', 'Password mismatch')], render_kw={"placeholder" : "Confirm Password"})
     submit = SubmitField("Register")
     
@@ -23,6 +23,6 @@ class RegisterForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder" : "Username"})
-    password = PasswordField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder" : "Password"})
+    username = StringField(validators=[InputRequired(), Length(min=1, max=20)], render_kw={"placeholder" : "Username"})
+    password = PasswordField(validators=[InputRequired(), Length(min=1, max=20)], render_kw={"placeholder" : "Password"})
     submit = SubmitField("Login")

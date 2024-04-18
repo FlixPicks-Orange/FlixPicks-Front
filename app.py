@@ -106,13 +106,16 @@ def mediaInfo(movie_id):
         header = 'header_guest.html'
     
     if request.method =='POST' and current_user.is_authenticated:
-        movie = { 
+        data = request.json
+        sub_id = int(data.get('provider_id'))
+        package = { 
             "from_recommended": True,
             "movie_id":movie_id,
-            "user_id": current_user.id
+            "user_id": current_user.id,
+            "provider_id": sub_id
             }
 
-        r = requests.post(os.getenv('DB_URL') + f"/watch_history", json=movie)
+        r = requests.post(os.getenv('DB_URL') + f"/watch_history", json=package)
         if r.status_code == 201:
             print('Succesfully updated Watch History.')
         
@@ -170,7 +173,7 @@ def logout():
 @app.route('/tasteProfile', methods=['GET','POST'])
 @login_required
 def tasteProfile():
-     trending_movies = get_trending_movies()
+     trending_movies = get_trending_movies(70)
 
      if request.method =='POST':
         subscriptions = request.form.getlist("subscriptions")
@@ -185,9 +188,7 @@ def tasteProfile():
             }
             r = requests.post(os.getenv('DB_URL') + f"/watch_history", json=movie)
             if r.status_code == 201:
-                print('Succesfully updated Watch History.')
-            else:
-                print('Get good scrub')
+                print('Added movie #' + str(movie_id) + " to watch history of User #" + str(current_user.id) + ". 201 -")
         return redirect(url_for('thank_you')) 
      else:
          return render_template('tasteProfile.html', header = header, trending_movies = trending_movies, subscriptions = survey_subs)
