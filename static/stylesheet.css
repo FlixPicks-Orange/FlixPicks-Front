@@ -470,3 +470,14 @@ label {
 .frontimage {
     width: 10vh;
 }
+  
+  #column-example-1 {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 15px;
+  }
+  #column-example-1 .column {
+    --aspect-ratio: 4 / 3;
+  }
+  

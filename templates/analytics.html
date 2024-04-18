@@ -4,15 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/stylesheet.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/charts.css/dist/charts.min.css">
     <link rel="icon" type="image/x-icon" href="../static/images/favicon.ico">
     <title>FlixPicks Analytics</title>
 </head>
 <body>
 {% include header %}
-    <h1>FlixPicks Analytics Report</h1>
-    <div>
-        <img class="analyticsimage" src="data:image/png;base64,{{ plot_url }}" alt="Matplotlib Plot for FlixPicks Analyticscd">
+    <h1 style="margin-top: 10vh;">FlixPicks Analytics Report</h1>
+    <div class="">
+        <button class="button2">Most Interacted Movies</button>
+        <button class="button2">Most Clicks</button>
+        <button class="button2">CineWheel Interactions</button>
+        <button class="button2">CineRoll Interactions</button>
+        <button class="button2">Top Recommended Services</button>
     </div>
-<p>Generated using Matplotlib Plot in Flask</p>
+
+     <!--Most Interacted Movie Graph-->
+    <div>
+     
+    </div>
+    <!--Most Clicks Graph-->
+   <div id="column-example-1">
+    <table class="charts-css column">
+        <caption> Column Example #1 </caption> 
+        <tbody>
+            <tr><td style="--size: 0.5;"><span class="data"> # </span></td></tr>
+             <tr><td style="--size: 0.4;"><span class="data"> # </span></td></tr>
+              <tr><td style="--size: 0.6;"><span class="data"> # </span></td></tr> 
+              <tr><td style="--size: 0.8;"><span class="data"> # </span></td></tr> 
+              <tr><td style="--size: 1.0;"><span class="data"> # </span></td></tr>
+            </tbody>
+        </table>
+    </div>
+ 
+
+    <p>Generated using Matplotlib Plot in Flask</p>
 </body>
+<script>
+ 
+
+
+  
+
+</script>
 </html>
