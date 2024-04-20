@@ -485,14 +485,30 @@ label {
     width: 10vh;
 }
   
-  #column-example-1 {
+  #graph {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-columns: 50px 1fr 50px;
+    grid-template-rows: 250px 50px;
+    grid-template-areas:
+      "data-axis-1 chart data-axis-2"
+      ". primary-axis .";
     width: 100%;
-    max-width: 300px;
+    max-width: 650px;
     margin: 0 auto;
-    padding: 15px;
   }
-  #column-example-1 .column {
+  #graph.column {
     --aspect-ratio: 4 / 3;
+  }
+
+  #graph .primary-axis {
+    grid-area: primary-axis;
+  }
+  #graph .data-axis-1 {
+    grid-area: data-axis-1;
+    writing-mode: tb-rl;
+    transform: rotateZ(180deg);
   }
   
 .survey-option-container {
