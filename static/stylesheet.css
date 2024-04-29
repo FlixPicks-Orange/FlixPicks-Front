@@ -35,14 +35,15 @@ body {
 }
 
 #options {
-    display: inline-flex;
-    background-color: #ccc;
-    font-size: 0.9vw;
-    width: 10vw;
-    height: 1.1vw;
+    position: absolute;
+    background-color: #cccccc00;
+    font-size: 1.5vh;
+    right: 3.5vh;
+    width: 22.5vh;
+    height: 2.4vh;
     outline: none;
-    border: 0.3vw solid white;
-    border-left: none;
+    border: 0.3vw solid rgba(255, 255, 255, 0);
+    z-index: 2;
 }
 
 .search-left {
@@ -61,6 +62,18 @@ body {
     outline: none;
 }
 
+.search-middle {
+    display: inline-flex;
+    background-color: #ccc;
+    width: 10.5vw;
+    height: 1.25vw;
+    outline: none;
+    border: 0.3vw solid white;
+    border-left: none;
+    border-right: none;
+    z-index: 1;
+}
+
 .search-right {
     position: absolute;
     right: 0;
@@ -76,6 +89,7 @@ body {
     cursor: pointer;
     align-items: center;
     justify-content: center;
+    z-index: 3;
 }
 
 #pfp {
