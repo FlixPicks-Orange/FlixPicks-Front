@@ -48,6 +48,8 @@ Password: 12345
 
 
 ## Sources used:
-[Python Login Tutorial](https://www.youtube.com/watch?v=71EU8gnZqZQ)
-[Wheel Library](https://github.com/CrazyTim/spin-wheel)
-[Charts.css](https://chartscss.org/docs/)
+- This product uses the TMDB API but is not endorsed or certified by TMDB
+- [Python Login Tutorial](https://www.youtube.com/watch?v=71EU8gnZqZQ)
+- [Wheel Library](https://github.com/CrazyTim/spin-wheel)
+- [Charts.css](https://chartscss.org/docs/)
+- ![image](https://github.com/FlixPicks-Orange/FlixPicks-Front/assets/123136801/1db804b4-09ec-4fa4-aa67-5b4aaea983f9)
