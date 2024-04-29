@@ -73,31 +73,30 @@
 
         let count = []; // the count array and moveCategory() are for horizontal-media-category-navigation
         function moveCategory(categoryNum, direction) {
-            const box = document.getElementById('category' + categoryNum);
-            const maxSteps = 3;
-            const maxDistance = 133 * 2.75 + 15;   // Should be MediaOption width * #OfMediaOptions + wiggle room
-            const stepSize = maxDistance / maxSteps;
+        const box = document.getElementById('category' + categoryNum);
+        const maxSteps = (Math.max(0, Math.ceil((box.offsetWidth - (7 * box.children[0].offsetWidth)) / box.children[0].offsetWidth)));
+        const stepSize = (box.children[0].offsetWidth); // (Width of each movie element + margin) * num of steps
 
-            // Initialize count for the category if it doesn't exist
-            if (!count[categoryNum]) {
-                count[categoryNum] = 0;
-            }
+        // Initialize count for the category if it doesn't exist
+        if (!count[categoryNum]) {
+            count[categoryNum] = 0;
+        }
 
-            // Update count based on direction
-            if (direction == 'right') {
-                count[categoryNum]++;
-            } else if (direction == 'left') {
-                count[categoryNum]--;
-            }
+        // Update count based on direction
+        if (direction == 'right') {
+            count[categoryNum]++;
+        } else if (direction == 'left') {
+            count[categoryNum]--;
+        }
 
-            // Ensure count stays within bounds
-            count[categoryNum] = Math.max(0, Math.min(maxSteps, count[categoryNum]));
+        // Ensure count stays within bounds
+        count[categoryNum] = Math.max(0, Math.min(maxSteps, count[categoryNum]));
 
-            // Calculate translation based on count
-            const translation = -stepSize * count[categoryNum]; // Negative for right direction
+        // Calculate translation based on count
+        const translation = -stepSize * count[categoryNum]; // Negative for right direction
 
-            // Apply translation to the box
-            box.style.transform = `translateX(${translation}px)`;
+        // Apply translation to the box
+        box.style.transform = `translateX(${translation}px)`;
         }
 
     </script>
