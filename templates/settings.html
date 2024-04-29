@@ -26,8 +26,12 @@
     <h3 class="settings-header">Current Subscriptions:</h3>
     <br /> 
     {% for sub in subs %}
+    {% if sub.title.lower() == "prime" %}
+        <img class="frontimage" src="../static/images/prime_video.svg" alt="{{ sub.title }}" title="{{ sub.title }}"/>
+    {% else %}
         <img class="frontimage" src="../static/images/{{ sub.title|lower() }}.svg" alt="{{ sub.title }}" title="{{ sub.title }}"/>
-    {% endfor %}
+    {% endif %}
+{% endfor %}
 
     <br></br>
     <div class="edit-options">
@@ -76,7 +80,7 @@
 
 
         function deleteSubscription() {
-            var providerName = prompt("Enter the provider name to delete (e.g., Netflix, Hulu, Disney+, etc.):");
+            var providerName = prompt("Enter the provider name to delete (our providers: Netflix, Hulu, Disney+, Prime, Max):");
             if (providerName !== null) {
                 providerName = providerName.toLowerCase(); // Convert to lowercase
                 var xhr = new XMLHttpRequest();
