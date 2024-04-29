@@ -12,13 +12,15 @@
   <body>
     {% include header %}
 
-    <h1 style="margin-top: 15vh;">Enter a List</h1>
-
+    <h1 style="margin-top: 15vh;">CineWheel</h1>
+    <p>
+      The CineWheel list is case sensitive. Spelling and spacing matters in order to find the movie. Partial movie titles can be entered as long as the spelling is accurate. A maximum of 13 titles can be added to the wheel. Titles must be separated by new lines.
+    </p>
     <!-- Input field for the user to enter items -->
     <textarea
       type="text"
       id="listInput"
-      placeholder="Enter items on separate lines"
+      placeholder="Enter titles on separate lines"
     ></textarea>
 
     <!-- Button to trigger the list processing function -->
@@ -36,7 +38,23 @@
       <button class="closeBTN button2">Close</button>
     </div>
     </div>
-    
-   
+
+    <div style="text-align: left; " >
+   <p>
+    Example list: 
+   </p> 
+   <ul>
+    Spider
+   </ul>
+   <ul>
+    Barbie
+   </ul>
+   <ul>
+    Up
+   </ul>
+   <ul>
+    Fast
+   </ul>
+  </div>
   </body>
 </html>
